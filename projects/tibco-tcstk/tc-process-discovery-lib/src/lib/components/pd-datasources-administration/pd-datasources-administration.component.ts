@@ -1,25 +1,26 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-// import { ProcessDiscoveryCaseRoute } from '../../models/pd-liveappsdata';
-import { RouteAction } from '@tibco-tcstk/tc-core-lib';
+import { Component, OnInit } from '@angular/core';
+import { RouteAction, TcButtonsHelperService, ToolbarButton, MessageService } from '@tibco-tcstk/tc-core-lib';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LiveAppsService, CaseInfoList } from '@tibco-tcstk/tc-liveapps-lib';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'tcpd-pd-settings-administration',
-    templateUrl: './pd-settings-administration.component.html',
-    styleUrls: ['./pd-settings-administration.component.css']
+    selector: 'tcpd-pd-datasources-administration',
+    templateUrl: './pd-datasources-administration.component.html',
+    styleUrls: ['./pd-datasources-administration.component.css']
 })
-export class PdSettingsAdministrationComponent implements OnInit {
+export class PdDatasourcesAdministrationComponent implements OnInit {
 
     public cases = [];
-    public datasourceId: string;
+    public datasourceId: string;   
     public sandboxId: number;
-    public displayType: string;
-    @Output() routeAction: EventEmitter<RouteAction> = new EventEmitter<RouteAction>();
-
-
-    constructor(private route: ActivatedRoute, private router: Router, private liveapps: LiveAppsService) { }
+    public displayType: string; 
+    
+    constructor(
+        private route: ActivatedRoute, 
+        private router: Router, 
+        private liveapps: LiveAppsService,
+        private messageService: MessageService) { }
 
     ngOnInit() {
         const claims = this.route.snapshot.data.claims;
@@ -31,6 +32,7 @@ export class PdSettingsAdministrationComponent implements OnInit {
         this.liveapps.getCases(this.sandboxId, this.datasourceId, '1', 0, 100)
             .pipe(
                 map(caseList => {
+                    caseList.caseinfos.sort((a, b) => (a.casedataObj.AnalysisID > b.casedataObj.AnalysisID) ? 1 : ((b.casedataObj.AnalysisID > a.casedataObj.AnalysisID) ? -1 : 0));
                     caseList.caseinfos.forEach(element => {
                         this.cases.push(element.caseReference);
                     });
@@ -42,13 +44,12 @@ export class PdSettingsAdministrationComponent implements OnInit {
     }
 
     clickCaseAction = ($event: any) => {
-        this.router.navigate(['/starterApp/configuration/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef]);
+        this.router.navigate(['/starterApp/pd/datasource/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef]);
     }
 
     addNewDatasource = (): void => {
-        this.router.navigate(['/starterApp/configuration/process-discovery-new-datasource'], {});
+        this.messageService.sendMessage('new-datasource');
+        this.router.navigate(['/starterApp/pd/new-datasource'], {});
 
     }
-
 }
-// to use to investigate process mining issues

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PdSettingsAdministrationComponent } from './pd-settings-administration.component';
+import { PdDatasourcesAdministrationComponent } from './pd-datasources-administration.component';
 
 describe('PdSettingsAdministrationComponent', () => {
-  let component: PdSettingsAdministrationComponent;
-  let fixture: ComponentFixture<PdSettingsAdministrationComponent>;
+    let component: PdDatasourcesAdministrationComponent;
+    let fixture: ComponentFixture<PdDatasourcesAdministrationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PdSettingsAdministrationComponent ]
+        declarations: [PdDatasourcesAdministrationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PdSettingsAdministrationComponent);
+      fixture = TestBed.createComponent(PdDatasourcesAdministrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

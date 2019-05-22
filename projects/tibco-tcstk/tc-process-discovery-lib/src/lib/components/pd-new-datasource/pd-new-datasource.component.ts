@@ -7,7 +7,10 @@ import { map } from 'rxjs/operators';
 import { TcDocumentService } from '@tibco-tcstk/tc-liveapps-lib';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatStepper } from '@angular/material';
+
+import { DateTimeFormatter, LocalDateTime } from 'js-joda';
+// import 'js-joda-timezone';
 
 export interface Mapping {
     columnName: string,
@@ -37,7 +40,7 @@ export class PdNewDatasourceComponent implements OnInit {
     // Field to start the case
     public analysisName: string;
     public analysisDescription: string;
-    public inputType: string; 
+    public inputType: string = ''; 
 
     // Options for parsing
     public useFirstRowAsHeader: boolean = true;
@@ -48,7 +51,7 @@ export class PdNewDatasourceComponent implements OnInit {
     public numberRowsForPreview: number = 5;
     public skipEmptyLines: boolean = true;
     public encoding: string = 'UTF-8';
-    public dateTimeFormat: string = 'YYYY-MM-DD HH:mm:ss.SSS';
+    public dateTimeFormat: string = 'yyyy-MM-dd HH:mm:ss.SSS';
     public quoteChar: string = '"';
     public escapeChar: string = '"';
 
@@ -71,6 +74,11 @@ export class PdNewDatasourceComponent implements OnInit {
 
     // stepper
     isLinear = false;
+
+    // Other options
+    public previewStart: string;
+    public previewEnd: string;
+    public useSuffix: string = 'No';
 
     private action: Process;
     private creator: Process;
@@ -127,6 +135,18 @@ export class PdNewDatasourceComponent implements OnInit {
         }
         if (currentTab == 1 && this.preview && this.inputType === 'json') {
             this.refreshJSON();
+        }
+
+        if (currentTab == 3){
+            console.log("********* " + this.start + "--" + this.end + "++");
+            if (this.start != undefined) {
+                this.previewStart = this.data[2][this.start];
+
+            }
+            if (this.end != undefined){
+                this.previewEnd = this.data[2][this.end];
+
+            }
         }
     }
 
@@ -199,7 +219,7 @@ export class PdNewDatasourceComponent implements OnInit {
         }
     }
 
-    handleSubmit = () => {
+    handleSubmit = (stepper: MatStepper) => {
 
         let data = {
             DiscoverAnalysisConfig: {
@@ -233,6 +253,9 @@ export class PdNewDatasourceComponent implements OnInit {
                     Status: '',
                     SDSProcessId: '',
                     Autocheckinterval: 2
+                },
+                Spotfire: {
+                    AddSuffix_1: this.useSuffix
                 }
             }
         }
@@ -249,10 +272,10 @@ export class PdNewDatasourceComponent implements OnInit {
                             let caseReference;
                             if (response.caseIdentifier) {
                                 caseIdentifier = response.caseIdentifier;
+                                data.DiscoverAnalysisConfig.FileOptions.FilePath = data.DiscoverAnalysisConfig.FileOptions.FilePath.replace('<folder>', caseIdentifier);
                             }
                             if (response.caseReference) {
                                 caseReference = response.caseReference;
-                                data.DiscoverAnalysisConfig.FileOptions.FilePath = data.DiscoverAnalysisConfig.FileOptions.FilePath.replace('<folder>', caseIdentifier);
                             }
                             
                             // upload the document to the case
@@ -291,7 +314,8 @@ export class PdNewDatasourceComponent implements OnInit {
                             this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, caseReference, data).
                                 pipe(
                                     map( _ => {
-                                        this.router.navigate(['/starterApp/configuration/process-discovery-administration']);
+                                        // this.router.navigate(['/starterApp/pd/datasources']);
+                                        stepper.next();
                                     })
                                 ).subscribe();
                         } else {
@@ -301,53 +325,20 @@ export class PdNewDatasourceComponent implements OnInit {
                 })
             ).subscribe(
                 success => success,
-                error => console.log("******error: ", error)
+                error => console.log('****** error: ', error)
             );
 
     }
-    
 
-    private newMethod() {
-        return this;
+    handleConfirmation = (): void => {
+        this.router.navigate(['/starterApp/pd/datasources']);
+    }
+
+    handleValidateFormat = (): void => {
+        const zdt = LocalDateTime.parse("2016-02-26T09:42"); 
+        console.log("11111 " + zdt.toString());
+        const zdt2 = zdt.format(DateTimeFormatter.ofPattern(this.dateTimeFormat));
+        console.log("22222", zdt2.toString());
+        console.log('typescript sample done');
     }
 }
-
-//     icons = [
-//         // { id: 'Cancel', icon: 'close'},
-//         { id: 'CaseId', icon: 'label'},
-//         { id: 'Activity', icon: 'start'},
-//         { id: 'Start', icon: 'timer'},
-//         { id: 'End', icon: 'timer_off'},
-//         { id: 'Resource', icon:'account_box'},
-//         { id: 'Other', icon: 'swap_vert'}
-//     ];
-
-//     todo = [
-//         'Cancel',
-//         'Case ID',
-//         'Activity',
-//         'Start',
-//         'End',
-//         'Resource',
-//         'Other'
-//     ];
-
-//     done = [
-//         'Walk dog'
-//     ];
-
-//     drop(event: CdkDragDrop<string[]>) {
-//         if (event.previousContainer === event.container) {
-//             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-//         } else {
-//             transferArrayItem(event.previousContainer.data,
-//                 event.container.data,
-//                 event.previousIndex,
-//                 event.currentIndex);
-//         }
-//     }
-//     onListDrop(event: CdkDragDrop<string[]>) {
-//         // Swap the elements around
-//         console.log("******* Drop");
-//  //       moveItemInArray(this.myArray, event.previousIndex, event.currentIndex);
-//     }

@@ -1,6 +1,4 @@
 <div fxLayout="column" fxFill>
-    <tc-tibco-cloud-widget-header style="height: 40px;" [icon]="'tcs-capabilities'"
-        [headerText]="'New Datasource Configuration'"></tc-tibco-cloud-widget-header>
     <div fxFlex style="padding: 20px;" fxLayout="column">
         <div fxLayout="column" fxFlex>
             <p>Choose the configuration to be used within this datasource:</p>
@@ -243,36 +241,11 @@
                     </div>
                 </mat-step>
 
-                <!-- Other options -->
-                <mat-step *ngIf="inputType === 'csv' || inputType === 'json'">
-                    <ng-template matStepLabel>Other options</ng-template>
-                    <div fxFill style="height:100%;overflow:auto" fxLayout="column" fxFlex>
-                        <div>
-                            <div fxLayout="column">
-                                <mat-form-field fxFlex="47">
-                                    <input matInput placeholder="Date Time Format" [(ngModel)]="dateTimeFormat">
-                                </mat-form-field>                
-                            </div>
-                        </div>
-                        <div fxFlex class="tcs-filler-panel"></div>
-                        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
-                            <button mat-raised-button matStepperPrevious>Back</button>
-                            <button mat-raised-button color="primary" matStepperNext>Next</button>
-                        </div>
-                    </div>
-                </mat-step>
-
-                <!-- CSV Mapping -->
+                <!-- Mapping -->
                 <mat-step *ngIf="inputType === 'csv' || inputType === 'json'">
                     <ng-template matStepLabel>Mapping</ng-template>
                     <div fxFill style="height:100%;overflow:auto" fxLayout="column" fxFlex>
                         <div>
-                            <!-- <div fxLayout="row">
-                                <div fxFlex fxLayout="column" fxLayoutAlign="center center" *ngFor="let element of icons" cdkDrag>
-                                    <mat-icon>{{element.icon}}</mat-icon>
-                                    <div>{{element.id}}</div>
-                                </div>
-                            </div> -->
                             <div fxLayout="column">
                                 <mat-form-field>
                                     <mat-label>CaseId</mat-label>
@@ -290,7 +263,7 @@
                                 </mat-form-field>
                                 <mat-form-field>
                                     <mat-label>Resources</mat-label>
-                                    <mat-select [(value)]="resource" required>
+                                    <mat-select [(value)]="resource">
                                         <mat-option *ngFor="let column of displayedColumns" [value]="column">{{column}}
                                         </mat-option>
                                     </mat-select>
@@ -321,11 +294,45 @@
                         <div fxFlex class="tcs-filler-panel"></div>
                         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
                             <button mat-raised-button matStepperPrevious>Back</button>
-                            <button mat-raised-button color="primary" (click)="handleSubmit()">Create datasource</button>
+                            <button mat-raised-button color="primary" matStepperNext (click)="moveNextTab(3)">Next</button>
                         </div>
                     </div>
                 </mat-step>
 
+                <!-- Other options -->
+                <mat-step *ngIf="inputType === 'csv' || inputType === 'json'">
+                    <ng-template matStepLabel>Other options</ng-template>
+                    <div fxFill style="height:100%;overflow:auto" fxLayout="column" fxFlex>
+                        <div>
+                            <div fxLayout="column">
+                                <mat-form-field fxFlex="47">
+                                    <mat-label>Use a separate DXP</mat-label>
+                                    <mat-select [(value)]="useSuffix">
+                                        <mat-option value="No">No</mat-option>
+                                        <mat-option value="Yes">Yes</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field fxFlex="47">
+                                    <input matInput placeholder="Date Time Format" [(ngModel)]="dateTimeFormat">
+                                </mat-form-field>
+                                <!-- <mat-form-field fxFlex="47">
+                                    <input matInput placeholder="Start Time Preview" [(ngModel)]="previewStart">
+                                </mat-form-field>
+                                <mat-form-field fxFlex="47">
+                                    <input matInput placeholder="End Time Preview" [(ngModel)]="previewEnd">
+                                </mat-form-field> -->
+                            </div>
+                            <!-- <button mat-raised-button color="primary" (click)="handleValidateFormat()">Validate format</button> -->
+                        </div>
+                        <div fxFlex class="tcs-filler-panel"></div>
+                        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
+                            <button mat-raised-button matStepperPrevious>Back</button>
+                            <button mat-raised-button color="primary" (click)="handleSubmit(stepper)">Create datasource</button>
+                        </div>
+                    </div>
+                </mat-step>
+
+                <!-- Manual input -->
                 <mat-step *ngIf="inputType === 'None'">
                     <ng-template matStepLabel>Create datasource</ng-template>
                     <div style="height:100%" fxLayout="column" fxFlex>
@@ -342,34 +349,22 @@
                         </div> -->
                     </div>
                 </mat-step>
+
+                <!-- Confirmation -->
+                <mat-step *ngIf="inputType != ''">
+                    <ng-template matStepLabel>Confirmation</ng-template>
+                    <div fxFill style="height:100%;overflow:auto" fxLayout="column" fxFlex>
+                        <div>
+                            Datasource created correctly!!!
+                        </div>
+                        <div fxFlex class="tcs-filler-panel"></div>
+                        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
+                            <button mat-raised-button color="primary" (click)="handleConfirmation()">Finish</button>
+                        </div>
+                    </div>
+                </mat-step>
             </mat-horizontal-stepper>
             <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
         </div>
     </div>
 </div>
-
-    <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-                        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-                    </button> -->
-    <!--
-                    <div cdkScrollable *ngIf="filename.length > 0" fxLayout="column">
-                        Preview table
-        
-                        Icons for drag and drop
-                        <div fxLayout="row" >
-                            <div fxFlex fxLayout="column" fxLayoutAlign="center center" *ngFor="let element of icons" cdkDrag>
-                                <mat-icon>{{element.icon}}</mat-icon>
-                                <div>{{element.id}}</div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    style="border-width: 1px;border-color:red;border-style: dashed"
-            -->
-<!-- <div style="border-width: 1px;border-color:green;border-style: dashed" fxFlex class="tcs-filler-panel"></div>
-                <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="5px" style="min-height: 50px">
-                    <button [disabled]="filename.length == 0" mat-raised-button color="primary">Create datasource</button>
-                </div> -->
-
-
-

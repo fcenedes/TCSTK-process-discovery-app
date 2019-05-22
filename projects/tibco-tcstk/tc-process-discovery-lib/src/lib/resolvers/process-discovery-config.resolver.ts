@@ -11,7 +11,7 @@ import { PdProcessDiscoveryConfigService } from '../services/pd-process-discover
 @Injectable()
 export class ProcessDiscoveryConfigResolver implements Resolve<Observable<ProcessDiscoveryConfig>> {
 
-    DEFAULT_CONFIG_URL = 'assets/config/<uiAppId>/processDiscoveryConfig.json';
+    DEFAULT_CONFIG_URL = 'assets/config/processDiscoveryConfig.json';
     APP_ID_URL = TcCoreCommonFunctions.prepareUrlForStaticResource(this.location, 'assets/config/uiAppId.json');
 
     private sandboxId: number;
@@ -30,7 +30,7 @@ export class ProcessDiscoveryConfigResolver implements Resolve<Observable<Proces
 
     // can be used to load defaultProcessDiscoveryConfig from a JSON config
     private getDefaultProcessDiscoveryConfig = (uiAppId: string) => {
-        return this.http.get(TcCoreCommonFunctions.prepareUrlForStaticResource(this.location, this.DEFAULT_CONFIG_URL.replace('<uiAppId>', uiAppId)));
+        return this.http.get(TcCoreCommonFunctions.prepareUrlForStaticResource(this.location, this.DEFAULT_CONFIG_URL));
     }
 
     // loads uiAppId from json file in assets (appId.json)

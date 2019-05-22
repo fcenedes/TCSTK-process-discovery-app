@@ -16,6 +16,7 @@ export class Datasource implements Deserializable {
     description: string;
     caseRef: string;
     idDefinition: string;
+    addSuffix: boolean;
     deserialize(input: any) {
         Object.assign(this, input);
         return this;

@@ -74,27 +74,34 @@ export class PdCaseViewComponent extends LiveAppsHomeCockpitComponent {
     protected createViewButtons = (): ToolbarButton[] => {
         const processMiningView = this.buttonsHelper.createButton('process-mining-view', '', true, 'Process Mining View', true, true);
         const caseView = this.buttonsHelper.createButton('case-view', '', true, 'Case View', true, true);
-        const buttons = [  ];
-        if (this.currentRole.display === 'Business Analyst'){
-            buttons.push(processMiningView);
-        }
-        buttons.push(caseView);
+        const datasources = this.buttonsHelper.createButton('datasource-administration', '', true, 'Business Processes', true, true);
+        // const buttons = [  ];
+        // if (this.currentRole.display === 'Business Analyst'){
+        //     buttons.push(processMiningView);
+        // }
+        // buttons.push(caseView);
+        // buttons.push(datasources);
+        const buttons = [processMiningView, caseView, datasources];
         return buttons;
     }
 
     public handleViewButtonEvent = (event: MatButtonToggleChange) => {
-        if (event.value != 'case-view'){
+        if (event.value === 'process-mining-view'){
             this.router.navigate(['/starterApp/pd/process-mining-view']);
         }
+        if (event.value === 'datasource-administration') {
+            this.router.navigate(['/starterApp/pd/datasource-administration']);
+        }
+
         // this.processDiscovery.getCurrentDatasource().subscribe(
         //     datasource => {
-                // this.router.navigate(['/starterApp/pd/process-mining-view']);
+        //         this.router.navigate(['/starterApp/pd/process-mining-view/' + datasource]);
         //     }
         // )
     }
 
     clickCaseAction = ($event: any): void => {
-        this.router.navigate(['/starterApp/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef], { });
+        this.router.navigate(['/starterApp/pd/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef], { });
     }
 
     public roleChange = ($role: RoleAttribute): void => {

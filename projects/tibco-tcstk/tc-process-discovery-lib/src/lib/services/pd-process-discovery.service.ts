@@ -191,35 +191,13 @@ export class PdProcessDiscoveryService {
         }
     }
     
-    dataStr = new EventEmitter();
-    public sendMessage = (comment: string, cases: string): void => {
-        this.dataStr.emit({comment: comment, cases: cases});
-    }   
+    // dataStr = new EventEmitter();
+    // public sendMessage = (comment: string, cases: string): void => {
+    //     this.dataStr.emit({comment: comment, cases: cases});
+    // }   
     
-    public uploadFileHDFS2 = (url: string, username: string, filePermission: string, overwriteFile: boolean, fileContent: any): Observable<string> => {
-        console.log('Uploading to ' + url + ' with username: ' + username + ' overwrite: ' + overwriteFile + ' and filePermission: ' + filePermission);
-
-        // const url = '/collaboration/v1/notes/' + noteId;
-        const completeURL = url + '?user.name=' + username + '&op=CREATE&overwrite=' + overwriteFile + '&permission=' + filePermission;
-
-        const body = fileContent;
-        const bodyStr = JSON.stringify(body);
-        const headers = new HttpHeaders()
-            .set('Content-Type', 'application/octet-stream');
-        return this.http.put(completeURL, fileContent, { headers })
-            .pipe(
-                map(result => { 
-                    return 'ok';
-                })
-            );
-    }
-
     public uploadFileHDFS = (url: string, analysisId: string, hadoopDestination: string, fileToUpload: File): Observable<any> => {
         const headers = new HttpHeaders({
-            // 'accept': 'application/json',
-            // 'Content-Type': 'multipart/form-data',
-            // 'filename': fileName,
-            // 'enctype': 'multipart/form-data'
         });
         let formData: FormData = new FormData();
         formData.append('analysisId', analysisId);

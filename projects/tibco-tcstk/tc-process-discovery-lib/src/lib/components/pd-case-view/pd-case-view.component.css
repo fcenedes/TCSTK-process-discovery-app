@@ -55,11 +55,11 @@
     color: #333;
 }
 
-::ng-deep .mat-tab-group {
+/* ::ng-deep .mat-tab-group {
     border-radius: 3px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.33);
     background-color: #ffffff;
-}
+} */
 
 ::ng-deep .tcs-case-list-header-text {
   font-family: Source Sans Pro;
