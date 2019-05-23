@@ -23,10 +23,8 @@ export class PdSettingsConfigurationComponent implements OnInit {
     public processDiscoveryConfig: ProcessDiscoveryConfig;
     public datasourceId: string;
     public creatorId: string
-    public storageTechnology: string;
   
     constructor(private processDiscoveryConfigService: PdProcessDiscoveryConfigService, private liveapps: LiveAppsService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
-
 
     ngOnInit() {
 
@@ -36,10 +34,8 @@ export class PdSettingsConfigurationComponent implements OnInit {
 
         // Get values from PUBLIC shared state
         this.datasourceId = this.processDiscoveryConfig.datasourceAppId;
-//        this.creatorId = this.processDiscoveryConfig.creatorAppId.valueOf();
 
         this.refresh(true);
-
     }
 
     selectApplication = ($event: any): void =>{
@@ -80,8 +76,6 @@ export class PdSettingsConfigurationComponent implements OnInit {
                     duration: 3000
                 });
             }
-
         );
     }
-
 }

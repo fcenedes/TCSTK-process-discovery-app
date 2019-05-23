@@ -21,7 +21,7 @@ export class PdProcessMiningComponent implements OnInit {
     public title: string;
     public viewButtons: ToolbarButton[];
     public toolbarButtons: ToolbarButton[];
-    public sandboxId: number;
+    // public sandboxId: number;
 
     // Spotfire configuration
     public spotfireServer: string;
@@ -33,7 +33,7 @@ export class PdProcessMiningComponent implements OnInit {
     public parameters: string;
 
     // public appIds: string[];
-    public uiAppId: string;
+    // public uiAppId: string;
 
     public currentDatasource: Datasource;
     // private datasourceAppId: string;     // AppId for the app which contains the datasources
@@ -46,8 +46,8 @@ export class PdProcessMiningComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
-        this.uiAppId = this.route.snapshot.data.laConfigHolder.generalConfig.uiAppId;
+        // this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
+        // this.uiAppId = this.route.snapshot.data.laConfigHolder.generalConfig.uiAppId;
 
         // Spotfire general configuration
         const spotfireConfig = this.route.snapshot.data.spotfireConfigHolder;
@@ -58,7 +58,7 @@ export class PdProcessMiningComponent implements OnInit {
 
         this.markingOn[spotfireConfig.tableName] = spotfireConfig.columnNames;
 
-        this.processDiscovery.getJezDatasource(this.sandboxId, this.uiAppId).subscribe(
+        this.processDiscovery.getCurrentDatasource().subscribe(
             datasource => {        
                 // Spotfire general configuration
                 const spotfireConfig = this.route.snapshot.data.spotfireConfigHolder;

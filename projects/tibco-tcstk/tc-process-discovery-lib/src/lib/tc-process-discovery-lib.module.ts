@@ -28,7 +28,6 @@ import { PdDatasourcesAdministrationComponent } from './components/pd-datasource
 import { TcSpotfireLibModule } from '@tibco-tcstk/tc-spotfire-lib';
 import { PdSettingsConfigurationComponent } from './components/pd-settings-configuration/pd-settings-configuration.component';
 import { PdNewDatasourceComponent } from './components/pd-new-datasource/pd-new-datasource.component';
-import { ProcesDiscoveryChangeDatasourceDialogComponent } from './components/proces-discovery-change-datasource-dialog/proces-discovery-change-datasource-dialog.component';
 import { SelectedRoleGuard } from './guards/selectedRole.guard';
 import { PdCreatorSelectorComponent } from './components/pd-creator-selector/pd-creator-selector.component';
 import { PdCaseComponent } from './components/pd-case/pd-case.component';
@@ -45,7 +44,6 @@ import { PdDatasourceCaseCockpitComponent } from './components/pd-datasource-cas
         PdDatasourcesAdministrationComponent,
         PdSettingsConfigurationComponent,
         PdNewDatasourceComponent,
-        ProcesDiscoveryChangeDatasourceDialogComponent,
         PdCreatorSelectorComponent,
         PdCaseComponent,
         PdCockpitComponent,
@@ -94,7 +92,7 @@ import { PdDatasourceCaseCockpitComponent } from './components/pd-datasource-cas
     ],
     providers: [ SelectedRoleGuard ],
     exports: [ ],
-    entryComponents: [ ProcesDiscoveryChangeDatasourceDialogComponent ]
+    entryComponents: [ ]
 })
 export class TcProcessDiscoveryLibModule { 
 

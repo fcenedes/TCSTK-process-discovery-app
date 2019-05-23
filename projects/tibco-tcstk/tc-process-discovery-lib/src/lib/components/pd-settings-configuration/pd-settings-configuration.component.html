@@ -19,10 +19,7 @@
                 <span fxFlex="50">Configure the TIBCO Live Apps action to validate datasources:</span>
                 <tcla-live-apps-case-actions-list [sandboxId]="sandboxId" [appId]="processDiscoveryConfig.datasourceAppId" [seletedActionId]="processDiscoveryConfig.validateActionAppId" [typeId]="'1'" (actionClicked)="selectAction($event)"></tcla-live-apps-case-actions-list>
             </div>
-            <mat-slide-toggle [(ngModel)]="processDiscoveryConfig.storeToLiveApps">Store file in TIBCO CLOUD(TM) Live Apps</mat-slide-toggle>
-            <mat-slide-toggle [(ngModel)]="processDiscoveryConfig.storeToHDFS">Store file in HDFS</mat-slide-toggle>
-
-            <div *ngIf="processDiscoveryConfig.storeToHDFS">
+            <div>
                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch">
                     <mat-form-field fxFlex="70">
                         <input matInput placeholder="Hostname" [(ngModel)]="processDiscoveryConfig.hdfsHostname">
