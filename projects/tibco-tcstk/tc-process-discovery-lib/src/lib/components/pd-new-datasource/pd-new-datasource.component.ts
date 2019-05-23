@@ -278,48 +278,36 @@ export class PdNewDatasourceComponent implements OnInit {
                                 caseReference = response.caseReference;
                             }
                             
-                            // upload the document to the case
-                            if (this.pdConfiguration.storeToLiveApps) {
-                                this.documentService.uploadDocument('caseFolders', caseReference, this.sandboxId, this.file, this.file.name, "Datasource definition for ").
-                                    pipe(
-                                        map( _ => {
-                                            this.snackBar.open('Error uploading file', 'OK', {
-                                                duration: 5000
-                                            });
-                                        })
-                                    ).subscribe();
-                            }
-
-                            if (this.pdConfiguration.storeToHDFS) {
-                                const datasourceId = response.caseIdentifier;
-                                this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, datasourceId,  this.pdConfiguration.hdfsRootPath, this.file).subscribe(
-                                    response => {
-                                        if (response.type == HttpEventType.UploadProgress) {
-                                                this.uploadProgress = Math.round(100 * response.loaded / response.total);
-                                        }
-                                        if (this.uploadProgress == 100) {
-                                            this.snackBar.open('File uploaded correctly', 'OK', {
-                                                duration: 3000
-                                            });
-                                        }
-                                    },
-                                    error => {
-                                        this.snackBar.open('Error uploading file', 'OK', {
-                                            duration: 5000
-                                        });
+                            // upload the document to the backend
+                            const datasourceId = response.caseIdentifier;
+                            this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, datasourceId,  this.pdConfiguration.hdfsRootPath, this.file).subscribe(
+                                response => {
+                                    if (response.type == HttpEventType.UploadProgress) {
+                                            this.uploadProgress = Math.round(100 * response.loaded / response.total);
                                     }
-                                )
-                            }
 
-                            this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, caseReference, data).
-                                pipe(
-                                    map( _ => {
-                                        // this.router.navigate(['/starterApp/pd/datasources']);
-                                        stepper.next();
-                                    })
-                                ).subscribe();
+                                    if (this.uploadProgress == 100) {
+                                        this.snackBar.open('File uploaded correctly', 'OK', {
+                                            duration: 3000
+                                        });
+                                        this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, caseReference, data).
+                                            pipe(
+                                                map( _ => {
+                                                    stepper.next();
+                                                })
+                                            ).subscribe();
+                                    }
+                                },
+                                error => {
+                                    this.snackBar.open('Error uploading file. Please upload the file manually to ' + data.DiscoverAnalysisConfig.FileOptions.FilePath + ' and execute the validate action.', 'OK', {
+                                        duration: 5000
+                                    });
+                                }
+                            )
                         } else {
-                            console.error(response.data.errorMsg);
+                            this.snackBar.open('Error create the business process.', 'OK', {
+                                duration: 5000
+                            });
                         }
                     }
                 })

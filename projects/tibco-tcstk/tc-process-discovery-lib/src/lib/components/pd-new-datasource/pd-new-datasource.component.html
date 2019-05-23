@@ -291,6 +291,19 @@
                                 </mat-form-field>
                             </div>
                         </div>
+                        <div>
+                            <table *ngIf="data" fxFlex mat-table [dataSource]="data.slice(1,3)" class="mat-elevation-z8">
+                                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                                    <th mat-header-cell *matHeaderCellDef>
+                                        {{column}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                                </ng-container>
+                        
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </div>
                         <div fxFlex class="tcs-filler-panel"></div>
                         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
                             <button mat-raised-button matStepperPrevious>Back</button>
@@ -325,6 +338,8 @@
                             <!-- <button mat-raised-button color="primary" (click)="handleValidateFormat()">Validate format</button> -->
                         </div>
                         <div fxFlex class="tcs-filler-panel"></div>
+                        <mat-progress-bar *ngIf="uploadProgress > 0" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+
                         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
                             <button mat-raised-button matStepperPrevious>Back</button>
                             <button mat-raised-button color="primary" (click)="handleSubmit(stepper)">Create datasource</button>
@@ -364,7 +379,6 @@
                     </div>
                 </mat-step>
             </mat-horizontal-stepper>
-            <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
         </div>
     </div>
 </div>
