@@ -112,6 +112,9 @@
                                                 <input [disabled]="!skipComments" matInput placeholder="Coments" maxlength="10"
                                                     [(ngModel)]="comments">
                                             </mat-form-field>
+                                            <mat-form-field fxFlex="47">
+                                                <input matInput placeholder="Date Time Format" [(ngModel)]="dateTimeFormat">
+                                            </mat-form-field>
                                         </div>
                                         <div fxLayout="column">
                                             <mat-checkbox [(ngModel)]="skipEmptyLines">Skip empty lines</mat-checkbox>
@@ -195,6 +198,9 @@
                                             <mat-form-field>
                                                 <input [disabled]="!skipComments" matInput placeholder="Coments" maxlength="10"
                                                     [(ngModel)]="comments">
+                                            </mat-form-field>
+                                            <mat-form-field fxFlex="47">
+                                                <input matInput placeholder="Date Time Format" [(ngModel)]="dateTimeFormat">
                                             </mat-form-field>
                                         </div>
                                         <div fxLayout="column">
@@ -324,9 +330,6 @@
                                         <mat-option value="No">No</mat-option>
                                         <mat-option value="Yes">Yes</mat-option>
                                     </mat-select>
-                                </mat-form-field>
-                                <mat-form-field fxFlex="47">
-                                    <input matInput placeholder="Date Time Format" [(ngModel)]="dateTimeFormat">
                                 </mat-form-field>
                                 <!-- <mat-form-field fxFlex="47">
                                     <input matInput placeholder="Start Time Preview" [(ngModel)]="previewStart">
