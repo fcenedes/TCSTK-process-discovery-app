@@ -16,8 +16,8 @@
                             <div style="margin-left: 10px;" class="tcs-case-list-header-text">Recents</div>
                         </ng-template>
                         <div class="recentCasesWidget" fxFill>
-                            <tcla-live-apps-recent-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
-                                (clickCase)="clickCaseAction($event)"></tcla-live-apps-recent-cases>
+                            <tcpd-pd-recent-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
+                                (clickCase)="clickCaseAction($event)"></tcpd-pd-recent-cases>
                         </div>
                     </mat-tab>
                     <mat-tab>
@@ -26,8 +26,8 @@
                             <div style="margin-left: 10px;" class="tcs-case-list-header-text">Favorites</div>
                         </ng-template>
                         <div class="favoriteCasesWidget" fxFill>
-                            <tcla-live-apps-favorite-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
-                                (clickCase)="clickCaseAction($event)"></tcla-live-apps-favorite-cases>
+                            <tcpd-pd-favorite-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
+                                (clickCase)="clickCaseAction($event)"></tcpd-pd-favorite-cases>
                         </div>
                     </mat-tab>
                 </mat-tab-group>

@@ -36,6 +36,9 @@ import { PdDatasourceCaseSummaryComponent } from './components/pd-datasource-cas
 import { DomSanitizer } from '@angular/platform-browser';
 import { PdDatasourceCaseComponent } from './components/pd-datasource-case/pd-datasource-case.component';
 import { PdDatasourceCaseCockpitComponent } from './components/pd-datasource-case-cockpit/pd-datasource-case-cockpit.component';
+import { PdCaseSummaryComponent } from './components/pd-case-summary/pd-case-summary.component';
+import { PdFavoriteCasesComponent } from './components/pd-favorite-cases/pd-favorite-cases.component';
+import { PdRecentCasesComponent } from './components/pd-recent-cases/pd-recent-cases.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +52,10 @@ import { PdDatasourceCaseCockpitComponent } from './components/pd-datasource-cas
         PdCockpitComponent,
         PdDatasourceCaseSummaryComponent,
         PdDatasourceCaseComponent,
-        PdDatasourceCaseCockpitComponent
+        PdDatasourceCaseCockpitComponent,
+        PdCaseSummaryComponent,
+        PdFavoriteCasesComponent,
+        PdRecentCasesComponent
     ],
     imports: [
         CommonModule,
@@ -107,5 +113,42 @@ export class TcProcessDiscoveryLibModule {
                 '</svg>\n'
             )
         );
+
+        this.matIconRegistry.addSvgIconLiteral(
+            'pd-database-blue-icon',
+            this.domSanitizer.bypassSecurityTrustHtml(
+                '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">\n' +
+                '<defs>\n' +
+                '<style>\n' +
+                '.cls-1 {\n' +
+                'fill: none;\n' +
+                'cli-rule: evenodd;\n' +
+                '}\n' +
+                '.cls-2 {\n' +
+                'clip-path: url(#clip-path);\n' +
+                '}\n' +
+                '.cls-3 {\n' +
+                'clip-path: url(#clip-path-2);\n' +
+                '}\n' +
+                '.cls-4 {\n' +
+                'fill: #0081cb;\n' +
+                '}\n' +
+                '</style>\n' +
+                '<clipPath id="clip-path" >\n' +
+                '<path class="cls-1" d="M-284,390.5h-12a2.49,2.49,0,0,1-1.76-.73,2.49,2.49,0,0,1-.73-1.76V376a2.49,2.49,0,0,1,.73-1.76,2.49,2.49,0,0,1,1.76-.73h12a2.49,2.49,0,0,1,1.76.73,2.49,2.49,0,0,1,.73,1.76v12a2.49,2.49,0,0,1-.73,1.76A2.49,2.49,0,0,1-284,390.5Z" />\n' +
+                '</clipPath>\n' +
+                '<clipPath id="clip-path-2">\n' +
+                '<path class="cls-1" d="M-298,376a2,2,0,0,1,2-2h12a2,2,0,0,1,2,2v12a2,2,0,0,1-2,2h-12a2,2,0,0,1-2-2Zm-10-12h36v36h-36Z" />\n' +
+                '</clipPath>\n' +
+                '</defs>\n' +
+                '<title>ic-database-blue</title>\n' +
+                '<g>\n' +
+                '<ellipse class="cls-4" cx="12" cy="5" rx="9" ry="3"/>\n' +
+                '<path class="cls-4" d="M12,10C7,10,3,8.66,3,7v5c0,1.66,4,3,9,3s9-1.34,9-3V7C21,8.66,17,10,12,10Z"/>\n' +
+                '<path class="cls-4" d="M12,17c-5,0-9-1.34-9-3v5c0,1.66,4,3,9,3s9-1.34,9-3V14C21,15.66,17,17,12,17Z"/>\n' +
+                '</g>\n' +
+                '</svg>'
+            )
+        )
     }
 }
