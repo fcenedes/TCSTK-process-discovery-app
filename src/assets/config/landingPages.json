@@ -5,23 +5,23 @@
         {
             "key": "id1",
             "description": "Business Analyst",
-            "title": "Welcome to your Process Discovery App",
-            "subtitle": "Empower process owners to mitigate risks and optimize processes",
+            "title": "Welcome to your Discover App",
+            "subtitle": "Discover, Understand, and Improve Your Business Processes Based on Operational Systems Logs",
             "highlights": [
                 {
-                    "title": "Streamline",
+                    "title": "Learn",
                     "iconURL": "svg/ic-graph.svg",
-                    "content": "Reduce losses and avoid adverse risk events through business processes, controls, and analytics"
+                    "content": "Discover processes and drive actionable insights from your data - e.g. tackle performance hotspots, compliance outliers, and capture best practices."
                 },
                 {
-                    "title": "Collaborate",
+                    "title": "Improve",
                     "iconURL": "svg/ic-community.svg",
-                    "content": "A simple yet refined user experience to foster collaboration via case management, interaction feeds, attached documents, etc."
+                    "content": "Raise out-of-compliance cases or process improvement requests. Collaborate with other teams to swiftly improve processes."
                 },
                 {
-                    "title": "Track",
+                    "title": "Predict",
                     "iconURL": "svg/ic-documentation.svg",
-                    "content": "Provide in-depth, real-time visibility into the risk investigation process - e.g. high priority cases; action audit trails, etc."
+                    "content": "Analyze performance with visual analytics and anticipate process bottlenecks with predictive analytics."
                 }
             ],
             "backgroundURL": "",
@@ -30,23 +30,23 @@
         {
             "key": "id2",
             "description": "Investigators",
-            "title": "Welcome to your Process Discovery App",
-            "subtitle": "Empower process owners to mitigate risks and optimize processes",
+            "title": "Welcome to your Discover App",
+            "subtitle": "Discover, Understand, and Improve Your Business Processes Based on Operational Systems Logs",
             "highlights": [
                 {
-                    "title": "Streamline",
+                    "title": "Learn",
                     "iconURL": "svg/ic-graph.svg",
-                    "content": "Reduce losses and avoid adverse risk events through business processes, controls, and analytics"
+                    "content": "Discover processes and drive actionable insights from your data - e.g. tackle performance hotspots, compliance outliers, and capture best practices."
                 },
                 {
-                    "title": "Collaborate",
+                    "title": "Improve",
                     "iconURL": "svg/ic-community.svg",
-                    "content": "A simple yet refined user experience to foster collaboration via case management, interaction feeds, attached documents, etc."
+                    "content": "Raise out-of-compliance cases or process improvement requests. Collaborate with other teams to swiftly improve processes."
                 },
                 {
-                    "title": "Track",
+                    "title": "Predict",
                     "iconURL": "svg/ic-documentation.svg",
-                    "content": "Provide in-depth, real-time visibility into the risk investigation process - e.g. high priority cases; action audit trails, etc."
+                    "content": "Analyze performance with visual analytics and anticipate process bottlenecks with predictive analytics."
                 }
             ],
             "backgroundURL": "",
