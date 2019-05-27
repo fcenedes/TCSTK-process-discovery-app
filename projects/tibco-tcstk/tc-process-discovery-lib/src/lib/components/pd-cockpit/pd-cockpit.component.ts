@@ -25,8 +25,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     public currentView: string; 
     sandboxId: any;
     appIds: any;
-    uiAppId: any;
-    userId: any;
 
     private subscription: Subscription;
 
@@ -55,14 +53,11 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
         this.currentView = this.route.firstChild.snapshot.url[0].path;
         this.generateTitle();
 
-        const roles = this.route.snapshot.data.rolesHolder;
-        this.displayRoles = roles.roles.filter(role => !role.configuration);
+        this.displayRoles = this.route.snapshot.data.rolesHolder.roles.filter(role => !role.configuration);
         this.currentRole = this.roleService.getCurrentRole();
 
         this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
         this.appIds = this.route.snapshot.data.laConfigHolder.liveAppsConfig.applicationIds;
-        this.uiAppId = this.route.snapshot.data.laConfigHolder.generalConfig.uiAppId;
-        this.userId = this.route.snapshot.data.claims.userId;
     }
 
     ngOnDestroy(){
@@ -122,7 +117,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
         this.toolbarButtons = this.createToolbarButtons();
     }
 
-    ///////// to review 
     public roleChange = ($role: RoleAttribute): void => {
         console.log('Role chante to ', $role);
         // this.roleService.setCurrentRole($role);
@@ -147,23 +141,31 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
                     }
                 }
             }
-            if (this.marking['Variant'] != null) {
-                if (this.marking['Variant']['uncompliantVariants'] != null) {
-                    if (this.marking['Variant']['uncompliantVariants']['variant_id'] != null) {
-                        console.log('Selected Uncompliand Variant IDs: ', this.marking['Variant']['uncompliantVariants']['variant_id']);
-                    }
-                }
-            }   
+            // if (this.marking['Variant'] != null) {
+            //     if (this.marking['Variant']['uncompliantVariants'] != null) {
+            //         if (this.marking['Variant']['uncompliantVariants']['variant_id'] != null) {
+            //             console.log('Selected Uncompliand Variant IDs: ', this.marking['Variant']['uncompliantVariants']['variant_id']);
+            //         }
+            //     }
+            // }   
         }
 
         const EXAMPLE_INITIAL_DATA = {
             DiscoverCompliance: {
                 ShortDescription: selectedVariant,
                 Context: {
-                    ContextType: 'Case',
-                    ContextID: selectedVariantID,
-                    // DataSourceName: this.currentDatasource.description
-                }
+                    ContextType: 'Case', // For now, can be changed in the future to Variant or None
+                    ContextID: selectedVariantID
+                },
+                DataSourceName: this.title.slice(11, this.title.length) // this.currentDatasource.description
+            },
+            DiscoverImprovement: {
+                ShortDescription: selectedVariant,
+                Context: {
+                    ContextType: 'Case', // For now, can be changed in the future to Variant or None
+                    ContextID: selectedVariantID
+                },
+                DataSourceName: this.title.slice(11, this.title.length) // this.currentDatasource.description
             }
         };
         this.openCreatorDialog(application, EXAMPLE_INITIAL_DATA, this.sandboxId);
@@ -181,7 +183,7 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.router.navigate(['/starterApp/case/' + result.appId + '/' + result.typeId + '/' + result.caseRef], {});
+                this.router.navigate(['/starterApp/pd/case/' + result.appId + '/' + result.typeId + '/' + result.caseRef], {});
             }
         });
     }
