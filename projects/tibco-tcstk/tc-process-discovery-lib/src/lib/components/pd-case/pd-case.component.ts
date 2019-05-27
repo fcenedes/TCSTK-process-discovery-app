@@ -45,7 +45,7 @@ export class PdCaseComponent implements OnInit {
     handleRouteAction = (routeAction: RouteAction) => {
         if (routeAction.action === 'backClicked') {
             // back clicked - navigate to home
-            this.router.navigate(['/starterApp/home/']);
+            this.router.navigate(['/starterApp/pd/case-view']);
         }
         if (routeAction.action === 'configClicked') {
             // config clicked - route to config
@@ -66,7 +66,8 @@ export class PdCaseComponent implements OnInit {
         this.appId = this.route.snapshot.params['appId'];
         this.typeId = this.route.snapshot.params['typeId'];
 
-        const filterString = this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID.split(',');
+        const filterString = this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID ? 
+                this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID.split(','): '';
 
         const spotfireConfig = this.route.snapshot.data.spotfireConfigHolder;
         this.spotfireServer = spotfireConfig.spotfireServer;
