@@ -345,8 +345,9 @@
                         <mat-progress-bar *ngIf="uploadProgress > 0" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
 
                         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
-                            <button mat-raised-button matStepperPrevious>Back</button>
-                            <button mat-raised-button color="primary" (click)="handleSubmit(stepper)">Create datasource</button>
+                            <button *ngIf="showButton" mat-raised-button matStepperPrevious>Back</button>
+                            <button *ngIf="showButton" mat-raised-button color="primary" (click)="handleSubmit(stepper)">Create datasource</button>
+                            <button *ngIf="showRetryButton" mat-raised-button color="primary" (click)="handleRetry(stepper)">Retry</button>
                         </div>
                     </div>
                 </mat-step>
@@ -373,8 +374,12 @@
                 <mat-step *ngIf="inputType != ''">
                     <ng-template matStepLabel>Confirmation</ng-template>
                     <div fxFill style="height:100%;overflow:auto" fxLayout="column" fxFlex>
-                        <div>
+                        <!-- <div>
                             Datasource created correctly!!!
+                        </div> --> 
+                        <div class="tcs-case-created-confirmation-details" fxLayout="row" fxLayoutAlign="center start">
+                            <span class="tcs-case-created-confirmation-text">New *-
+                                case successfully submitted</span>
                         </div>
                         <div fxFlex class="tcs-filler-panel"></div>
                         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
