@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteAction, TcButtonsHelperService, ToolbarButton, MessageService } from '@tibco-tcstk/tc-core-lib';
+import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LiveAppsService, CaseInfoList } from '@tibco-tcstk/tc-liveapps-lib';
+import { LiveAppsService } from '@tibco-tcstk/tc-liveapps-lib';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
         private route: ActivatedRoute, 
         private router: Router, 
         private liveapps: LiveAppsService,
-        private messageService: MessageService) { }
+        private messageService: MessageQueueService) { }
 
     ngOnInit() {
         const claims = this.route.snapshot.data.claims;
@@ -48,7 +48,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
     }
 
     addNewDatasource = (): void => {
-        this.messageService.sendMessage('new-datasource');
+        this.messageService.sendMessage('title-bar', 'new-datasource');
         this.router.navigate(['/starterApp/pd/new-datasource'], {});
 
     }

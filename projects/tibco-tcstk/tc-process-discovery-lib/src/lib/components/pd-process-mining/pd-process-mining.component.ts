@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SpotfireCustomization } from '@tibco/spotfire-wrapper/lib/spotfire-customization';
 import { SpotfireWrapperComponent } from '@tibco-tcstk/tc-spotfire-lib';
 import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
-import { ToolbarButton, TcButtonsHelperService, RoleAttribute, MessageService } from '@tibco-tcstk/tc-core-lib';
+import { ToolbarButton, MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { MatDialog } from '@angular/material';
 import { Roles, TcRolesService, Groups } from '@tibco-tcstk/tc-liveapps-lib';
 import { Datasource } from '../../models/tc-process-discovery';
@@ -41,7 +41,7 @@ export class PdProcessMiningComponent implements OnInit {
     constructor(
         private route: ActivatedRoute, 
         private processDiscovery: PdProcessDiscoveryService,
-        private messageService: MessageService
+        private messageService: MessageQueueService
     ) { 
     }
 
@@ -79,6 +79,6 @@ export class PdProcessMiningComponent implements OnInit {
     }
 
     public marking(data) {
-        this.messageService.sendMessage(data);
+        this.messageService.sendMessage('marking', data);
     }
 }

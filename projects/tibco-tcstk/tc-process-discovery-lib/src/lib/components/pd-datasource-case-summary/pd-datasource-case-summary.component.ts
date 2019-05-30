@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
 import { map, flatMap } from 'rxjs/operators';
 import { Datasource } from '../../models/tc-process-discovery';
-import { MessageService } from '@tibco-tcstk/tc-core-lib';
+import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 
 @Component({
   selector: 'tcpd-pd-datasource-case-summary',
@@ -14,7 +14,7 @@ import { MessageService } from '@tibco-tcstk/tc-core-lib';
 })
 export class PdDatasourceCaseSummaryComponent extends LiveAppsCaseSummaryComponent {
 
-    constructor(private messageService: MessageService, private route: Router, private processDiscovery: PdProcessDiscoveryService, protected liveapps: LiveAppsService, protected caseCardConfigService: TcCaseCardConfigService, protected sanitizer: DomSanitizer){
+    constructor(private messageService: MessageQueueService, private route: Router, private processDiscovery: PdProcessDiscoveryService, protected liveapps: LiveAppsService, protected caseCardConfigService: TcCaseCardConfigService, protected sanitizer: DomSanitizer){
         super(liveapps, caseCardConfigService, sanitizer);
     }
 
@@ -29,7 +29,7 @@ export class PdDatasourceCaseSummaryComponent extends LiveAppsCaseSummaryCompone
                 });
                 return this.processDiscovery.setCurrentDatasource(datasource).pipe(
                     map(_ => {
-                        this.messageService.sendMessage('process-mining-view');
+                        this.messageService.sendMessage('title-bar', 'process-mining-view');
                         this.route.navigate(['/starterApp/pd/process-mining-view']);
                     })
                 );
