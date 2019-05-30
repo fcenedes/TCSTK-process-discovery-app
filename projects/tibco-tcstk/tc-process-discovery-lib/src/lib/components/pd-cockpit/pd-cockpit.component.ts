@@ -50,8 +50,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.viewButtons = this.createViewButtons();
         this.messageService.sendMessage('title-bar', this.route.firstChild.snapshot.url[0].path);
-        // this.currentView = ;
-        // this.generateTitle();
 
         this.displayRoles = this.route.snapshot.data.rolesHolder.roles.filter(role => !role.configuration);
         this.currentRole = this.roleService.getCurrentRole();
@@ -79,7 +77,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     }
 
     protected createViewButtons = (): ToolbarButton[] => {
-        // const processMiningView = this.buttonsHelper.createButton('process-mining-view', '', true, 'Process Mining View', true, true);
         const caseView = this.buttonsHelper.createButton('case-view', '', true, 'Case View', true, true);
         const datasourcesView = this.buttonsHelper.createButton('datasources', '', true, 'Business Processes', true, true);
         const buttons = [caseView, datasourcesView];
@@ -89,9 +86,7 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
     public handleViewButtonEvent = (event: MatButtonToggleChange) => {
         this.messageService.sendMessage('title-bar', event.value);
-        // this.currentView = event.value;
         this.router.navigate(['/starterApp/pd/' + event.value]);
-        // this.generateTitle();
     }
 
     private generateTitle = (): void => {
