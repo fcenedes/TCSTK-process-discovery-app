@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { TcButtonsHelperService, ToolbarButton, RoleAttribute, MessageService } from '@tibco-tcstk/tc-core-lib';
+import { TcButtonsHelperService, ToolbarButton, RoleAttribute, MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { TcRolesService, CaseType, LiveAppsCreatorDialogComponent, CaseCreatorSelectionContext } from '@tibco-tcstk/tc-liveapps-lib';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatButtonToggleChange, MatDialog } from '@angular/material';
@@ -34,24 +34,24 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute, 
         private dialog: MatDialog,
-        private messageService: MessageService,
+        private messageService: MessageQueueService,
         private processDiscovery: PdProcessDiscoveryService
     ) { 
-        this.subscription = this.messageService.getMessage().subscribe(message => {
-            if (typeof message.text === 'string'){
-                this.currentView = message.text;
-                this.generateTitle();
-                this.marking = {};
-            } else {
-                this.marking = message.text;
-            }
+        this.subscription = this.messageService.getMessage('marking').subscribe(message => {
+            this.marking = message.text;
+        });
+        this.subscription = this.messageService.getMessage('title-bar').subscribe(message => {
+            this.currentView = message.text;
+            this.generateTitle();
+            this.marking = {};
         });
     }
 
     ngOnInit() {
         this.viewButtons = this.createViewButtons();
-        this.currentView = this.route.firstChild.snapshot.url[0].path;
-        this.generateTitle();
+        this.messageService.sendMessage('title-bar', this.route.firstChild.snapshot.url[0].path);
+        // this.currentView = ;
+        // this.generateTitle();
 
         this.displayRoles = this.route.snapshot.data.rolesHolder.roles.filter(role => !role.configuration);
         this.currentRole = this.roleService.getCurrentRole();
@@ -88,9 +88,10 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     }
 
     public handleViewButtonEvent = (event: MatButtonToggleChange) => {
-        this.currentView = event.value;
+        this.messageService.sendMessage('title-bar', event.value);
+        // this.currentView = event.value;
         this.router.navigate(['/starterApp/pd/' + event.value]);
-        this.generateTitle();
+        // this.generateTitle();
     }
 
     private generateTitle = (): void => {
@@ -127,8 +128,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
 
     public handleCreatorAppSelection = (application: CaseType): void => {
-        console.log("********* CREATE CASE: ", application);
-
         let selectedVariant: string = '';
         let selectedVariantID: string = '';
 
