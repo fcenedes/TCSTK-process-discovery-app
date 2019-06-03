@@ -10,8 +10,9 @@
     "e2e": "ng e2e",
     "serve_eu": "ng serve --proxy-config proxy.conf.prod.eu.json --ssl true --source-map --aot",
     "serve_us": "ng serve --proxy-config proxy.conf.prod.us.json --ssl true --source-map --aot",
-    "build_prod_hash": "ng build --prod --base-href /webresource/apps/pd/index.html --deploy-url /webresource/apps/pd/ && cd ./dist/process-discovery-app/ && zip -r ./app.zip ./* && cd ../.."
-  },
+    "build_prod_hash": "ng build --prod --base-href /webresource/apps/pd/index.html --deploy-url /webresource/apps/pd/ && cd ./dist/process-discovery-app/ && zip -r ./app.zip ./* && cd ../..",
+    "build_prod": "ng build --prod --base-href /webresource/apps/pd/ --deploy-url /webresource/apps/pd/ && cd ./dist/process-discovery-app/ && zip -r ./app.zip ./* && cd ../.."
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.14",
@@ -26,11 +27,11 @@
     "@angular/platform-browser-dynamic": "~7.2.15",
     "@angular/router": "~7.2.15",
     "@tibco-tcstk/component-template": "0.0.27",
-    "@tibco-tcstk/tc-core-lib": "0.0.1",
-    "@tibco-tcstk/tc-forms-lib": "0.0.1",
-    "@tibco-tcstk/tc-liveapps-lib": "0.0.3",
-    "@tibco-tcstk/tc-spotfire-lib": "0.0.1",
-    "@tibco/spotfire-wrapper": "^0.2.3",
+    "@tibco-tcstk/tc-core-lib": "^1.0.0",
+    "@tibco-tcstk/tc-forms-lib": "^1.0.0",
+    "@tibco-tcstk/tc-liveapps-lib": "^1.0.0",
+    "@tibco-tcstk/tc-spotfire-lib": "^1.0.0",
+    "@tibco/spotfire-wrapper": "^0.2.6",
     "angular6-json-schema-form": "^7.1.0",
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.6.0",
