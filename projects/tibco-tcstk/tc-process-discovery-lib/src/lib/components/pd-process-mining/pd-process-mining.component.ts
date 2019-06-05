@@ -46,6 +46,8 @@ export class PdProcessMiningComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.messageService.sendMessage('title-bar', 'process-mining-view');
+
         // this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
         // this.uiAppId = this.route.snapshot.data.laConfigHolder.generalConfig.uiAppId;
 

@@ -23,6 +23,8 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
         private messageService: MessageQueueService) { }
 
     ngOnInit() {
+        this.messageService.sendMessage('title-bar', 'datasources');
+
         const claims = this.route.snapshot.data.claims;
         this.sandboxId = Number(claims.primaryProductionSandbox.id).valueOf();
         this.datasourceId = this.route.snapshot.data.processDiscovery.datasourceAppId.valueOf();
@@ -48,7 +50,6 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
     }
 
     addNewDatasource = (): void => {
-        this.messageService.sendMessage('title-bar', 'new-datasource');
         this.router.navigate(['/starterApp/pd/new-datasource'], {});
 
     }

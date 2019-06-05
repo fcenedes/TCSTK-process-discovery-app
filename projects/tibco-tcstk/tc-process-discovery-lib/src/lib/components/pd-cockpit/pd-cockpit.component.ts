@@ -49,7 +49,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.viewButtons = this.createViewButtons();
-        this.messageService.sendMessage('title-bar', this.route.firstChild.snapshot.url[0].path);
 
         this.displayRoles = this.route.snapshot.data.rolesHolder.roles.filter(role => !role.configuration);
         this.currentRole = this.roleService.getCurrentRole();
@@ -85,7 +84,6 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     }
 
     public handleViewButtonEvent = (event: MatButtonToggleChange) => {
-        this.messageService.sendMessage('title-bar', event.value);
         this.router.navigate(['/starterApp/pd/' + event.value]);
     }
 
@@ -106,7 +104,11 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
         if (this.currentView === 'process-mining-view') {
             this.processDiscovery.getCurrentDatasource().pipe(
                 map(datasource => {
-                    this.title = datasource.datasourceId + '-' + datasource.description;
+                    if (datasource) {
+                        this.title = datasource.datasourceId + '-' + datasource.description;
+                    } else {
+                        this.router.navigate(['/starterApp/pd/datasources']);
+                    }
                 })
             ).subscribe();
         }
