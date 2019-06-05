@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToolbarButton, TcButtonsHelperService, RoleAttribute } from '@tibco-tcstk/tc-core-lib';
+import { ToolbarButton, TcButtonsHelperService, RoleAttribute, MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { MatButtonToggleChange, MatDialog } from '@angular/material';
 import {LiveAppsHomeCockpitComponent, TcRolesService, Groups} from '@tibco-tcstk/tc-liveapps-lib';
 import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
@@ -28,26 +28,20 @@ export class PdCaseViewComponent extends LiveAppsHomeCockpitComponent {
         protected buttonsHelper: TcButtonsHelperService,
         public dialog: MatDialog,
         private processDiscovery: PdProcessDiscoveryService,
-        protected roleService: TcRolesService
+        protected roleService: TcRolesService,
+        private messageService: MessageQueueService
     ) {
         super(buttonsHelper, dialog, roleService);
      }
 
     ngOnInit() {
+        this.messageService.sendMessage('title-bar', 'case-view');
         
         this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
         this.title = this.route.snapshot.data.laConfigHolder.generalConfig.welcomeMessage;
         this.appIds = this.route.snapshot.data.laConfigHolder.liveAppsConfig.applicationIds;
         this.uiAppId = this.route.snapshot.data.laConfigHolder.generalConfig.uiAppId;
         this.userId = this.route.snapshot.data.claims.userId;
-
-        // Roles
-        this.roles = this.route.snapshot.data.rolesHolder;
-        this.displayRoles = this.roles.roles.filter(role => !role.configuration);
-        this.currentRole = this.roleService.getCurrentRole();
-
-        // Groups
-        this.groups = this.route.snapshot.data.groupsHolder;
 
         // Buttons on the top bar
         this.toolbarButtons = this.createToolbarButtons();
@@ -85,29 +79,7 @@ export class PdCaseViewComponent extends LiveAppsHomeCockpitComponent {
         return buttons;
     }
 
-    public handleViewButtonEvent = (event: MatButtonToggleChange) => {
-        if (event.value === 'process-mining-view'){
-            this.router.navigate(['/starterApp/pd/process-mining-view']);
-        }
-        if (event.value === 'datasource-administration') {
-            this.router.navigate(['/starterApp/pd/datasource-administration']);
-        }
-
-        // this.processDiscovery.getCurrentDatasource().subscribe(
-        //     datasource => {
-        //         this.router.navigate(['/starterApp/pd/process-mining-view/' + datasource]);
-        //     }
-        // )
-    }
-
     clickCaseAction = ($event: any): void => {
         this.router.navigate(['/starterApp/pd/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef], { });
-    }
-
-    public roleChange = ($role: RoleAttribute): void => {
-        this.roleService.setCurrentRole($role);
-        this.currentRole = this.roleService.getCurrentRole();
-        // this.viewButtons = 0;
-        this.viewButtons[0] = this.createViewButtons()[0];
     }
 }
