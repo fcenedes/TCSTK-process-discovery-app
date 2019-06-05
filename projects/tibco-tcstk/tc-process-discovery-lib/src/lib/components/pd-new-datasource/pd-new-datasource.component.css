@@ -41,3 +41,17 @@
 ::ng-deep .mat-horizontal-stepper-header {
     pointer-events: none !important;
 }
+
+.tcs-data-preview-button-text {
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #0081cb;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
