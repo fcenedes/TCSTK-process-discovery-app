@@ -6,9 +6,11 @@ import { ProcessDiscoveryConfig } from '../../models/tc-process-discovery-config
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
-import { MatSnackBar, MatStepper } from '@angular/material';
+import { MatSnackBar, MatStepper, MatSelectChange } from '@angular/material';
 
 import { DateTimeFormatter, LocalDateTime } from 'js-joda';
+import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
+// import { Locale } from 'js-joda/locale_en-us';
 // import 'js-joda-timezone';
 
 export interface Mapping {
@@ -98,10 +100,13 @@ export class PdNewDatasourceComponent implements OnInit {
         private pdService: PdProcessDiscoveryService,
         private route: ActivatedRoute,
         private router: Router,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private messageService: MessageQueueService
     ) { }
 
     ngOnInit() {
+        this.messageService.sendMessage('title-bar', 'new-datasource');
+
         this.sandboxId = Number(this.route.snapshot.data.claims.primaryProductionSandbox.id).valueOf();
         this.pdConfiguration = this.route.snapshot.data.processDiscovery;
         this.liveapps.getCaseTypeSchema(this.sandboxId, this.pdConfiguration.datasourceAppId, 100).
@@ -332,6 +337,15 @@ export class PdNewDatasourceComponent implements OnInit {
 
     }
 
+    validateDate = (event) => {
+        const sampleDate = this.data[0][event.value];
+        const dateFormat = this.dateTimeFormat;
+
+        const d = LocalDateTime.parse('2018-04-28T12:34')
+        const formatter = DateTimeFormatter.ofPattern('eeee (d MMMM)');
+        d.format(formatter) // samedi (28 avril)
+    }
+    
     handleConfirmation = (): void => {
         this.router.navigate(['/starterApp/pd/datasources']);
     }
