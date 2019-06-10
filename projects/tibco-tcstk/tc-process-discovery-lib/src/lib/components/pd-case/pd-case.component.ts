@@ -70,8 +70,6 @@ export class PdCaseComponent implements OnInit {
         let filterString = this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID ? 
                 this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID.split(','): [];
 
-        // filterString = ["RSUD0004638","RSUD0004266"];
-
         const spotfireConfig = this.route.snapshot.data.spotfireConfigHolder;
         this.spotfireServer = spotfireConfig.spotfireServer;
         this.spotfirePath = spotfireConfig.analysisPath;
@@ -87,7 +85,7 @@ export class PdCaseComponent implements OnInit {
             }
         ];
         this.spotfirePage = spotfireConfig.activePageForDetails;
-        // this.parameters = 'AnalysisId = "' + 'DIS_000076' + '";';
+        this.parameters = 'AnalysisId = "' + this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.DataSourceId + '";';
 
     }
     public parameters: string

@@ -153,7 +153,8 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
                     ContextType: 'Case', // For now, can be changed in the future to Variant or None
                     ContextID: selectedVariantID
                 },
-                DataSourceName: this.title.slice(11, this.title.length) // this.currentDatasource.description
+                DataSourceName: this.title.slice(11, this.title.length),
+                DataSourceId: this.title.slice(0,10)
             },
             DiscoverImprovement: {
                 ShortDescription: selectedVariant,
@@ -161,7 +162,8 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
                     ContextType: 'Case', // For now, can be changed in the future to Variant or None
                     ContextID: selectedVariantID
                 },
-                DataSourceName: this.title.slice(11, this.title.length) // this.currentDatasource.description
+                DataSourceName: this.title.slice(11, this.title.length),
+                DataSourceId: this.title.slice(0, 10)
             }
         };
         this.openCreatorDialog(application, EXAMPLE_INITIAL_DATA, this.sandboxId);
