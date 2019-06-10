@@ -31,6 +31,7 @@ export class PdProcessMiningComponent implements OnInit {
     public markingOn = {};
     public markingName: string;
     public parameters: string;
+    public configuration: SpotfireCustomization;
 
     // public appIds: string[];
     // public uiAppId: string;
@@ -57,6 +58,25 @@ export class PdProcessMiningComponent implements OnInit {
         this.activePage = spotfireConfig.activePageForHome;
         this.allowedPages = spotfireConfig.allowedPages;
         this.markingName = spotfireConfig.markingName;
+        this.configuration = {
+            showAbout: false,
+            showAnalysisInformationTool: false,
+            showAuthor: false,
+            showClose: false,
+            showCustomizableHeader: false,
+            showDodPanel: false,
+            showExportFile: false,
+            showExportVisualization: false,
+            showFilterPanel: true,
+            showHelp: false,
+            showLogout: false,
+            showPageNavigation: false,
+            showAnalysisInfo: false,
+            showReloadAnalysis: false,
+            showStatusBar: false,
+            showToolBar: false,
+            showUndoRedo: false
+        };
 
         this.markingOn[spotfireConfig.tableName] = spotfireConfig.columnNames;
 
