@@ -17,6 +17,10 @@ export class PdDatasourceCaseCockpitComponent extends LiveAppsCaseCockpitCompone
         
         // setup button array
         this.toolbarButtons = [];
+
+        // Remove tabs
+        this.showDocuments = false;
+        
         // call superclass init
         super.ngOnInit();
     }

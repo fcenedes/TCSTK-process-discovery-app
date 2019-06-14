@@ -44,25 +44,25 @@
                 </div>
                 <div fxLayout="column" fxFlex fxLayoutGap="20px">
                     <mat-tab-group fxFlex style="overflow: hidden">
-                        <mat-tab label="Notes">
+                        <mat-tab #contextTabs label="Notes" *ngIf="showNotes">
                             <ng-template matTabContent>
                                 <tcla-live-apps-notes class="live-apps-widget" [relatedItemType]="'CASE_APP'"
                                     [relatedItemId]="caseRef" [userId]="userId"></tcla-live-apps-notes>
                             </ng-template>
                         </mat-tab>
-                        <mat-tab label="Documents">
+                        <mat-tab #contextTabs label="Documents" *ngIf="showDocuments">
                             <ng-template matTabContent>
                                 <tcla-live-apps-documents class="live-apps-widget" [sandboxId]="sandboxId"
                                     [folderId]="caseRef" [folderType]="'caseFolders'"></tcla-live-apps-documents>
                             </ng-template>
                         </mat-tab>
-                        <mat-tab label="States">
+                        <mat-tab #contextTabs label="States" *ngIf="showStates">
                             <ng-template matTabContent>
                                 <tcla-live-apps-case-state-audit [caseRef]="caseRef" [sandboxId]="sandboxId"
                                     [appId]="appId"></tcla-live-apps-case-state-audit>
                             </ng-template>
                         </mat-tab>
-                        <mat-tab label="Audit">
+                        <mat-tab #contextTabs label="Audit" *ngIf="showAudit">
                             <ng-template matTabContent>
                                 <tcla-live-apps-case-audit [sandboxId]="sandboxId" [caseRef]="caseRef">
                                 </tcla-live-apps-case-audit>
