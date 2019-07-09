@@ -11,7 +11,7 @@
                     <div fxFill fxLayout="column" >
                         <mat-form-field>
                             <mat-label>Datasource type</mat-label>
-                            <mat-select [(value)]="inputType">
+                            <mat-select [(value)]="inputType" [disabled]="remote">
                                 <mat-option value="csv">CSV</mat-option>
                                 <!-- <mat-option value="JDBC">JDBC</mat-option> -->
                                 <mat-option value="json">JSON</mat-option>
@@ -27,14 +27,16 @@
                                     <input matInput placeholder="Analysis Description" [(ngModel)]="analysisDescription">
                                 </mat-form-field>
                             </div>
-                            <mat-form-field >
-                                <input readonly matInput placeholder="Filename" [(ngModel)]="filename">
-                            </mat-form-field>
-                            <button *ngIf="filename.length == 0" mat-raised-button color="primary" (click)="file.click()">Select
-                                file</button>
-                            <button *ngIf="filename.length > 0" mat-raised-button color="primary" (click)="file.click()">Change
-                                file</button>
-                            <input class="tcs-hidden-input" type="file" accept=".{{inputType}}" #file (change)="onFileSelect(file.files)">
+                            <div fxLayout="row">
+                                <mat-form-field >
+                                    <input readonly matInput placeholder="Filename" [(ngModel)]="filename">
+                                </mat-form-field>
+                                <div *ngIf="!remote">
+                                    <button *ngIf="filename.length == 0" mat-raised-button color="primary" (click)="file.click()">Select file</button>
+                                    <button *ngIf="filename.length > 0" mat-raised-button color="primary" (click)="file.click()">Change file</button>
+                                    <input class="tcs-hidden-input" type="file" accept=".{{inputType}}" #file (change)="onFileSelect(file.files)">
+                                </div>
+                            </div>
                             <mat-checkbox [(ngModel)]="preview">Preview file</mat-checkbox>
                         </div>
                         <!-- <div fxLayout="column" *ngIf="inputType === 'JDBC'">

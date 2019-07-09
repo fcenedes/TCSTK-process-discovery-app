@@ -40,6 +40,7 @@ import { PdCaseSummaryComponent } from './components/pd-case-summary/pd-case-sum
 import { PdFavoriteCasesComponent } from './components/pd-favorite-cases/pd-favorite-cases.component';
 import { PdRecentCasesComponent } from './components/pd-recent-cases/pd-recent-cases.component';
 import { PdCaseCockpitComponent } from './components/pd-case-cockpit/pd-case-cockpit.component';
+import { PdFileManagementComponent } from './components/pd-file-management/pd-file-management.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import { PdCaseCockpitComponent } from './components/pd-case-cockpit/pd-case-coc
         PdCaseSummaryComponent,
         PdFavoriteCasesComponent,
         PdRecentCasesComponent,
-        PdCaseCockpitComponent
+        PdCaseCockpitComponent,
+        PdFileManagementComponent
     ],
     imports: [
         CommonModule,

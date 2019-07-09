@@ -54,6 +54,7 @@ export class PdNewDatasourceComponent implements OnInit {
     public dateTimeFormat: string = 'yyyy-MM-dd HH:mm:ss.SSS';
     public quoteChar: string = '"';
     public escapeChar: string = '"';
+    public remote: boolean = false;
 
     // JDBC
     // public jdbcUsername: string;
@@ -109,15 +110,20 @@ export class PdNewDatasourceComponent implements OnInit {
 
         this.sandboxId = Number(this.route.snapshot.data.claims.primaryProductionSandbox.id).valueOf();
         this.pdConfiguration = this.route.snapshot.data.processDiscovery;
-        this.liveapps.getCaseTypeSchema(this.sandboxId, this.pdConfiguration.datasourceAppId, 100).
-            pipe(
-                map(types => {
-                    const app = types.casetypes.filter(casetype => casetype.id === '1')[0];
-                    this.creator = app.creators.filter(creator => creator.id === this.pdConfiguration.creatorAppId)[0];
-                    this.action = app.actions.filter(action => action.id === this.pdConfiguration.validateActionAppId)[0];
-                    console.log("+ ", JSON.stringify(this.creator));
-                })
-            );
+        this.liveapps.getCaseTypeSchema(this.sandboxId, this.pdConfiguration.datasourceAppId, 100).pipe(
+            map(types => {
+                const app = types.casetypes.filter(casetype => casetype.id === '1')[0];
+                this.creator = app.creators.filter(creator => creator.id === this.pdConfiguration.creatorAppId)[0];
+                this.action = app.actions.filter(action => action.id === this.pdConfiguration.validateActionAppId)[0];
+                console.log("+ ", JSON.stringify(this.creator));
+            })
+        );
+
+        if (this.route.snapshot.params.documentName){
+            this.inputType = this.route.snapshot.params.documentExtension;
+            this.filename = this.route.snapshot.params.documentName;
+            this.remote = true;
+        }
     }
 
     public calculateColumnNames = (numColumns: number, columnNames: string[]): string[] => {
@@ -149,7 +155,6 @@ export class PdNewDatasourceComponent implements OnInit {
         }
 
         if (currentTab == 3){
-            console.log("********* " + this.start + "--" + this.end + "++");
             if (this.start != undefined) {
                 this.previewStart = this.data[2][this.start];
 
@@ -179,7 +184,8 @@ export class PdNewDatasourceComponent implements OnInit {
                     this.data = result.data;
                     this.columnSeparator = result.meta.delimiter;
                 },
-                skipEmptyLines: this.skipEmptyLines
+                skipEmptyLines: this.skipEmptyLines,
+                download: this.remote
             };
             const result = parse(jsonData, config);
         }
@@ -202,9 +208,14 @@ export class PdNewDatasourceComponent implements OnInit {
                 this.data = result.data;
                 this.columnSeparator = result.meta.delimiter;
             },
-            skipEmptyLines: this.skipEmptyLines
+            skipEmptyLines: this.skipEmptyLines,
+            download: this.remote
         };
-        parse(this.file, config);
+        if (this.remote) {
+            parse(this.route.snapshot.params.documentURL, config);
+        } else {
+            parse(this.file, config);
+        }
     }
 
     public setComments = ($event): void => {
@@ -221,7 +232,7 @@ export class PdNewDatasourceComponent implements OnInit {
 
             // inputtype = CSV
             if (this.inputType === 'csv'){
-                if (this.analysisName && this.analysisDescription && this.file) {
+                if (this.analysisName && this.analysisDescription && this.filename) {
                     return false;
                 } else {
                     return true;
@@ -253,7 +264,7 @@ export class PdNewDatasourceComponent implements OnInit {
                 },
                 FileOptions: {
                     FileName: this.file.name,
-                    FilePath: ''
+                    FilePath: (this.remote ? this.route.snapshot.params.documentURL : '')
                 },
                 EventMap: {
                     case_id: this.caseId,
@@ -292,31 +303,44 @@ export class PdNewDatasourceComponent implements OnInit {
                             }
                             
                             // upload the document to the backend
-                            this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, this.caseIdentifier,  this.pdConfiguration.hdfsRootPath, this.file).subscribe(
-                                response => {
-                                    if (response.type == HttpEventType.UploadProgress) {
-                                            this.uploadProgress = Math.round(100 * response.loaded / response.total);
-                                    }
-
-                                    if (this.uploadProgress == 100) {
-                                        this.snackBar.open('File uploaded correctly', 'OK', {
-                                            duration: 3000
-                                        });
-                                        this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
-                                            pipe(
-                                                map( _ => {
-                                                    stepper.next();
-                                                })
-                                            ).subscribe();
-                                    }
-                                },
-                                error => {
-                                    this.showRetryButton = true;
-                                    this.snackBar.open('Error uploading file. ERROR: ' + error.message + '. Please fix the error and retry', 'OK', {
-                                        duration: 10000
-                                    });
+                            // TODO: Review it
+                            if (this.remote){
+                                if (this.caseIdentifier) {
+                                    this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
                                 }
-                            )
+                                this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
+                                    pipe(
+                                        map(_ => {
+                                            stepper.next();
+                                        })
+                                    ).subscribe();
+                            } else {
+                                this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, this.caseIdentifier, this.pdConfiguration.hdfsRootPath, this.file).subscribe(
+                                    response => {
+                                        if (response.type == HttpEventType.UploadProgress) {
+                                            this.uploadProgress = Math.round(100 * response.loaded / response.total);
+                                        }
+
+                                        if (this.uploadProgress == 100) {
+                                            this.snackBar.open('File uploaded correctly', 'OK', {
+                                                duration: 3000
+                                            });
+                                            this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
+                                                pipe(
+                                                    map(_ => {
+                                                        stepper.next();
+                                                    })
+                                                ).subscribe();
+                                        }
+                                    },
+                                    error => {
+                                        this.showRetryButton = true;
+                                        this.snackBar.open('Error uploading file. ERROR: ' + error.message + '. Please fix the error and retry', 'OK', {
+                                            duration: 10000
+                                        });
+                                    }
+                                )
+                            }
                         } else {
                             this.snackBar.open('Error create the business process.', 'OK', {
                                 duration: 10000

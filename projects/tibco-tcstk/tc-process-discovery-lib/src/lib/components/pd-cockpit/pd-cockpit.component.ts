@@ -78,7 +78,8 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     protected createViewButtons = (): ToolbarButton[] => {
         const caseView = this.buttonsHelper.createButton('case-view', '', true, 'Case View', true, true);
         const datasourcesView = this.buttonsHelper.createButton('datasources', '', true, 'Business Processes', true, true);
-        const buttons = [caseView, datasourcesView];
+        const file = this.buttonsHelper.createButton('file-management', '', true, 'File Management', true, true);
+        const buttons = [caseView, datasourcesView, file];
 
         return buttons;
     }
@@ -99,6 +100,10 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
         if (this.currentView === 'new-datasource'){
             this.title = 'New datasource';
+        }
+
+        if (this.currentView === 'file-management'){
+            this.title = 'File management';
         }
 
         if (this.currentView === 'process-mining-view') {
