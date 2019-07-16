@@ -60,7 +60,11 @@ export class PdSettingsConfigurationComponent implements OnInit {
                     this.selectedApp = applicationList.casetypes[0];
                 })
             )
-            .subscribe(null, error => { console.log("***** error " + error.error.errorMsg); }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });          
+            .subscribe(null, error => { 
+                console.log("***** error " + error.error.errorMsg); 
+                this.datasourceId = "";
+                this.refresh(bypassCache);
+            }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });          
     }
 
     runSaveFuntion = () => {
