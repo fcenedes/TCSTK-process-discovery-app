@@ -55,7 +55,13 @@
       "@tibco-tcstk/tc-check-workflow-monitor-lib/*": [
         "dist/tibco-tcstk/tc-check-workflow-monitor-lib/*"
       ],
-      "@tibco-tcstk/tc-spotfire-lib": [
+            "@tibco-tcstk/tc-process-discovery-lib": [
+                "projects/tibco-tcstk/tc-process-discovery-lib/src/public_api"
+            ],
+            "@tibco-tcstk/tc-process-discovery-lib/*": [
+                "dist/tibco-tcstk/tc-process-discovery-lib/*"
+            ],
+            "@tibco-tcstk/tc-spotfire-lib": [
         "projects/tibco-tcstk/tc-spotfire-lib/src/public_api"
       ],
       "@tibco-tcstk/tc-spotfire-lib/*": [

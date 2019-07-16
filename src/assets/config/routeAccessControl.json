@@ -1,26 +1,44 @@
 {
-  "routes": [
-    {
-      "routeUrl": "configuration",
-      "requiredRoleId": "Administrator"
-    }
-  ],
-  "buttons": [
-    {
-      "buttonId": "configure",
-      "requiredRoleId": "Administrator"
-    },
-    {
-      "buttonId": "caseStart",
-      "requiredRoleId": "User"
-    },
-    {
-      "buttonId": "refresh",
-      "requiredRoleId": "User"
-    },
-    {
-      "buttonId": "favorite",
-      "requiredRoleId": "User"
-    }
-  ]
+    "allowedRoutes": [
+        "R1",
+        "R2",
+        "R3"
+    ],
+    "allowedButtonIds": [
+        "caseStart",
+        "refresh",
+        "favorite",
+        "configure"
+    ],
+    "configuration": [
+        {
+            "roleId": "Administrator",
+            "routes": [
+                "configuration"
+            ],
+            "buttonIds": [
+                "configure"
+            ]
+        },
+        {
+            "roleId": "role1",
+            "routes": [],
+            "buttonIds": [
+                "caseStart",
+                "refresh",
+                "favorite",
+                "configure"
+            ]
+        },
+        {
+            "roleId": "role3",
+            "routes": [],
+            "buttonIds": [
+                "caseStart",
+                "refresh",
+                "favorite",
+                "configure"
+            ]
+        }
+    ]
 }

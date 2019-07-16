@@ -150,7 +150,7 @@
                                         <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
                                     </ng-container>
                 
-                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                                 </table>
                             </div>
@@ -167,7 +167,7 @@
                 <mat-step *ngIf="inputType === 'json'">
                     <ng-template matStepLabel>JSON Parse options</ng-template>
                     <div fxFill style="height:100%; overflow:auto" fxLayout="column" fxFlex>
-                        <div>
+                        <div style="max-width: 90vw;width: 90vw;overflow: scroll;"> 
                             <mat-accordion>
                                 <mat-expansion-panel>
                                     <mat-expansion-panel-header>
@@ -228,7 +228,7 @@
                                     </mat-action-row>
                                 </mat-expansion-panel>
                             </mat-accordion>
-                            <div *ngIf="data" fxLayout="column">
+                            <div *ngIf="data" fxLayout="column" >
                                 <div class="tcs-data-preview-button-text">Data Preview</div>
                                 <table fxFlex mat-table [dataSource]="data" class="mat-elevation-z8">
                                     <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">

@@ -11,7 +11,8 @@ import {
     LaConfigResolver,
     LiveAppsConfigResolver, RoleGuard,
     RolesResolver,
-    LiveAppsLandingPageComponent
+    LiveAppsLandingPageComponent,
+    RoleActiveResolver
 } from '@tibco-tcstk/tc-liveapps-lib';
 import { CaseComponent } from '../../routes/case/case.component';
 import { ConfigurationComponent } from '../../routes/configuration/configuration.component';
@@ -28,7 +29,8 @@ export const STARTER_APP_ROUTES = [
         component: LiveAppsLandingPageComponent,
         resolve: {
             generalConfigHolder: GeneralConfigResolver,
-            rolesHolder: RolesResolver
+            rolesHolder: RolesResolver,
+            activeRoleHolder: RoleActiveResolver
         }
     },
     // {
@@ -58,8 +60,15 @@ export const STARTER_APP_ROUTES = [
         }
     },
     {
-        path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard, RoleGuard],
-        resolve: { configurationMenuHolder: ConfigurationMenuConfigResolver },
+        path: 'configuration', 
+        component: ConfigurationComponent, 
+        canActivate: [
+            AuthGuard, 
+            RoleGuard
+        ],
+        resolve: { 
+            configurationMenuHolder: ConfigurationMenuConfigResolver 
+        },
         children: CONFIGURATION_ROUTE_CONFIG
     },
     {
@@ -85,7 +94,8 @@ export const STARTER_APP_PROVIDERS = [
         RolesResolver,
         GroupsResolver,
         AccessResolver,
-        FormResolver
+        FormResolver,
+        RoleActiveResolver
     ],
     CONFIGURATION_ROUTE_PROVIDERS,
     PROCESS_DISCOVERY_ROUTE_PROVIDERS

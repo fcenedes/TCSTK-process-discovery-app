@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+        "@tibco-tcstk/tc-process-discovery-lib/*": [
+            "dist/tibco-tcstk/tc-process-discovery-lib/*"
+        ],
+        "@tibco-tcstk/tc-process-discovery-lib": [
+            "projects/tibco-tcstk/tc-process-discovery-lib/src/public_api"
+        ],
+    }                
   }
 }

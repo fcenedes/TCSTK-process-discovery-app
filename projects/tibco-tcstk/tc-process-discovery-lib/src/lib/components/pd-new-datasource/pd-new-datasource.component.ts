@@ -167,9 +167,12 @@ export class PdNewDatasourceComponent implements OnInit {
     }
 
     public refreshJSON = (): void => {
+
+        // Pending to parse JSON file
         const reader = new FileReader();
         reader.onload = (data: any) => {
             const jsonData = unparse(data.target.result);
+
             let config = {
                 quoteChar: this.quoteChar,
                 escapeChar: this.escapeChar,
@@ -243,7 +246,10 @@ export class PdNewDatasourceComponent implements OnInit {
 
     handleSubmit = (stepper: MatStepper) => {
 
-        const uploadPath = this.pdConfiguration.hdfsRootPath + ' / <folder>/' + this.file.name;
+        let uploadPath: string;
+        if (!this.remote){
+            uploadPath = this.pdConfiguration.hdfsRootPath + ' / <folder>/' + this.file.name;
+        }
         this.showButton = false;
 
         this.case = {
@@ -263,7 +269,7 @@ export class PdNewDatasourceComponent implements OnInit {
                     datetimeFormat: this.dateTimeFormat
                 },
                 FileOptions: {
-                    FileName: this.file.name,
+                    FileName: this.filename,
                     FilePath: (this.remote ? this.route.snapshot.params.documentURL : '')
                 },
                 EventMap: {
@@ -296,7 +302,7 @@ export class PdNewDatasourceComponent implements OnInit {
                             // case created send back response including caseIdentifier if one is present
                             if (response.caseIdentifier) {
                                 this.caseIdentifier = response.caseIdentifier;
-                                this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
+                                // this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
                             }
                             if (response.caseReference) {
                                 this.caseReference = response.caseReference;
@@ -305,9 +311,6 @@ export class PdNewDatasourceComponent implements OnInit {
                             // upload the document to the backend
                             // TODO: Review it
                             if (this.remote){
-                                if (this.caseIdentifier) {
-                                    this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
-                                }
                                 this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
                                     pipe(
                                         map(_ => {
@@ -315,6 +318,9 @@ export class PdNewDatasourceComponent implements OnInit {
                                         })
                                     ).subscribe();
                             } else {
+                                if (this.caseIdentifier) {
+                                    this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
+                                }
                                 this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, this.caseIdentifier, this.pdConfiguration.hdfsRootPath, this.file).subscribe(
                                     response => {
                                         if (response.type == HttpEventType.UploadProgress) {

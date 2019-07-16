@@ -15,7 +15,7 @@ import { Datasource } from '../../models/tc-process-discovery';
 })
 export class PdProcessMiningComponent implements OnInit {
 
-    @ViewChild(SpotfireWrapperComponent) spotfireWrapperComponent: SpotfireWrapperComponent;
+    @ViewChild(SpotfireWrapperComponent, { static: false }) spotfireWrapperComponent: SpotfireWrapperComponent;
 
     // Widget configuration
     public title: string;
@@ -66,12 +66,10 @@ export class PdProcessMiningComponent implements OnInit {
             showCustomizableHeader: false,
             showDodPanel: false,
             showExportFile: false,
-            showExportVisualization: false,
             showFilterPanel: true,
             showHelp: false,
             showLogout: false,
             showPageNavigation: false,
-            showAnalysisInfo: false,
             showReloadAnalysis: false,
             showStatusBar: false,
             showToolBar: false,
