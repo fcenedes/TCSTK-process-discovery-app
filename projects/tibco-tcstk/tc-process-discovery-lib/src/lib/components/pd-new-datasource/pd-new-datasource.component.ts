@@ -266,7 +266,8 @@ export class PdNewDatasourceComponent implements OnInit {
                     separator: this.columnSeparator,
                     quoteChar: this.quoteChar,
                     escapeChar: this.escapeChar,
-                    datetimeFormat: this.dateTimeFormat
+                    datetimeFormat: this.dateTimeFormat,
+                    encoding: this.encoding
                 },
                 FileOptions: {
                     FileName: this.filename,
