@@ -278,7 +278,7 @@ export class PdNewDatasourceComponent implements OnInit {
                     resource_id: this.resource,
                     activity_start_time: this.start,
                     activity_end_time: this.end,
-                    otherAttributes: this.other.toString()
+                    otherAttributes: this.other ? this.other.toString(): undefined
                 },
                 SDSBackend: {
                     Status: '',
