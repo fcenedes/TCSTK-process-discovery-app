@@ -41,9 +41,11 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
             this.marking = message.text;
         });
         this.subscription = this.messageService.getMessage('title-bar').subscribe(message => {
-            this.currentView = message.text;
-            this.generateTitle();
-            this.marking = {};
+            setTimeout(() => {
+                this.currentView = message.text;
+                this.generateTitle();
+                this.marking = {};
+            });
         });
     }
 
@@ -89,35 +91,35 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     }
 
     private generateTitle = (): void => {
+            if (this.currentView === 'case-view') {
+                this.title = this.route.snapshot.data.generalConfigHolder.welcomeMessage;
+            }
 
-        if (this.currentView === 'case-view') {
-            this.title = this.route.snapshot.data.generalConfigHolder.welcomeMessage;
-        }
+            if (this.currentView === 'datasources'){
+                this.title = 'Business Processes';
+            }
 
-        if (this.currentView === 'datasources'){
-            this.title = 'Business Processes';
-        }
+            if (this.currentView === 'new-datasource'){
+                this.title = 'New datasource';
+            }
 
-        if (this.currentView === 'new-datasource'){
-            this.title = 'New datasource';
-        }
+            if (this.currentView === 'file-management'){
+                this.title = 'File management';
+            }
 
-        if (this.currentView === 'file-management'){
-            this.title = 'File management';
-        }
+            if (this.currentView === 'process-mining-view') {
+                this.processDiscovery.getCurrentDatasource().pipe(
+                    map(datasource => {
+                        if (datasource) {
+                            this.title = datasource.datasourceId + '-' + datasource.description;
+                        } else {
+                            this.router.navigate(['/starterApp/pd/datasources']);
+                        }
+                    })
+                ).subscribe();
+            }
 
-        if (this.currentView === 'process-mining-view') {
-            this.processDiscovery.getCurrentDatasource().pipe(
-                map(datasource => {
-                    if (datasource) {
-                        this.title = datasource.datasourceId + '-' + datasource.description;
-                    } else {
-                        this.router.navigate(['/starterApp/pd/datasources']);
-                    }
-                })
-            ).subscribe();
-        }
-        this.toolbarButtons = this.createToolbarButtons();
+            this.toolbarButtons = this.createToolbarButtons();
     }
 
     public roleChange = ($role: RoleAttribute): void => {
