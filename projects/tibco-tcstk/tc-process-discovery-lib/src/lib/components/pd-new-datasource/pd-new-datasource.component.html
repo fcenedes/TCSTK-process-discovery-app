@@ -281,14 +281,14 @@
                                 </mat-form-field>
                                 <mat-form-field>
                                     <mat-label>Start</mat-label>
-                                    <mat-select [(value)]="start" required>
-                                        <mat-option *ngFor="let column of displayedColumns" [value]="column">{{column}}
+                                    <mat-select [(value)]="start" required (selectionChange)="validateDate('start', $event)">
+                                        <mat-option *ngFor="let column of displayedColumns" [value]="column">{{column}} 
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field>
                                     <mat-label>End</mat-label>
-                                    <mat-select [(value)]="end">
+                                    <mat-select [(value)]="end" (selectionChange)="validateDate('end', $event)">
                                         <mat-option value=""></mat-option>
                                         <mat-option *ngFor="let column of displayedColumns" [value]="column">{{column}}</mat-option>
                                     </mat-select>

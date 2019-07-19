@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { parse, unparse } from 'papaparse';
-import { LiveAppsService, ProcessId, Process } from '@tibco-tcstk/tc-liveapps-lib';
+import { LiveAppsService, Process } from '@tibco-tcstk/tc-liveapps-lib';
 import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
 import { ProcessDiscoveryConfig } from '../../models/tc-process-discovery-config';
 import { map } from 'rxjs/operators';
@@ -8,10 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
 import { MatSnackBar, MatStepper, MatSelectChange } from '@angular/material';
 
-import { DateTimeFormatter, LocalDateTime } from 'js-joda';
 import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
-// import { Locale } from 'js-joda/locale_en-us';
-// import 'js-joda-timezone';
+// import * as moment from 'moment';
+
+import { LocalDateTime, DateTimeFormatter } from 'js-joda';
 
 export interface Mapping {
     columnName: string,
@@ -368,25 +368,29 @@ export class PdNewDatasourceComponent implements OnInit {
 
     }
 
-    validateDate = (event) => {
-        const sampleDate = this.data[0][event.value];
-        const dateFormat = this.dateTimeFormat;
-
-        const d = LocalDateTime.parse('2018-04-28T12:34')
-        const formatter = DateTimeFormatter.ofPattern('eeee (d MMMM)');
-        d.format(formatter) // samedi (28 avril)
+    public validateDate = (field: string, $event: MatSelectChange) => {
+        let errors: number[] = [];
+        const formatter = DateTimeFormatter.ofPattern(this.dateTimeFormat);
+        this.data.forEach(element => {
+            let parsedDate
+            try {
+                parsedDate = LocalDateTime.parse(element[$event.value], formatter).format(formatter);  
+            } catch (error){
+                if (element[$event.value] !== parsedDate) {
+                    errors.push(element[$event.value]);
+                }
+            }
+        });
+        if (errors.length != 0) {
+            this.snackBar.open('Error parsing date for field ' + field + ' in values: ' + errors.toString(), 'OK', {
+                duration: 3000
+            });
+            field === 'start' ? this.start = '': this.end = '';
+        }
     }
     
     handleConfirmation = (): void => {
         this.router.navigate(['/starterApp/pd/datasources']);
-    }
-
-    handleValidateFormat = (): void => {
-        const zdt = LocalDateTime.parse("2016-02-26T09:42"); 
-        console.log("11111 " + zdt.toString());
-        const zdt2 = zdt.format(DateTimeFormatter.ofPattern(this.dateTimeFormat));
-        console.log("22222", zdt2.toString());
-        console.log('typescript sample done');
     }
 
     handleRetry(stepper: MatStepper){
