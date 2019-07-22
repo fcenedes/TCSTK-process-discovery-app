@@ -1,6 +1,6 @@
 <tcpd-pd-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId"
     [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout"
-    [exclRecentAppIds]="exclRecentAppIds" [showStates]="false" [roles]="roles" (routeAction)="handleRouteAction($event)">
+    [exclRecentAppIds]="exclRecentAppIds" [showStates]="false" [roles]="roles" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)">
     <mat-tab #projectedTab label="Analytics">
         <ng-template matTabContent>
             <tcsf-spotfire-wrapper fxFlex fxFill [url]="spotfireServer" [path]="spotfirePath" [page]="spotfirePage"

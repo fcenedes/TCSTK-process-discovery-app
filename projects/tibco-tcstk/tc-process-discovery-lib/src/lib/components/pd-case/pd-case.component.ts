@@ -8,6 +8,7 @@ import { map, take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { GeneralConfig, RouteAction } from '@tibco-tcstk/tc-core-lib';
 import { SpotfireConfig } from '@tibco-tcstk/tc-spotfire-lib';
+import { CustomFormDefs } from '@tibco-tcstk/tc-forms-lib';
 
 @Component({
     selector: 'tcpd-pd-case',
@@ -33,6 +34,8 @@ export class PdCaseComponent implements OnInit {
     public spotfirePath: string;
     public spotfirePage: string;
     public spotfireFilter;
+    
+    public customFormDefs: CustomFormDefs;
 
     public layout: any[] = undefined;
     // you can use a layout here to override the default layout for case data
@@ -66,6 +69,8 @@ export class PdCaseComponent implements OnInit {
         this.caseRef = this.route.snapshot.params['caseRef'];
         this.appId = this.route.snapshot.params['appId'];
         this.typeId = this.route.snapshot.params['typeId'];
+        this.customFormDefs = this.route.snapshot.data.customFormDefs;
+
 
         let filterString = this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID ? 
                 this.route.snapshot.data.caseDataHolder.untaggedCasedataObj.Context.ContextID.split(','): [];

@@ -6,6 +6,7 @@ import { MatButtonToggleChange, MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
 import { map } from 'rxjs/operators';
+import { CustomFormDefs } from '@tibco-tcstk/tc-forms-lib';
 
 @Component({
     selector: 'tcpd-pd-cockpit',
@@ -27,6 +28,9 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
     appIds: any;
 
     private subscription: Subscription;
+
+    public customFormDefs: CustomFormDefs;
+
 
     constructor(
         private buttonsHelper: TcButtonsHelperService,
@@ -57,6 +61,8 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
         this.sandboxId = this.route.snapshot.data.claims.primaryProductionSandbox.id;
         this.appIds = this.route.snapshot.data.laConfigHolder.liveAppsConfig.applicationIds;
+
+        this.customFormDefs = this.route.snapshot.data.customFormDefs;
     }
 
     ngOnDestroy(){
@@ -173,17 +179,17 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
                 DataSourceId: this.title.slice(0, 10)
             }
         };
-        this.openCreatorDialog(application, EXAMPLE_INITIAL_DATA, this.sandboxId);
+        this.openCreatorDialog(application, EXAMPLE_INITIAL_DATA, this.sandboxId, this.customFormDefs);
     }
 
-    private openCreatorDialog = (application: CaseType, initialData, sandboxId) => {
+    private openCreatorDialog = (application: CaseType, initialData, sandboxId, customFormDefs) => {
         const dialogRef = this.dialog.open(LiveAppsCreatorDialogComponent, {
             width: '60%',
             height: '80%',
             maxWidth: '100vw',
             maxHeight: '100vh',
             panelClass: 'tcs-style-dialog',
-            data: new CaseCreatorSelectionContext(application, initialData, sandboxId, null)
+            data: new CaseCreatorSelectionContext(application, initialData, sandboxId, customFormDefs)
         });
 
         dialogRef.afterClosed().subscribe(result => {
