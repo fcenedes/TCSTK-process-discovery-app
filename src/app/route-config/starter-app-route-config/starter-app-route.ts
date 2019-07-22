@@ -63,8 +63,8 @@ export const STARTER_APP_ROUTES = [
         path: 'configuration', 
         component: ConfigurationComponent, 
         canActivate: [
-            AuthGuard, 
-            RoleGuard
+            AuthGuard
+            // RoleGuard
         ],
         resolve: { 
             configurationMenuHolder: ConfigurationMenuConfigResolver 
@@ -78,7 +78,8 @@ export const STARTER_APP_ROUTES = [
             claims: ClaimsResolver,
             generalConfigHolder: GeneralConfigResolver,
             laConfigHolder: LaConfigResolver,
-            rolesHolder: RolesResolver
+            rolesHolder: RolesResolver,
+            customFormDefs: FormResolver
         },
         children: PROCESS_DISCOVERY_ROUTE_CONFIG
     }

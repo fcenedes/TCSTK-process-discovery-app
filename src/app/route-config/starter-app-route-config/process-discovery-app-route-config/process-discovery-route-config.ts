@@ -16,6 +16,7 @@ import {
 import { SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
 import { PdDatasourceCaseComponent } from 'projects/tibco-tcstk/tc-process-discovery-lib/src/lib/components/pd-datasource-case/pd-datasource-case.component';
 import { PdFileManagementComponent } from 'projects/tibco-tcstk/tc-process-discovery-lib/src/lib/components/pd-file-management/pd-file-management.component';
+import { FormResolver } from '@tibco-tcstk/tc-forms-lib';
 
 export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
     {
@@ -52,7 +53,8 @@ export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
             claims: ClaimsResolver,
             groups: GroupsResolver,
             roles: RolesResolver,
-            caseDataHolder: CaseDataResolver
+            caseDataHolder: CaseDataResolver, 
+            customFormDefs: FormResolver
         }
     },
     {
@@ -80,7 +82,8 @@ export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
             laConfigHolder: LaConfigResolver,
             claims: ClaimsResolver,
             groups: GroupsResolver,
-            roles: RolesResolver
+            roles: RolesResolver,
+            customFormDefs: FormResolver
             // access: AccessResolver
         }
     },
@@ -88,8 +91,8 @@ export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
         path: "file-management",
         component: PdFileManagementComponent,
         resolve: {
-            // claims: ClaimsResolver,
-            // processDiscovery: ProcessDiscoveryConfigResolver
+            claims: ClaimsResolver,
+            generalConfigHolder: GeneralConfigResolver
         }
     },
     {
@@ -104,5 +107,6 @@ export const PROCESS_DISCOVERY_ROUTE_PROVIDERS = [
     AllRolesResolver,
     AllGroupsResolver,
     ProcessDiscoveryConfigResolver,
-    CaseDataResolver
+    CaseDataResolver,
+    FormResolver
 ]
