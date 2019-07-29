@@ -3,9 +3,9 @@
         <div fxLayout="row" fxLayoutAlign="start start" style="height: 20px">
             <p>Here you can configure existing datasources and register new ones</p>
         </div>
-        <div fxFlex fxLayout="row wrap">
-            <tcla-live-apps-documents 
-                sandboxId="31" 
+        <div fxFlex fxLayout="row wrap" fxLayoutGap="20px">
+            <tcla-live-apps-documents fxFlex="40"
+                [sandboxId]="sandboxId" 
                 folderType="orgFolders" 
                 folderId="{{FOLDERID}}" 
                 folderDescription="Files available"
@@ -13,6 +13,10 @@
                 (customActionClicked)="manageCustomAction($event)"
             >
             </tcla-live-apps-documents>
+            <div fxFlex class="collaborationWidget" fxFlex>
+                <tcla-live-apps-notes [userId]="userId" [relatedItemId]="uiAppId" [relatedItemType]="'CASE_APP'">
+                </tcla-live-apps-notes>
+            </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
             <button mat-raised-button color="secondary" (click)="createNewDatasource()">New Business Process</button>
