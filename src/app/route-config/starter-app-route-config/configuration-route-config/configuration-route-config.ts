@@ -4,7 +4,7 @@ import {
     AllRolesResolver,
     ClaimsResolver, LaConfigResolver,
     LiveAppsSettingsComponent, LiveAppsSettingsRecentCasesComponent,
-    LiveAppsSettingsRolesComponent, LiveAppsSettingsSummaryCardsComponent
+    LiveAppsSettingsRolesComponent, LiveAppsSettingsSummaryCardsComponent, LiveAppsSettingsAccessControlComponent, AccessControlConfigurationResolver
 } from '@tibco-tcstk/tc-liveapps-lib';
 import { PdSettingsConfigurationComponent, ProcessDiscoveryConfigResolver } from '@tibco-tcstk/tc-process-discovery-lib';
 import { SettingsSpotfireComponent, SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
@@ -35,6 +35,15 @@ export const CONFIGURATION_ROUTE_CONFIG = [
             landingPagesConfigHolder: GeneralLandingPageConfigResolver,
             claims: ClaimsResolver,
             allRolesHolder: AllRolesResolver
+        }
+    },
+    {
+        path: "general-application-access-control",
+        component: LiveAppsSettingsAccessControlComponent,
+        resolve: {
+            claims: ClaimsResolver,
+            accessControlConfigHolder: AccessControlConfigurationResolver,
+            allRoles: AllRolesResolver
         }
     },
     {
@@ -93,5 +102,6 @@ export const CONFIGURATION_ROUTE_PROVIDERS = [
     AllGroupsResolver,
     GeneralLandingPageConfigResolver,
     SpotfireConfigResolver,
-    ProcessDiscoveryConfigResolver
+    ProcessDiscoveryConfigResolver,
+    AccessControlConfigurationResolver
 ]
