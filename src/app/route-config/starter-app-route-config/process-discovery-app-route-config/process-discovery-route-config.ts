@@ -58,7 +58,7 @@ export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
         }
     },
     {
-        path: "datasources",
+        path: "business-processes",
         component: PdDatasourcesAdministrationComponent,
         // canActivate: [SelectedRoleGuard],
         resolve: {
