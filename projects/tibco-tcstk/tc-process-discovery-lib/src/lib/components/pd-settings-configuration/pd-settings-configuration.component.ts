@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LiveAppsService, CaseType, LaProcessSelection } from '@tibco-tcstk/tc-liveapps-lib';
-import { Sandbox, Claim } from '@tibco-tcstk/tc-core-lib';
+import { Claim } from '@tibco-tcstk/tc-core-lib';
 import { ActivatedRoute } from '@angular/router';
-import { take, takeUntil, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ProcessDiscoveryConfig } from '../../models/tc-process-discovery-config';
 import { PdProcessDiscoveryConfigService } from '../../services/pd-process-discovery-config.service';
 import { MatSnackBar } from '@angular/material';
@@ -14,9 +14,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class PdSettingsConfigurationComponent implements OnInit {
 
-
-    // public liveAppsConfig: LiveAppsConfig;
-    // public generalConfig: GeneralConfig;
     public claims: Claim;
     public sandboxId: number;
     public selectedApp: CaseType;
@@ -61,10 +58,9 @@ export class PdSettingsConfigurationComponent implements OnInit {
                 })
             )
             .subscribe(null, error => { 
-                console.log("***** error " + error.error.errorMsg); 
                 this.datasourceId = "";
                 this.refresh(bypassCache);
-            }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });          
+            })
     }
 
     runSaveFuntion = () => {

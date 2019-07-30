@@ -19,25 +19,6 @@
                 <span fxFlex="50">Configure the TIBCO Live Apps action to validate datasources:</span>
                 <tcla-live-apps-case-actions-list [sandboxId]="sandboxId" [appId]="processDiscoveryConfig.datasourceAppId" [seletedActionId]="processDiscoveryConfig.validateActionAppId" [typeId]="'1'" (actionClicked)="selectAction($event)"></tcla-live-apps-case-actions-list>
             </div>
-            <div>
-                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch">
-                    <mat-form-field fxFlex="70">
-                        <input matInput placeholder="Hostname" [(ngModel)]="processDiscoveryConfig.hdfsHostname">
-                    </mat-form-field>
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Username" [(ngModel)]="processDiscoveryConfig.hdfsUsername">
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch">
-                    <mat-form-field fxFlex>
-                        <input matInput placeholder="Root path" [(ngModel)]="processDiscoveryConfig.hdfsRootPath">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="File Permission" [(ngModel)]="processDiscoveryConfig.hdfsPermision">
-                    </mat-form-field>
-                    <mat-slide-toggle [(ngModel)]="processDiscoveryConfig.hdfsOverwriteFile">Overwrite file</mat-slide-toggle>
-                </div>                
-            </div>
         </div>
         <div fxFlex class="tcs-filler-panel"></div>
         <div fxLayout="column" fxLayoutAlign="end end" style="min-height: 50px">
