@@ -1,14 +1,17 @@
 {
     "allowedRoutes": [
-        "R1",
-        "R2",
-        "R3"
+        "/starterApp/configuration",
+        "/starterApp/pd/business-processes",
+        "/starterApp/pd/file-management"
     ],
     "allowedButtonIds": [
         "caseStart",
         "refresh",
         "favorite",
-        "configure"
+        "configure",
+        "case-view", 
+        "business-processes",
+        "file-management"
     ],
     "configuration": [
         {
@@ -21,8 +24,8 @@
             ]
         },
         {
-            "roleId": "role1",
-            "routes": [],
+            "roleId": "Analyst",
+            "routes": ["/starterApp/configuration"],
             "buttonIds": [
                 "caseStart",
                 "refresh",
@@ -31,7 +34,7 @@
             ]
         },
         {
-            "roleId": "role3",
+            "roleId": "Investigators",
             "routes": [],
             "buttonIds": [
                 "caseStart",
