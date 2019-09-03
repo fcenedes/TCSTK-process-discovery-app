@@ -35,7 +35,7 @@ export class PdDatasourceCaseComponent implements OnInit {
     handleRouteAction = (routeAction: RouteAction) => {
         if (routeAction.action === 'backClicked') {
             // back clicked - navigate to home
-            this.router.navigate(['/starterApp/pd/datasources']);
+            this.router.navigate(['/starterApp/pd/business-processes']);
         }
     }
 
