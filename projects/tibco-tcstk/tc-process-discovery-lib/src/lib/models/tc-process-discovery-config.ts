@@ -7,13 +7,6 @@ export class ProcessDiscoveryConfig implements Deserializable {
     datasourceAppId: string;
     creatorAppId: string;
     validateActionAppId: string;
-    storeToHDFS: boolean;
-    storeToLiveApps: boolean;
-    hdfsHostname: string;
-    hdfsRootPath: string;
-    hdfsUsername: string;
-    hdfsOverwriteFile: boolean;
-    hdfsPermision: string;
     
     deserialize(input: any) {
         Object.assign(this, input);
