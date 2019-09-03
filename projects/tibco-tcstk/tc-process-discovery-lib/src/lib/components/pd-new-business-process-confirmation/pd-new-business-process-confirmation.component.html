@@ -1,0 +1,21 @@
+<div fxFill style="height:100%; overflow:auto" fxLayout="column" fxFill [formGroup]="form">
+    <div style="max-width: 90vw;width: 90vw;overflow: scroll;">
+        <div *ngIf="!caseCreated">
+           Business Process Summary 
+        </div>
+        <div *ngIf="caseCreated">
+            Business Process created successfully!!!
+        </div>
+
+    </div>
+    <div fxFlex class="tcs-filler-panel"></div>
+    <div *ngIf="!caseCreated" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px; padding: 5px">
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="confirmClicked()">Create Business Process</button>
+     </div>
+    <div *ngIf="caseCreated" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px; padding: 5px">
+        <button mat-raised-button (click)="goToBusinessProcesses()">Go to business process</button>
+        <button mat-raised-button color="primary" (click)="goToCase()">Go to case</button>
+    </div>
+     
+</div>

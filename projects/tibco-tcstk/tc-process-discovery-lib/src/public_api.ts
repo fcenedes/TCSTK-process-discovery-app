@@ -18,6 +18,7 @@ export * from './lib/components/pd-new-datasource/pd-new-datasource.component';
 export * from './lib/components/pd-process-mining/pd-process-mining.component';
 export * from './lib/components/pd-settings-configuration/pd-settings-configuration.component';
 export * from './lib/components/pd-file-management/pd-file-management.component';
+export * from './lib/components/pd-new-business-process/pd-new-business-process.component';
 
 // Services
 export * from './lib/services/pd-process-discovery-config.service';

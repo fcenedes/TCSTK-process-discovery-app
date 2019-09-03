@@ -1,0 +1,50 @@
+<div fxLayout="column" fxFill>
+    <div fxFlex style="padding: 20px;" fxLayout="column">
+        <div fxLayout="column" fxFlex>
+            <p>Choose the configuration to be used within this datasource:</p>
+            <br>
+            <div fxLayout="column" fxFlex>
+                <!-- New datasource specific -->
+                <mat-horizontal-stepper fxFlex fxLayout="column" labelPosition="bottom" [linear]="isLinear" #stepper>
+                    <!-- Select the datasource type JSON, CSV -->
+                    <mat-step #file_step>
+                        <ng-template matStepLabel>Datasource selection</ng-template>
+                        <ng-container *ngIf="stepper.selected == file_step">
+                            <pd-new-business-process-source-selection [form]="sourceSelection" [preview]="parseOptions.get('preview')" (refresh)="moveNextTab()"></pd-new-business-process-source-selection>
+                        </ng-container>
+                    </mat-step>
+
+                    <!--  CSV file and preview -->
+                    <mat-step #parsing_step>
+                        <ng-template matStepLabel>{{sourceSelection.get('inputType').value | uppercase}} Parse options</ng-template>
+                        <ng-container *ngIf="stepper.selected == parsing_step">
+                            <pd-new-business-process-parsing [form]="parseOptions" [data]="data" [columns]="columns" (refresh)="refreshPreview()"></pd-new-business-process-parsing>
+                        </ng-container>
+                    </mat-step>
+
+                    <!-- Mapping -->
+                    <mat-step #mapping_step>
+                        <ng-template matStepLabel>Mapping</ng-template>
+                        <ng-container *ngIf="stepper.selected == mapping_step">
+                            <pd-new-business-process-mapping [form]="mapping" [data]="data" [columns]="columns" [dateTimeFormat]="parseOptions.get('dateTimeFormat').value"></pd-new-business-process-mapping>
+                        </ng-container>
+                    </mat-step>
+
+                    <!-- Other options -->
+                    <mat-step #other_step>
+                        <ng-template matStepLabel>Other options</ng-template>
+                        <ng-container *ngIf="stepper.selected == other_step">
+                            <pd-new-business-process-other-options [form]="other"></pd-new-business-process-other-options>
+                        </ng-container>
+                    </mat-step>
+
+                    <!-- Confirmation -->
+                    <mat-step>
+                        <ng-template matStepLabel>Confirmation</ng-template>
+                        <pd-new-business-process-confirmation [form]="sourceSelection" [caseCreated]="caseCreated" [caseURL]="caseURL" (confirmButtonClicked)="createNewBusinessProcess()"></pd-new-business-process-confirmation>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </div> 
+        </div>
+    </div>
+</div>

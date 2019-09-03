@@ -1,0 +1,70 @@
+.tcs-new-datasource-settings-pane {
+  overflow: hidden;
+}
+
+.tcs-hidden-input {
+  display: none;
+}
+
+::ng-deep .mat-stepper-horizontal{
+    /* border: solid 1px red; */
+    /* height: 100%;
+    overflow: hidden; */
+}
+
+::ng-deep .mat-horizontal-content-container{
+    flex: 1 1 1e-09px;
+    /* overflow:hidden; */
+    /* height: 100%; */
+}
+
+::ng-deep .mat-horizontal-stepper-content{
+    height: 100%
+    /* overflow:hidden; */
+}
+
+.tcs-case-created-confirmation-details {
+    margin-top: 20px;
+}
+
+.tcs-case-created-confirmation-text {
+    font-family: Source Sans Pro;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #b6b6b6;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}
+
+.tcs-data-preview-button-text {
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #0081cb;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.mat-cell {
+  padding: 0px 5px 0px 5px;
+}
+
+.mat-header-cell{
+  padding: 0px 5px 0px 5px;
+  text-align: center
+}
+
+.mat-row, .mat-header-row {  
+    width: 100%;  
+ }  

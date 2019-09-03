@@ -1,0 +1,19 @@
+<div fxFill style="height:100%;overflow:auto" fxLayout="column" >
+    <div>
+        <div fxLayout="column" [formGroup]="form">
+            <mat-form-field fxFlex="47">
+                <mat-label>Use a separate DXP</mat-label>
+                <mat-select formControlName="useSuffix">
+                    <mat-option value="No">No</mat-option>
+                    <mat-option value="Yes">Yes</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxFlex class="tcs-filler-panel"></div>
+
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px; padding: 5px">
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
+</div>

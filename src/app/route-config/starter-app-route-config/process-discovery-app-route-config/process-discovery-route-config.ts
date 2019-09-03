@@ -11,7 +11,8 @@ import {
     PdCaseViewComponent,
     PdDatasourcesAdministrationComponent,
     PdNewDatasourceComponent,
-    PdCaseComponent
+    PdCaseComponent,
+    PdNewBusinessProcessComponent
  } from '@tibco-tcstk/tc-process-discovery-lib';
 import { SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
 import { PdDatasourceCaseComponent } from 'projects/tibco-tcstk/tc-process-discovery-lib/src/lib/components/pd-datasource-case/pd-datasource-case.component';
@@ -68,7 +69,7 @@ export const PROCESS_DISCOVERY_ROUTE_CONFIG = [
     },
     {
         path: "new-datasource",
-        component: PdNewDatasourceComponent,
+        component: PdNewBusinessProcessComponent,
         resolve: {
             claims: ClaimsResolver,
             processDiscovery: ProcessDiscoveryConfigResolver

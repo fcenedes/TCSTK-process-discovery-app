@@ -41,6 +41,12 @@ import { PdFavoriteCasesComponent } from './components/pd-favorite-cases/pd-favo
 import { PdRecentCasesComponent } from './components/pd-recent-cases/pd-recent-cases.component';
 import { PdCaseCockpitComponent } from './components/pd-case-cockpit/pd-case-cockpit.component';
 import { PdFileManagementComponent } from './components/pd-file-management/pd-file-management.component';
+import { PdNewBusinessProcessComponent } from './components/pd-new-business-process/pd-new-business-process.component';
+import { PdNewBusinessProcessSourceSelectionComponent } from './components/pd-new-business-process-source-selection/pd-new-business-process-source-selection.component';
+import { PdNewBusinessProcessParsingComponent } from './components/pd-new-business-process-parsing/pd-new-business-process-parsing.component';
+import { PdNewBusinessProcessMappingComponent } from './components/pd-new-business-process-mapping/pd-new-business-process-mapping.component';
+import { PdNewBusinessProcessOtherOptionsComponent } from './components/pd-new-business-process-other-options/pd-new-business-process-other-options.component';
+import { PdNewBusinessProcessConfirmationComponent } from './components/pd-new-business-process-confirmation/pd-new-business-process-confirmation.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +65,13 @@ import { PdFileManagementComponent } from './components/pd-file-management/pd-fi
         PdFavoriteCasesComponent,
         PdRecentCasesComponent,
         PdCaseCockpitComponent,
-        PdFileManagementComponent
+        PdFileManagementComponent,
+        PdNewBusinessProcessComponent,
+        PdNewBusinessProcessSourceSelectionComponent,
+        PdNewBusinessProcessParsingComponent,
+        PdNewBusinessProcessMappingComponent,
+        PdNewBusinessProcessOtherOptionsComponent,
+        PdNewBusinessProcessConfirmationComponent
     ],
     imports: [
         CommonModule,
