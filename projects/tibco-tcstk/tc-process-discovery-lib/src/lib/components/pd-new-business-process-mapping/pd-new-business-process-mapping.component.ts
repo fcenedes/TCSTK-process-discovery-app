@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { DateTimeFormatter, LocalDateTime, LocalDate, LocalTime } from 'js-joda';
 import { MatSelectChange, MatSnackBar } from '@angular/material';
 
@@ -61,5 +61,27 @@ export class PdNewBusinessProcessMappingComponent implements OnInit {
         }
     }
 
+    public updateColumns = (column: string): void => {
+
+        let valuesAssigned = [];
+        const keys= Object.keys(this.form.controls);
+
+        keys.forEach(element => {
+            if (this.form.controls[element].value != null){
+                if (typeof(this.form.controls[element].value) == 'string'){
+                    valuesAssigned.push(this.form.controls[element].value);
+                } else {
+                    valuesAssigned = valuesAssigned.concat(this.form.controls[element].value);
+                }
+            }
+        });
+
+        console.log("***** Assigned values are", valuesAssigned);
+        
+        this.availableColumns = this.columns.filter(item => valuesAssigned.indexOf(item) == -1);
+       console.log("******* UPDATA COLUMNS: ", this.columns.filter(item => valuesAssigned.indexOf(item) == -1));
+
+
+    }
 
 }

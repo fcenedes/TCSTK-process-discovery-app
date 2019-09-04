@@ -3,44 +3,48 @@
         <div fxFlex fxLayout="column" [formGroup]="form">
             <mat-form-field>
                 <mat-label>CaseId</mat-label>
-                <mat-select formControlName="caseId" required>
-                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}
-                    </mat-option>
+                <mat-select formControlName="caseId" (selectionChange)="updateColumns()" required>
+                    <mat-option *ngIf="form.value['caseId']!=null" [value]="form.value['caseId']">{{form.value['caseId']}}</mat-option>
+                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Activity</mat-label>
-                <mat-select formControlName="activity" required>
-                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}
-                    </mat-option>
+                <mat-select formControlName="activity" (selectionChange)="updateColumns()" required>
+                    <mat-option *ngIf="form.value['activity']!=null" [value]="form.value['activity']">{{form.value['activity']}}</mat-option>
+                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Resources</mat-label>
-                <mat-select formControlName="resource">
+                <mat-select formControlName="resource" (selectionChange)="updateColumns()">
                     <mat-option value=""></mat-option>
-                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}
-                    </mat-option>
+                    <mat-option *ngIf="form.value['resource']!=null && form.value['resource'].value != ''" [value]="form.value['resource']">{{form.value['resource']}}</mat-option>
+                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Start</mat-label>
-                <mat-select formControlName="start" required (selectionChange)="validateDate('start', $event)">
+                <mat-select formControlName="start" required (selectionChange)="validateDate('start', $event);updateColumns()">
                     <mat-option></mat-option>
-                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}} 
-                    </mat-option>
+                    <mat-option *ngIf="form.value['start']!=null" [value]="form.value['start']">{{form.value['start']}}</mat-option>
+                    <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>End</mat-label>
-                <mat-select formControlName="end" (selectionChange)="validateDate('end', $event)">
+                <mat-select formControlName="end" (selectionChange)="validateDate('end', $event); updateColumns()">
                     <mat-option></mat-option>
+                    <mat-option *ngIf="form.value['end']!=null" [value]="form.value['end']">{{form.value['end']}}</mat-option>
                     <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Others</mat-label>
-                <mat-select formControlName="other" multiple >
+                <mat-select formControlName="other" multiple (selectionChange)="updateColumns()">
+                    <ng-container *ngIf="form.value['other'] && form.value['other'].length > 0">
+                        <mat-option  *ngFor="let selected of form.value['other']" [value]="selected">{{selected}}</mat-option>
+                    </ng-container>
                     <mat-option *ngFor="let column of availableColumns" [value]="column">{{column}}</mat-option>
                 </mat-select>
             </mat-form-field>
