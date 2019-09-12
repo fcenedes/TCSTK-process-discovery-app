@@ -1,5 +1,5 @@
 <div fxFill style="height:100%; overflow:auto" fxLayout="column" fxFill [formGroup]="form">
-    <div style="max-width: 90vw;width: 90vw;overflow: scroll;">
+    <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="panelOpenState">
                 <mat-expansion-panel-header>
@@ -50,7 +50,7 @@
             </mat-expansion-panel>
         </mat-accordion>
     </div>
-    <div fxLayout="column">
+    <div fxLayout="column" style="max-width:90vw;width:90vw;overflow:scroll">
         <div class="tcs-data-preview-button-text">Data Preview</div>
         <table fxFlex mat-table [dataSource]="data" class="mat-elevation-z8">
             <ng-container [matColumnDef]="column" *ngFor="let column of columns">
