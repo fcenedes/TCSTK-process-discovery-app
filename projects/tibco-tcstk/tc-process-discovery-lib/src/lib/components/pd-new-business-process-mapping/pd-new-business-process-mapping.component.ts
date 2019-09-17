@@ -61,7 +61,7 @@ export class PdNewBusinessProcessMappingComponent implements OnInit {
         }
     }
 
-    public updateColumns = (column: string): void => {
+    public updateColumns = (): void => {
 
         let valuesAssigned = [];
         const keys= Object.keys(this.form.controls);
@@ -76,12 +76,7 @@ export class PdNewBusinessProcessMappingComponent implements OnInit {
             }
         });
 
-        console.log("***** Assigned values are", valuesAssigned);
-        
         this.availableColumns = this.columns.filter(item => valuesAssigned.indexOf(item) == -1);
-       console.log("******* UPDATA COLUMNS: ", this.columns.filter(item => valuesAssigned.indexOf(item) == -1));
-
-
     }
 
 }

@@ -3,9 +3,11 @@
     [exclRecentAppIds]="exclRecentAppIds" [showStates]="false" [roles]="roles" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)">
     <mat-tab #projectedTab label="Analytics">
         <ng-template matTabContent>
+            <div *ngIf="">
             <tcsf-spotfire-wrapper fxFlex fxFill [url]="spotfireServer" [path]="spotfirePath" [page]="spotfirePage"
              [filters]='spotfireFilter' [parameters]="parameters" [debug]="true">
             </tcsf-spotfire-wrapper>
+        </div>
         </ng-template>
     </mat-tab>
 
