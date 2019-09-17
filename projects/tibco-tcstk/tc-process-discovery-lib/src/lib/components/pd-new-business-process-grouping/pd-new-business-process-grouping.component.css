@@ -1,0 +1,171 @@
+.tcs-hidden-input {
+  display: none;
+}
+
+.tcs-small-pane {
+  width: 400px;
+  max-width: 400px;
+  height: 386px;
+  max-height: 400px;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.33);
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.tcs-documents-pane {
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.33);
+  background-color: #ffffff;
+}
+
+.tcs-documents-header {
+  min-height: 40px;
+  height: 40px;
+  border-radius: 3px 3px 0px 0px;
+  box-shadow: 0 1px 2px 0 #dedede;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tcs-documents-header-text {
+  margin-left: 10px;
+  font-family: Source Sans Pro;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+
+.tcs-document-name-text {
+  font-family: Source Sans Pro;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0081cb;
+}
+
+.tcs-document-comment-text {
+  font-family: Source Sans Pro;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #727272;
+}
+
+.tcs-document-modified-text {
+  font-family: Source Sans Pro;
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.1px;
+  color: #b6b6b6;
+}
+
+.tcs-document-filesize-text {
+  font-family: Source Sans Pro;
+  font-size: 10px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.1px;
+  color: #b6b6b6;
+}
+
+
+.tcs-document-details-text-box {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+:host ::ng-deep .tcs-icon-disabled.tcs-icon.tcs-document-edit-buttons path.svg-content {
+  fill: #b6b6b6;
+}
+
+:host ::ng-deep .tcs-icon-disabled.tcs-icon.tcs-document-edit-buttons:hover path.svg-content {
+  fill: #b6b6b6;
+  cursor: not-allowed;
+}
+
+:host ::ng-deep .tcs-icon.tcs-document-edit-buttons:hover path.svg-content {
+  fill: #0081cb;
+  cursor: pointer;
+}
+
+:host ::ng-deep .tcs-icon.tcs-document-edit-icon:hover path.svg-content {
+  fill: #0081cb;
+  cursor: pointer;
+}
+
+.tcs-document-detail-box {
+  min-height: 85px;
+  flex-shrink: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.tcs-document-detail-box:hover {
+  background-color: #EEF0F7;
+  transition: background-color 0.5s;
+}
+
+.tcs-document-line {
+  margin-left: 20px;
+  padding: 0px;
+  margin-top: 0px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  border-bottom-color: #f4f4f4;
+  border-bottom-width: 1.1px;
+  border-bottom-style: solid;
+}
+
+.tcs-document-list {
+  overflow-y: auto;
+}
+
+.tcs-no-item-text {
+  font-family: Source Sans Pro;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #b6b6b6;
+}
+
+.cdk-drop-dragging .cdk-drag {
+  transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-animating {
+  transition: transform 550ms cubic-bezier(0, 0, 0.2, 1);
+}
+.cdk-drag-placeholder {
+  background: rgba(0, 0, 0, .2);
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}

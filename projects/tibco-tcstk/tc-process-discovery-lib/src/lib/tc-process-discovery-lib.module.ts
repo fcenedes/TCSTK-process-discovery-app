@@ -13,6 +13,8 @@ import {
     MatToolbarModule,
     MatListModule, MatMenuModule, MatOptionModule, MatSelectModule, MatTabsModule, MatTooltipModule, MatButtonToggleModule, MatExpansionModule, MatTableModule, MatStepperModule, MatRadioModule, MatSnackBarModule, MatSlideToggleModule, MatProgressBarModule, MatIconRegistry
 } from '@angular/material';
+import { MatTreeModule } from '@angular/material/tree';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,6 +49,7 @@ import { PdNewBusinessProcessParsingComponent } from './components/pd-new-busine
 import { PdNewBusinessProcessMappingComponent } from './components/pd-new-business-process-mapping/pd-new-business-process-mapping.component';
 import { PdNewBusinessProcessOtherOptionsComponent } from './components/pd-new-business-process-other-options/pd-new-business-process-other-options.component';
 import { PdNewBusinessProcessConfirmationComponent } from './components/pd-new-business-process-confirmation/pd-new-business-process-confirmation.component';
+import { PdNewBusinessProcessGroupingComponent } from './components/pd-new-business-process-grouping/pd-new-business-process-grouping.component';
 
 @NgModule({
     declarations: [
@@ -71,7 +74,8 @@ import { PdNewBusinessProcessConfirmationComponent } from './components/pd-new-b
         PdNewBusinessProcessParsingComponent,
         PdNewBusinessProcessMappingComponent,
         PdNewBusinessProcessOtherOptionsComponent,
-        PdNewBusinessProcessConfirmationComponent
+        PdNewBusinessProcessConfirmationComponent,
+        PdNewBusinessProcessGroupingComponent
     ],
     imports: [
         CommonModule,
@@ -99,6 +103,7 @@ import { PdNewBusinessProcessConfirmationComponent } from './components/pd-new-b
         MatStepperModule,
         DragDropModule,
         MatRadioModule,
+        MatTreeModule,
         MatSnackBarModule,
         MatSlideToggleModule,
         MatProgressBarModule,
@@ -164,6 +169,13 @@ export class TcProcessDiscoveryLibModule {
                 '<path class="cls-4" d="M12,17c-5,0-9-1.34-9-3v5c0,1.66,4,3,9,3s9-1.34,9-3V14C21,15.66,17,17,12,17Z"/>\n' +
                 '</g>\n' +
                 '</svg>'
+            )
+        )
+
+        this.matIconRegistry.addSvgIconLiteral(
+            'pd-grouping-add-new-group',
+            this.domSanitizer.bypassSecurityTrustHtml(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#727272" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>'
             )
         )
     }
