@@ -23,7 +23,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
         private messageService: MessageQueueService) { }
 
     ngOnInit() {
-        this.messageService.sendMessage('title-bar', 'datasources');
+        this.messageService.sendMessage('title-bar', 'business-processes');
 
         const claims = this.route.snapshot.data.claims;
         this.sandboxId = Number(claims.primaryProductionSandbox.id).valueOf();
