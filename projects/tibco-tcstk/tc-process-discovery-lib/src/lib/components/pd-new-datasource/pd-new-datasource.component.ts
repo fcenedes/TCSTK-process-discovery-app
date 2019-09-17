@@ -248,7 +248,7 @@ export class PdNewDatasourceComponent implements OnInit {
 
         let uploadPath: string;
         if (!this.remote){
-            uploadPath = this.pdConfiguration.hdfsRootPath + ' / <folder>/' + this.file.name;
+            uploadPath = 'this.pdConfiguration.hdfsRootPath' + ' / <folder>/' + this.file.name;
         }
         this.showButton = false;
 
@@ -322,7 +322,7 @@ export class PdNewDatasourceComponent implements OnInit {
                                 if (this.caseIdentifier) {
                                     this.case.DiscoverAnalysisConfig.FileOptions.FilePath = uploadPath.replace('<folder>', this.caseIdentifier);
                                 }
-                                this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, this.caseIdentifier, this.pdConfiguration.hdfsRootPath, this.file).subscribe(
+                                this.pdService.uploadFileHDFS('this.pdConfiguration.hdfsHostname', this.caseIdentifier, 'this.pdConfiguration.hdfsRootPath', this.file).subscribe(
                                     response => {
                                         if (response.type == HttpEventType.UploadProgress) {
                                             this.uploadProgress = Math.round(100 * response.loaded / response.total);
@@ -396,30 +396,30 @@ export class PdNewDatasourceComponent implements OnInit {
     handleRetry(stepper: MatStepper){
         this.num_retries = this.num_retries + 1;
         if (this.num_retries < this.MAX_RETRIES) {
-            this.pdService.uploadFileHDFS(this.pdConfiguration.hdfsHostname, this.caseIdentifier, this.pdConfiguration.hdfsRootPath, this.file).subscribe(
-                response => {
-                    if (response.type == HttpEventType.UploadProgress) {
-                        this.uploadProgress = Math.round(100 * response.loaded / response.total);
-                    }
+            // this.pdService.uploadFileHDFS('this.pdConfiguration.hdfsHostnam'e, this.caseIdentifier, 'this.pdConfiguration.hdfsRootPath', this.file).subscribe(
+            //     response => {
+            //         if (response.type == HttpEventType.UploadProgress) {
+            //             this.uploadProgress = Math.round(100 * response.loaded / response.total);
+            //         }
 
-                    if (this.uploadProgress == 100) {
-                        this.snackBar.open('File uploaded correctly', 'OK', {
-                            duration: 3000
-                        });
-                        this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
-                            pipe(
-                                map(_ => {
-                                    stepper.next();
-                                })
-                            ).subscribe();
-                    }
-                },
-                error => {
-                    this.snackBar.open('Error uploading file. ERROR: ' + error.message + '. Please fix the error and retry', 'OK', {
-                        duration: 10000
-                    });
-                }
-            );
+            //         if (this.uploadProgress == 100) {
+            //             this.snackBar.open('File uploaded correctly', 'OK', {
+            //                 duration: 3000
+            //             });
+            //             this.liveapps.runProcess(this.sandboxId, this.pdConfiguration.datasourceAppId, this.pdConfiguration.validateActionAppId, this.caseReference, this.case).
+            //                 pipe(
+            //                     map(_ => {
+            //                         stepper.next();
+            //                     })
+            //                 ).subscribe();
+            //         }
+            //     },
+            //     error => {
+            //         this.snackBar.open('Error uploading file. ERROR: ' + error.message + '. Please fix the error and retry', 'OK', {
+            //             duration: 10000
+            //         });
+            //     }
+            // );
         } else {
             this.snackBar.open('Error uploading file. Please upload the file manually to ' + this.case.DiscoverAnalysisConfig.FileOptions.FilePath + ' and execute the validate action.', 'OK', {
                 duration: 10000
