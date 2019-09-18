@@ -6,6 +6,7 @@
             <div fxLayout="column" fxFlex>
                 <!-- New datasource specific -->
                 <mat-horizontal-stepper fxFlex fxLayout="column" labelPosition="bottom" [linear]="isLinear" #stepper>
+
                     <!-- Select the datasource type JSON, CSV -->
                     <mat-step #file_step>
                         <ng-template matStepLabel>Datasource selection</ng-template>
@@ -30,6 +31,14 @@
                         </ng-container>
                     </mat-step>
 
+                    <!-- Grouping -->
+                    <mat-step #grouping_step>
+                        <ng-template matStepLabel>Grouping</ng-template>
+                        <ng-container *ngIf="stepper.selected == grouping_step">
+                            <pd-new-business-process-grouping  [form]="grouping" [avActivities]="avActivities"></pd-new-business-process-grouping>
+                        </ng-container>
+                    </mat-step>
+
                     <!-- Other options -->
                     <mat-step #other_step>
                         <ng-template matStepLabel>Other options</ng-template>
@@ -39,9 +48,11 @@
                     </mat-step>
 
                     <!-- Confirmation -->
-                    <mat-step>
+                    <mat-step #confirmation_step>
                         <ng-template matStepLabel>Confirmation</ng-template>
-                        <pd-new-business-process-confirmation [form]="sourceSelection" [caseCreated]="caseCreated" [caseURL]="caseURL" (confirmButtonClicked)="createNewBusinessProcess()"></pd-new-business-process-confirmation>
+                        <ng-container *ngIf="stepper.selected == confirmation_step">
+                            <pd-new-business-process-confirmation [form]="sourceSelection" [form2]="mapping" [form3]="grouping" [caseCreated]="caseCreated" [caseURL]="caseURL" (confirmButtonClicked)="createNewBusinessProcess()"></pd-new-business-process-confirmation>
+                        </ng-container>
                     </mat-step>
                 </mat-horizontal-stepper>
             </div> 

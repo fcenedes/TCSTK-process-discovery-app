@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { TcButtonsHelperService, ToolbarButton, RoleAttribute, MessageQueueService } from '@tibco-tcstk/tc-core-lib';
-import { TcRolesService, CaseType, LiveAppsCreatorDialogComponent, CaseCreatorSelectionContext } from '@tibco-tcstk/tc-liveapps-lib';
+import { TcRolesService, CaseType, LiveAppsCreatorDialogComponent, CaseCreatorSelectionContext, AccessResolver } from '@tibco-tcstk/tc-liveapps-lib';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatButtonToggleChange, MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -105,33 +105,35 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
                 this.title = 'Business Processes';
             }
 
-            if (this.currentView === 'new-datasource'){
-                this.title = 'New datasource';
-            }
+        if (this.currentView === 'new-datasource'){
+            this.title = 'New datasource';
+        }
 
-            if (this.currentView === 'file-management'){
-                this.title = 'File management';
-            }
+        if (this.currentView === 'file-management'){
+            this.title = 'File management';
+        }
 
-            if (this.currentView === 'process-mining-view') {
-                this.processDiscovery.getCurrentDatasource().pipe(
-                    map(datasource => {
-                        if (datasource) {
-                            this.title = datasource.datasourceId + '-' + datasource.description;
-                        } else {
-                            this.router.navigate(['/starterApp/pd/business-processes']);
-                        }
-                    })
-                ).subscribe();
-            }
+        if (this.currentView === 'process-mining-view') {
+            this.processDiscovery.getCurrentDatasource().pipe(
+                map(datasource => {
+                    if (datasource) {
+                        this.title = datasource.datasourceId + '-' + datasource.description;
+                    } else {
+                        this.router.navigate(['/starterApp/pd/business-processes']);
+                    }
+                })
+            ).subscribe();
+        }
 
-            this.toolbarButtons = this.createToolbarButtons();
+        this.toolbarButtons = this.createToolbarButtons();
     }
 
     public roleChange = ($role: RoleAttribute): void => {
         console.log('Role chante to ', $role);
-        // this.roleService.setCurrentRole($role);
-        // this.currentRole = this.roleService.getCurrentRole();
+        this.roleService.setCurrentRole($role);
+        this.currentRole = this.roleService.getCurrentRole();
+        console.log("new Role: ", this.currentRole);
+
         // // this.viewButtons = 0;
         // this.viewButtons[0] = this.createViewButtons()[0];
     }
@@ -142,10 +144,10 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
         let selectedVariantID: string = '';
 
         if (this.marking){
-            if (this.marking['Cases'] != null) {
-                if (this.marking['Cases']['newCases'] != null) {
-                    if (this.marking['Cases']['newCases']['case_id'] != null) {
-                        selectedVariantID = this.marking['Cases']['newCases']['case_id'].toString();
+            if (this.marking['Variant'] != null) {
+                if (this.marking['Variant']['uncompliantVariants'] != null) {
+                    if (this.marking['Variant']['uncompliantVariants']['case_id'] != null) {
+                        selectedVariantID = this.marking['Variant']['uncompliantVariants']['case_id'].toString();
                         selectedVariant = 'Compliance case at ' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
                     }
                 }
@@ -189,7 +191,7 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
             maxWidth: '100vw',
             maxHeight: '100vh',
             panelClass: 'tcs-style-dialog',
-            data: new CaseCreatorSelectionContext(application, initialData, sandboxId, customFormDefs)
+            data: new CaseCreatorSelectionContext(application, initialData, sandboxId, customFormDefs, false)
         });
 
         dialogRef.afterClosed().subscribe(result => {

@@ -14,8 +14,8 @@
 
         <div fxLayout="row" fxLayoutAlign="end center" class="tcs-actions-bar">
             <tcla-live-apps-case-actions [sandboxId]="sandboxId" [typeId]="typeId" [appId]="appId" [caseRef]="caseRef"
-                [caseState]="'Created'" [maxActions]="5" (actionClicked)="handleActionSelection($event)">
-            </tcla-live-apps-case-actions>
+                 [maxActions]="5" (actionClicked)="handleActionSelection($event)">
+            </tcla-live-apps-case-actions> <!-- [caseState]="'Created'" -->
         </div>
         <div fxLayout="row" style="overflow: hidden; height: 100%">
             <div fxFlex fxLayoutGap="20px" fxLayout.gt-md="row" fxLayout.lt-lg="column" ngStyle.lt-lg="overflow: auto">

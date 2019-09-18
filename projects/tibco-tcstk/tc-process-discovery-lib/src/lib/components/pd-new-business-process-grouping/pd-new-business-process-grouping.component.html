@@ -1,6 +1,9 @@
 <div fxFill fxLayout="column" style="height:100%;overflow:auto" >
-    <div fxFill fxLayout="column" >
-        <div fxFlex fxLayout="row" fxLayoutGap="10px" style="margin:10px">
+    <div fxFill fxLayout="column" [formGroup]="form">
+
+        <mat-checkbox formControlName="enable">Define groups</mat-checkbox>
+
+        <div *ngIf="showGrouping()" fxFlex fxLayout="row" fxLayoutGap="10px" style="margin:10px">
 
             <div fxFlex  fxLayout="column" class="tcs-documents-pane">
                 <div class="tcs-documents-header" fxLayout="row" fxLayoutAlign="space-between center">

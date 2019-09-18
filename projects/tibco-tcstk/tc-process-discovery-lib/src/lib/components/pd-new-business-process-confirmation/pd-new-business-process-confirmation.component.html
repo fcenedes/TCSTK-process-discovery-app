@@ -1,12 +1,55 @@
 <div fxFill style="height:100%; overflow:auto" fxLayout="column" fxFill [formGroup]="form">
-    <div style="max-width: 90vw;width: 90vw;overflow: scroll;">
-        <div *ngIf="!caseCreated">
-           Business Process Summary 
+    <div fxFlex fxLayout="column" style="padding: 5px">
+        <div *ngIf="!caseCreated" fxLayout="column">
+            <div class="tcs-data-preview-text">New Business Process Summary</div>
+            <div fxFlex fxLayoutGap="10px" fxLayout="row">
+                <mat-form-field fxFlex="25">
+                    <input matInput placeholder="Analysis Name" formControlName="analysisName" [readonly]="true">
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="Analysis Description" formControlName="analysisDescription" [readonly]="true">
+                </mat-form-field>
+            </div>
+            <div class="tcs-data-preview-text">Mapping</div>
+            <div fxFlex fxLayout="column" [formGroup]="form2">
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <div fxFlex="25" fxLayout="column">
+                        <mat-form-field>
+                            <input matInput placeholder="CaseId" formControlName="caseId" [readonly]="true">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Start" formControlName="start" [readonly]="true">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="25" fxLayout="column">
+                        <mat-form-field>
+                            <input matInput placeholder="Activity" formControlName="activity" [readonly]="true">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="End" formControlName="end" [readonly]="true">
+                        </mat-form-field>                    
+                    </div>
+                    <div fxFlex="50" fxLayout="column">
+                        <mat-form-field>
+                            <input matInput placeholder="Resources" formControlName="resource" [readonly]="true">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Others" formControlName="other" [readonly]="true">
+                        </mat-form-field>                    
+                    </div>
+                </div>
+                <div [formGroup]="form3" >
+                    <div class="tcs-data-preview-text">Grouping</div>
+                    <mat-form-field>
+                        <input matInput placeholder="Enable Groups" formControlName="enable" [readonly]="true">
+                    </mat-form-field>
+
+                </div>
+            </div>
         </div>
         <div *ngIf="caseCreated">
             Business Process created successfully!!!
         </div>
-
     </div>
     <div fxFlex class="tcs-filler-panel"></div>
     <div *ngIf="!caseCreated" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px; padding: 5px">

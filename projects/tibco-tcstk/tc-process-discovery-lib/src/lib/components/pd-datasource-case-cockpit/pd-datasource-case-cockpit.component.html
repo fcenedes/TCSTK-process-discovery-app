@@ -14,8 +14,8 @@
 
         <div fxLayout="row" fxLayoutAlign="end center" class="tcs-actions-bar">
             <tcla-live-apps-case-actions [sandboxId]="sandboxId" [typeId]="typeId" [appId]="appId" [caseRef]="caseRef"
-                [caseState]="'Created'" [maxActions]="5" (actionClicked)="handleActionSelection($event)">
-            </tcla-live-apps-case-actions>
+                [maxActions]="5" (actionClicked)="handleActionSelection($event)">
+            </tcla-live-apps-case-actions> <!-- [caseState]="'Created'" -->
         </div>
         <div fxLayout="row" fxFlex style="overflow: hidden;">
             <div fxFlex fxLayoutGap="20px">
@@ -34,13 +34,22 @@
                                 <mat-icon fxLayoutAlign="end start" class="tcs-cancel-action-button"
                                     [svgIcon]="'tcs-close-icon'" (click)="handleCancelAction()"></mat-icon>
                             </ng-template>
-                            <tcla-live-apps-case-action *ngIf="actionSelection" tcOnCreate
+
+                            <!-- <tcla-live-apps-case-action *ngIf="actionSelection" tcOnCreate
                                 (fireCreated)="actionTabCreated($event)" [customFormDefs]="customFormDefs"
                                 [process]="actionSelection" [caseRef]="caseRef" [typeId]="typeId"
                                 [applicationId]="appId" [sandboxId]="sandboxId"
-                                (caseChanged)="handleActionCompleted($event)"></tcla-live-apps-case-action>
+                                (caseChanged)="handleActionCompleted($event)"></tcla-live-apps-case-action> -->
                         </mat-tab>
                     </mat-tab-group>
+                    <!-- Using a hidden tab here to workaround the fact that web components seems to disappear on tab change-->
+                    <div *ngIf="selectedTab" [hidden]="!actionVisible" style="overflow: auto; height: 100%">
+                        <tcla-live-apps-case-action [customFormDefs]="customFormDefs" [legacyActions]="legacyActions"
+                            [process]="selectedTab.action" [caseRef]="caseRef" [typeId]="typeId" [applicationId]="appId"
+                            [sandboxId]="sandboxId" (caseChanged)="handleActionCompleted(selectedTab)"></tcla-live-apps-case-action>
+                    </div>
+
+
                 </div>
                 <div fxLayout="column" fxFlex fxLayoutGap="20px">
                     <mat-tab-group fxFlex style="overflow: hidden">

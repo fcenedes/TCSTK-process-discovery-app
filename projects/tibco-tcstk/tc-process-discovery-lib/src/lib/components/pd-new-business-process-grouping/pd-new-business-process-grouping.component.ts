@@ -3,6 +3,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FormGroup } from '@angular/forms';
 
 /**
  * Json node data with nested structure. Each node has a name and a value or a list of children
@@ -81,6 +82,7 @@ export class FileDatabase {
 export class PdNewBusinessProcessGroupingComponent implements OnInit{
 
     public trees: TreeData[] = [];
+    @Input() form: FormGroup;
     @Input() avActivities: FileNode[];
 
     connectedTo = ['availableActivites'];
@@ -90,6 +92,13 @@ export class PdNewBusinessProcessGroupingComponent implements OnInit{
     }
 
     constructor() {
+    }
+
+    public showGrouping = (): void => {
+        if (this.form.get('enable').value && this.avActivities.length === 0){
+            console.log("Obtain activities");
+        }
+        return this.form.get('enable').value;
     }
 
     hasNestedChild = (index: number, nodeData: FileNode) => 

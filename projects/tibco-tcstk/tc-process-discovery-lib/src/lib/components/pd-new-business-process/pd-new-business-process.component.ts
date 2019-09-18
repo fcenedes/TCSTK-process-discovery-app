@@ -7,6 +7,7 @@ import { LiveAppsService, TcDocumentService } from '@tibco-tcstk/tc-liveapps-lib
 import { map } from 'rxjs/operators';
 import { MatSnackBar, MatStepper } from '@angular/material';
 import { HttpEventType } from '@angular/common/http';
+import { FileNode } from '../pd-new-business-process-grouping/pd-new-business-process-grouping.component';
 
 // export interface Mapping {
 //     columnName: string,
@@ -23,14 +24,16 @@ export class PdNewBusinessProcessComponent implements OnInit {
     public sourceSelection: FormGroup;
     public parseOptions: FormGroup;
     public mapping: FormGroup;
-    private other: FormGroup;
+    public other: FormGroup;
+    public grouping: FormGroup;
+
+    public avActivities: FileNode[] = [];
 
     // For data table
     public data;
     public columns;
     
     public caseCreated: boolean = false;
-    // public miMapping: Mapping[] = [];
 
     // stepper
     isLinear = false;
@@ -86,6 +89,16 @@ export class PdNewBusinessProcessComponent implements OnInit {
             useSuffix: new FormControl('No')
         })
 
+        this.grouping = new FormGroup(
+            {
+                enable: new FormControl(false),
+                // elements: new FormA({
+                //     groupName: new FormControl()
+                //     // activities: new FormArray()
+                // })
+            }
+        )
+
         if (this.route.snapshot.params.documentName) {
             this.sourceSelection.get('inputType').setValue(this.route.snapshot.params.documentExtension);
             this.sourceSelection.get('inputType').disable();
@@ -94,10 +107,21 @@ export class PdNewBusinessProcessComponent implements OnInit {
             this.parseOptions.get('remote').setValue(true);
             this.parseFile(this.route.snapshot.params.documentURL);
         }
+
+        const tempData = ['Activity 5', 'Activity 6'];
+
+        tempData.forEach(name => {
+            const element = new FileNode();
+            element.name = name;
+            element.isParent = false;
+            this.avActivities.push(element);
+        })
+
     }
 
     public parseFile = (file): void => {
 
+        let i = 0;
         let config = {
             quoteChar: this.parseOptions.get('quoteChar').value,
             escapeChar: this.parseOptions.get('escapeChar').value,
@@ -107,6 +131,13 @@ export class PdNewBusinessProcessComponent implements OnInit {
             comments: (this.parseOptions.get('skipComments').value) ? this.parseOptions.get('comments').value : '',
             skipEmptyLines: this.parseOptions.get('skipEmptyLines').value,
             download: this.parseOptions.get('remote').value,
+            // step: function (results, parser) {
+            //     console.log("Line: " + i++ + " Row data:", results.data);
+            //     if (results.errors){ 
+            //         console.log("*********** Abort file processing ", results.errors);
+            //         parser.abort();
+            //     }
+            // },
             complete: (result) => {
                 this.columns= this.calculateColumnNames(
                     this.parseOptions.get('useFirstRowAsHeader').value ? Object.keys(result.data[0]).length : result.data[0].length,
