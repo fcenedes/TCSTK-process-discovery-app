@@ -1,10 +1,16 @@
 import { GeneralConfigResolver, TibcoCloudSettingsGeneralComponent, TibcoCloudSettingLandingComponent, GeneralLandingPageConfigResolver } from '@tibco-tcstk/tc-core-lib';
 import {
-    AllGroupsResolver,
-    AllRolesResolver,
-    ClaimsResolver, LaConfigResolver,
-    LiveAppsSettingsComponent, LiveAppsSettingsRecentCasesComponent,
-    LiveAppsSettingsRolesComponent, LiveAppsSettingsSummaryCardsComponent, LiveAppsSettingsAccessControlComponent, AccessControlConfigurationResolver
+  AllGroupsResolver,
+  AllRolesResolver,
+  ClaimsResolver,
+  LaConfigResolver,
+  LiveAppsSettingsComponent,
+  LiveAppsSettingsRecentCasesComponent,
+  LiveAppsSettingsRolesComponent,
+  LiveAppsSettingsSummaryCardsComponent,
+  LiveAppsSettingsAccessControlComponent,
+  AccessControlConfigurationResolver,
+  LiveAppsSettingsFormsComponent
 } from '@tibco-tcstk/tc-liveapps-lib';
 import { PdSettingsConfigurationComponent, ProcessDiscoveryConfigResolver } from '@tibco-tcstk/tc-process-discovery-lib';
 import { SettingsSpotfireComponent, SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
@@ -29,7 +35,7 @@ export const CONFIGURATION_ROUTE_CONFIG = [
         }
     },
     {
-        path: "general-application-landing-page",
+        path: 'general-application-landing-page',
         component: TibcoCloudSettingLandingComponent,
         resolve: {
             landingPagesConfigHolder: GeneralLandingPageConfigResolver,
@@ -38,7 +44,7 @@ export const CONFIGURATION_ROUTE_CONFIG = [
         }
     },
     {
-        path: "general-application-access-control",
+        path: 'general-application-access-control',
         component: LiveAppsSettingsAccessControlComponent,
         resolve: {
             claims: ClaimsResolver,
@@ -74,24 +80,33 @@ export const CONFIGURATION_ROUTE_CONFIG = [
         }
     },
     {
-        path: "spotfire-settings",
+        path: 'live-apps-forms',
+        component: LiveAppsSettingsFormsComponent,
+        resolve: {
+          claims: ClaimsResolver,
+          laConfigHolder: LaConfigResolver,
+          generalConfigHolder: GeneralConfigResolver
+        }
+    },
+    {
+        path: 'spotfire-settings',
         component: SettingsSpotfireComponent,
         resolve: {
             spotfireConfigHolder: SpotfireConfigResolver,
             claimsHolder: ClaimsResolver
         }
     },
-    { 
-        path: 'process-discovery-configuration', 
-        component: PdSettingsConfigurationComponent, 
-        resolve: { 
+    {
+        path: 'process-discovery-configuration',
+        component: PdSettingsConfigurationComponent,
+        resolve: {
             claims: ClaimsResolver,
             processDiscovery: ProcessDiscoveryConfigResolver
-        } 
+        }
     },
-    { 
-        path: '**', 
-        redirectTo: '/starterApp/configuration/general-application-settings' 
+    {
+        path: '**',
+        redirectTo: '/starterApp/configuration/general-application-settings'
     }
 ];
 
@@ -104,4 +119,4 @@ export const CONFIGURATION_ROUTE_PROVIDERS = [
     SpotfireConfigResolver,
     ProcessDiscoveryConfigResolver,
     AccessControlConfigurationResolver
-]
+];

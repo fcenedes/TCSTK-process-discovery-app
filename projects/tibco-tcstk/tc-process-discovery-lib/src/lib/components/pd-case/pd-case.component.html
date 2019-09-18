@@ -1,6 +1,6 @@
 <tcpd-pd-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId"
     [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout"
-    [exclRecentAppIds]="exclRecentAppIds" [showStates]="false" [roles]="roles" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)">
+    [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access" [showStates]="false" [legacyWorkitems]="liveAppsConfig.legacyWorkitems" [legacyActions]="liveAppsConfig.legacyActions" [customFormDefs]="customFormDefs" [workitemId]="workitemId" (routeAction)="handleRouteAction($event)">
     <mat-tab #projectedTab label="Analytics">
         <ng-template matTabContent>
             <div *ngIf="">

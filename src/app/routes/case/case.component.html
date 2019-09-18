@@ -1,4 +1,5 @@
-<tcla-live-apps-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId" [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout" [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)">
+<tcla-live-apps-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId" [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout" [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access" [customFormDefs]="customFormDefs" [legacyWorkitems]="liveAppsConfig.legacyWorkitems" [legacyActions]="liveAppsConfig.legacyActions" [workitemId]="workitemId" (routeAction)="handleRouteAction($event)" >
+<!--tcla-live-apps-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId" [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout" [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access" [customFormDefs]="customFormDefs" (routeAction)="handleRouteAction($event)"-->
   <!--mat-button-toggle-group customToolbarContent name="view">
     <mat-button-toggle
       value="Projected Button">'Projected Button2'</mat-button-toggle>

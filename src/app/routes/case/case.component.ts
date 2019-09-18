@@ -37,6 +37,7 @@ export class CaseComponent implements OnInit {
   public roles: Roles;
   public access: RouteAccessControlConfig;
   public customFormDefs: CustomFormDefs;
+  public workitemId: number;
 
   public layout: any[] = undefined;
   // you can use a layout here to override the default layout for case data
@@ -68,9 +69,10 @@ export class CaseComponent implements OnInit {
     this.access = this.route.snapshot.data.access;
     this.customFormDefs = this.route.snapshot.data.customFormDefs;
     this.sandbox = this.claims.primaryProductionSandbox;
-    this.caseRef = this.route.snapshot.params['caseRef'];
-    this.appId = this.route.snapshot.params['appId'];
-    this.typeId = this.route.snapshot.params['typeId'];
+    this.caseRef = this.route.snapshot.params.caseRef;
+    this.appId = this.route.snapshot.params.appId;
+    this.typeId = this.route.snapshot.params.typeId;
+    this.workitemId = this.route.snapshot.params.workitemId;
   }
 
 }

@@ -1,7 +1,7 @@
 {
   "/idm/v3/login-oauth": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -15,7 +15,7 @@
       "*": "/"
     },
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com",
+      "Origin": "https://au.liveapps.cloud.tibco.com",
       "Cookie": ""
     }
   },
@@ -37,7 +37,7 @@
   },
   "/idm/v2/login-oauth": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -50,7 +50,7 @@
   },
   "/tsc-ws/v1/tsc-domain": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -63,7 +63,7 @@
   },
   "/idm/v1/reauthorize": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -76,7 +76,7 @@
   },
   "/tsc-ws": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -89,7 +89,7 @@
   },
   "/griddetails": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -102,7 +102,7 @@
   },
   "/tsc-ws-content": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -115,7 +115,7 @@
   },
   "/work/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -123,12 +123,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/organisation": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -136,12 +136,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/organisation/v1/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -149,12 +149,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/apps": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -162,12 +162,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/case": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -175,12 +175,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/case/v1/cases": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -188,12 +188,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/case/v1/types": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -201,12 +201,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/case/reports": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -214,12 +214,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/process/v1/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -227,12 +227,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/pageflow/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -240,12 +240,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/pageflow/v1/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -253,12 +253,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/event/v1/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -266,12 +266,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/clientstate/v1/states": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -279,12 +279,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/webresource/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -292,12 +292,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/webresource/v1": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -305,12 +305,12 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   },
   "/collaboration/v1/": {
     "target": {
-      "host": "eu.liveapps.cloud.tibco.com",
+      "host": "au.liveapps.cloud.tibco.com",
       "protocol": "https:",
       "port": 443
     },
@@ -318,7 +318,7 @@
     "changeOrigin": true,
     "logLevel": "info",
     "headers": {
-      "Origin": "https://eu.liveapps.cloud.tibco.com"
+      "Origin": "https://au.liveapps.cloud.tibco.com"
     }
   }
 }

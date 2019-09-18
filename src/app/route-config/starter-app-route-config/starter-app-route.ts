@@ -25,7 +25,7 @@ export const HOME_ROUTE = 'home';
 
 export const STARTER_APP_ROUTES = [
     {
-        path: "home",
+        path: 'home',
         component: LiveAppsLandingPageComponent,
         resolve: {
             generalConfigHolder: GeneralConfigResolver,
@@ -60,14 +60,14 @@ export const STARTER_APP_ROUTES = [
         }
     },
     {
-        path: 'configuration', 
-        component: ConfigurationComponent, 
+        path: 'configuration',
+        component: ConfigurationComponent,
         canActivate: [
             AuthGuard
             // RoleGuard
         ],
-        resolve: { 
-            configurationMenuHolder: ConfigurationMenuConfigResolver 
+        resolve: {
+            configurationMenuHolder: ConfigurationMenuConfigResolver
         },
         children: CONFIGURATION_ROUTE_CONFIG
     },
