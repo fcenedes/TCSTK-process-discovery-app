@@ -1,19 +1,22 @@
 <tcpd-pd-datasource-case-cockpit fxFill [typeId]="typeId" [appId]="appId" [uiAppId]="generalConfig.uiAppId"
-    [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout"
-    [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access" [customFormDefs]="customFormDefs"
-    (routeAction)="handleRouteAction($event)">
-    <!--mat-button-toggle-group customToolbarContent name="view">
-    <mat-button-toggle
-      value="Projected Button">'Projected Button2'</mat-button-toggle>
-    <mat-button-toggle
-      value="Projected Button2">'Projected Button2'</mat-button-toggle>
-  </mat-button-toggle-group-->
+                                 [sandboxId]="sandbox.id" [caseRef]="caseRef" [userId]="claims.id" [layout]="layout"
+                                 [exclRecentAppIds]="exclRecentAppIds" [roles]="roles" [access]="access"
+                                 [legacyWorkitems]="liveAppsConfig.legacyWorkitems"
+                                 [legacyActions]="liveAppsConfig.legacyActions" [customFormDefs]="customFormDefs"
+                                 [workitemId]="workitemId" (routeAction)="handleRouteAction($event)">
 
-    <!-- you can use content projection to insert new tabs into the case data page-->
-    <!--mat-tab #projectedTab label="test">
-    <span>I am projected</span>
-  </mat-tab>
-  <mat-tab #projectedTab label="tes2t">
-    <span>I am also projected</span>
-  </mat-tab-->
+  <!--mat-button-toggle-group customToolbarContent name="view">
+  <mat-button-toggle
+    value="Projected Button">'Projected Button2'</mat-button-toggle>
+  <mat-button-toggle
+    value="Projected Button2">'Projected Button2'</mat-button-toggle>
+</mat-button-toggle-group-->
+
+  <!-- you can use content projection to insert new tabs into the case data page-->
+  <!--mat-tab #projectedTab label="test">
+  <span>I am projected</span>
+</mat-tab>
+<mat-tab #projectedTab label="tes2t">
+  <span>I am also projected</span>
+</mat-tab-->
 </tcpd-pd-datasource-case-cockpit>
