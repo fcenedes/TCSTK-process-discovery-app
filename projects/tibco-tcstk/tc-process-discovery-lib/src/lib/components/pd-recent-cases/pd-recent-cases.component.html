@@ -1,4 +1,4 @@
-<div class="tcs-case-recent-box" fxLayout="column" fxFill>
+<div #componentDiv class="tcs-case-recent-box" fxLayout="column" fxFill>
     <div *ngIf="showHeader" class="tcs-case-recent-header" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayoutAlign="start center">
             <mat-icon class="tcs-icon tcs-recent-icon" svgIcon="tcs-recent-icon"></mat-icon>
@@ -14,7 +14,7 @@
             matTooltip="Clear Recent Cases" matTooltipPosition="left" matTooltipShowDelay="1000"></mat-icon>
     </div>
     <div *ngIf="recentCases.length > 0" class="tcs-case-recent-flow-list" fxLayout="column" fxLayout="row wrap">
-        <div class="tcs-case-recent-item-box" *ngFor="let case of recentCases" fxFlex>
+        <div class="tcs-case-recent-item-box" *ngFor="let case of recentCases" [fxFlex]="cardWidthPct">
             <tcpd-pd-case-summary [uiAppId]="uiAppId" [typeBar]="true" [borderCard]="false"
                 [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case"
                 (clickCase)="clickCaseAction($event)" (deleted)="handleDeleted($event)"></tcpd-pd-case-summary>

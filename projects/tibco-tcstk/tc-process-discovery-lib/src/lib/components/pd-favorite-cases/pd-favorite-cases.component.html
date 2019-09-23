@@ -1,4 +1,4 @@
-<div class="tcs-case-favorites-box" fxLayout="column" fxFill>
+<div #componentDiv class="tcs-case-favorites-box" fxLayout="column" fxFill>
     <div *ngIf="showHeader" class="tcs-case-favorites-header" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayoutAlign="start center">
             <mat-icon class="tcs-icon tcs-favorites-icon" svgIcon="tcs-favorites-icon"></mat-icon>
@@ -14,7 +14,7 @@
             matTooltip="Clear Favorites" matTooltipPosition="left" matTooltipShowDelay="1000"></mat-icon>
     </div>
     <div *ngIf="favoriteCases.length > 0" class="tcs-case-favorites-flow-list" fxLayout="column" fxLayout="row wrap">
-        <div class="tcs-case-favorite-item-box" *ngFor="let case of favoriteCases" fxFlex>
+        <div class="tcs-case-favorite-item-box" *ngFor="let case of favoriteCases" [fxFlex]="cardWidthPct">
             <tcpd-pd-case-summary [uiAppId]="uiAppId" [typeBar]="true" [borderCard]="false"
                 [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case"
                 (clickCase)="clickCaseAction($event)" (deleted)="handleDeleted($event)"></tcpd-pd-case-summary>
