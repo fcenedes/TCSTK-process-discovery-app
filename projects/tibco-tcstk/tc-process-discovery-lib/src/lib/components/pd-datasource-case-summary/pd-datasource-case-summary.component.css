@@ -306,3 +306,14 @@
   color: black;
   font-weight: 900;
 }
+
+.tcs-case-sumary-details-icon {
+    color:green;
+    height: 32px;
+    width: 32px;
+    font-size: 32px;
+}
+.tcs-case-sumary-details-icon:hover {
+    box-shadow: 0 3px 8px 4px rgba(0,0,0,.33);
+    border-radius: 20px;
+}

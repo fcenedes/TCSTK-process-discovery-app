@@ -69,7 +69,8 @@
             </div>
             <div *ngIf="summaryValues[0] == 'Ready'" class="tcs-case-summary-view-details" fxLayout="row" fxLayoutAlign="end center"
                 matTooltipPosition="above" matTooltip="Open Analysis" matTooltipShowDelay="1000" (click)="clickInvestigateAction()">
-                <mat-icon class="tcs-icon tcs-case-summary-details-ico" svgIcon="pd-investigate-icon"></mat-icon>
+                <!-- <mat-icon class="tcs-icon tcs-case-summary-details-ico" svgIcon="play_arrow"></mat-icon> -->
+                <mat-icon class="tcs-icon tcs-case-sumary-details-icon">insert_chart_outlined</mat-icon>
             </div>
             <div class="tcs-case-summary-view-details" fxLayout="row" fxLayoutAlign="end center" 
                 matTooltipPosition="above" matTooltip="Open Case" matTooltipShowDelay="1000"  (click)="clickCaseAction()">
