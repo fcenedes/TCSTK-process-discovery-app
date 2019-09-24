@@ -15,20 +15,24 @@
                             <mat-icon class="tcs-icon tcs-caselist-icon" svgIcon="tcs-recent-icon"></mat-icon>
                             <div style="margin-left: 10px;" class="tcs-case-list-header-text">Recents</div>
                         </ng-template>
-                        <div class="recentCasesWidget" fxFill>
-                            <tcpd-pd-recent-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
-                                (clickCase)="clickCaseAction($event)"></tcpd-pd-recent-cases>
-                        </div>
+                        <ng-template matTabContent>
+                            <div class="recentCasesWidget" fxFill>
+                                <tcpd-pd-recent-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
+                                    (clickCase)="clickCaseAction($event)"></tcpd-pd-recent-cases>
+                            </div>
+                        </ng-template>
                     </mat-tab>
                     <mat-tab>
                         <ng-template mat-tab-label>
                             <mat-icon class="tcs-icon tcs-caselist-icon" svgIcon="tcs-favorites-icon"></mat-icon>
                             <div style="margin-left: 10px;" class="tcs-case-list-header-text">Favorites</div>
                         </ng-template>
-                        <div class="favoriteCasesWidget" fxFill>
-                            <tcpd-pd-favorite-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
-                                (clickCase)="clickCaseAction($event)"></tcpd-pd-favorite-cases>
-                        </div>
+                        <ng-template matTabContent>
+                            <div class="favoriteCasesWidget" fxFill>
+                                <tcpd-pd-favorite-cases class="padded-widget" [sandboxId]="sandboxId" [uiAppId]="uiAppId" [showHeader]="false"
+                                    (clickCase)="clickCaseAction($event)"></tcpd-pd-favorite-cases>
+                            </div>
+                        </ng-template>
                     </mat-tab>
                 </mat-tab-group>
             </div>
