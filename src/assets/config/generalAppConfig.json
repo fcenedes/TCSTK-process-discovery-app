@@ -10,13 +10,13 @@
       "priority": 1
     },
     {
-        "id": "role1",
+        "id": "Analyst",
         "group": "Discover - Business Analysts",
         "display": "Business Analyst",
         "priority": 7
     },
     {
-        "id": "role3",
+        "id": "Investigators",
         "group": "Discover - Investigators",
         "display": "Investigators",
         "priority": 5

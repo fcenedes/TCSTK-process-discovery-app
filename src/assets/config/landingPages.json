@@ -3,7 +3,7 @@
     "version": "1.0",
     "landingPage": [
         {
-            "key": "id1",
+            "key": "Analyst",
             "description": "Business Analyst",
             "title": "Welcome to your Discover App",
             "subtitle": "Discover, Understand, and Improve Your Business Processes Based on Operational Systems Logs",
@@ -25,10 +25,15 @@
                 }
             ],
             "backgroundURL": "",
-            "homeRoute": "/starterApp/pd/datasource-administration"
+            "homeRoute": "/starterApp/pd/datasource-administration",
+            "verticalPadding": 0,
+            "roles": [
+                "Analyst"
+            ],
+            "priority": 7
         },
         {
-            "key": "id2",
+            "key": "Investigators",
             "description": "Investigators",
             "title": "Welcome to your Discover App",
             "subtitle": "Discover, Understand, and Improve Your Business Processes Based on Operational Systems Logs",
@@ -50,7 +55,12 @@
                 }
             ],
             "backgroundURL": "",
-            "homeRoute": "/starterApp/pd/datasource-administration"
+            "homeRoute": "/starterApp/pd/datasource-administration",
+            "verticalPadding": 0,
+            "roles": [
+                "Investigators","Administrator"
+            ],
+            "priority": 5
         }
     ]
 }
