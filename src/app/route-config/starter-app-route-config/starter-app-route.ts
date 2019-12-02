@@ -2,6 +2,7 @@ import {
     AuthGuard,
     ConfigurationMenuConfigResolver,
     GeneralConfigResolver,
+    GeneralLandingPageConfigResolver,
 } from '@tibco-tcstk/tc-core-lib';
 import {
     AccessResolver,
@@ -28,6 +29,7 @@ export const STARTER_APP_ROUTES = [
         path: 'home',
         component: LiveAppsLandingPageComponent,
         resolve: {
+            landingPagesConfigHolder: GeneralLandingPageConfigResolver,
             generalConfigHolder: GeneralConfigResolver,
             rolesHolder: RolesResolver,
             activeRoleHolder: RoleActiveResolver
@@ -96,7 +98,8 @@ export const STARTER_APP_PROVIDERS = [
         GroupsResolver,
         AccessResolver,
         FormResolver,
-        RoleActiveResolver
+        RoleActiveResolver,
+        GeneralLandingPageConfigResolver
     ],
     CONFIGURATION_ROUTE_PROVIDERS,
     PROCESS_DISCOVERY_ROUTE_PROVIDERS

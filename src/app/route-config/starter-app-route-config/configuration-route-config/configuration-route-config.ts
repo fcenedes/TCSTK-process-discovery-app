@@ -1,4 +1,4 @@
-import { GeneralConfigResolver, TibcoCloudSettingsGeneralComponent, TibcoCloudSettingLandingComponent, GeneralLandingPageConfigResolver } from '@tibco-tcstk/tc-core-lib';
+import { GeneralConfigResolver, TibcoCloudSettingsGeneralComponent, GeneralLandingPageConfigResolver } from '@tibco-tcstk/tc-core-lib';
 import {
   AllGroupsResolver,
   AllRolesResolver,
@@ -10,7 +10,8 @@ import {
   LiveAppsSettingsSummaryCardsComponent,
   LiveAppsSettingsAccessControlComponent,
   AccessControlConfigurationResolver,
-  LiveAppsSettingsFormsComponent
+  LiveAppsSettingsFormsComponent,
+  LiveAppsSettingsLandingComponent
 } from '@tibco-tcstk/tc-liveapps-lib';
 import { PdSettingsConfigurationComponent, ProcessDiscoveryConfigResolver } from '@tibco-tcstk/tc-process-discovery-lib';
 import { SettingsSpotfireComponent, SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
@@ -36,7 +37,7 @@ export const CONFIGURATION_ROUTE_CONFIG = [
     },
     {
         path: 'general-application-landing-page',
-        component: TibcoCloudSettingLandingComponent,
+        component: LiveAppsSettingsLandingComponent,
         resolve: {
             landingPagesConfigHolder: GeneralLandingPageConfigResolver,
             claims: ClaimsResolver,
