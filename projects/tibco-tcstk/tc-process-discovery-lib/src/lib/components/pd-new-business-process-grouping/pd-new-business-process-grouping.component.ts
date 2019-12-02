@@ -95,9 +95,6 @@ export class PdNewBusinessProcessGroupingComponent implements OnInit{
     }
 
     public showGrouping = (): void => {
-        if (this.form.get('enable').value && this.avActivities.length === 0){
-            console.log("Obtain activities");
-        }
         return this.form.get('enable').value;
     }
 

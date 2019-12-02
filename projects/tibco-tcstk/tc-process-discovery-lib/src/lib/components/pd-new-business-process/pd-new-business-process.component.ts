@@ -99,53 +99,25 @@ export class PdNewBusinessProcessComponent implements OnInit {
             }
         )
 
+        this.grouping.controls.enable.valueChanges.subscribe(value => {
+            if (value && this.avActivities.length === 0) {
+                this.getActivities();
+            }
+        });
+
         if (this.route.snapshot.params.documentName) {
             this.sourceSelection.get('inputType').setValue(this.route.snapshot.params.documentExtension);
             this.sourceSelection.get('inputType').disable();
             this.sourceSelection.get('filename').setValue(this.route.snapshot.params.documentName);
             this.sourceSelection.get('file').setValue(this.route.snapshot.params.documentURL);
             this.parseOptions.get('remote').setValue(true);
-            this.parseFile(this.route.snapshot.params.documentURL);
+            this.parseFile(this.route.snapshot.params.documentURL, false);
         }
-
-        const tempData = ['Activity 5', 'Activity 6'];
-
-        tempData.forEach(name => {
-            const element = new FileNode();
-            element.name = name;
-            element.isParent = false;
-            this.avActivities.push(element);
-        })
-
     }
 
-    public parseFile = (file): void => {
+    public parseFile = (file: any, useStep: boolean): void => {
 
-        let i = 0;
-        let config = {
-            quoteChar: this.parseOptions.get('quoteChar').value,
-            escapeChar: this.parseOptions.get('escapeChar').value,
-            header: this.parseOptions.get('useFirstRowAsHeader').value,
-            preview: this.parseOptions.get('numberRowsForPreview').value,
-            encoding: this.parseOptions.get('encoding').value,
-            comments: (this.parseOptions.get('skipComments').value) ? this.parseOptions.get('comments').value : '',
-            skipEmptyLines: this.parseOptions.get('skipEmptyLines').value,
-            download: this.parseOptions.get('remote').value,
-            // step: function (results, parser) {
-            //     console.log("Line: " + i++ + " Row data:", results.data);
-            //     if (results.errors){ 
-            //         console.log("*********** Abort file processing ", results.errors);
-            //         parser.abort();
-            //     }
-            // },
-            complete: (result) => {
-                this.columns= this.calculateColumnNames(
-                    this.parseOptions.get('useFirstRowAsHeader').value ? Object.keys(result.data[0]).length : result.data[0].length,
-                    this.parseOptions.get('useFirstRowAsHeader').value ? result.meta.fields : undefined);
-                this.data = result.data;
-                this.parseOptions.get('columnSeparator').setValue(result.meta.delimiter);
-            },
-        };
+        const config = this.obtainParseOptions(useStep);
 
         if (this.sourceSelection.get('inputType').value === 'csv') {
             parse(file, config)
@@ -160,6 +132,47 @@ export class PdNewBusinessProcessComponent implements OnInit {
 
             reader.readAsText(file);
         }
+    }
+
+    private obtainParseOptions = (useStep: boolean): any => {
+        let config = {
+            quoteChar: this.parseOptions.get('quoteChar').value,
+            escapeChar: this.parseOptions.get('escapeChar').value,
+            header: this.parseOptions.get('useFirstRowAsHeader').value,
+            preview: this.parseOptions.get('numberRowsForPreview').value,
+            encoding: this.parseOptions.get('encoding').value,
+            comments: (this.parseOptions.get('skipComments').value) ? this.parseOptions.get('comments').value : '',
+            skipEmptyLines: this.parseOptions.get('skipEmptyLines').value,
+            download: this.parseOptions.get('remote').value,
+            complete: (result) => {
+                this.columns = this.calculateColumnNames(
+                    this.parseOptions.get('useFirstRowAsHeader').value ? Object.keys(result.data[0]).length : result.data[0].length,
+                    this.parseOptions.get('useFirstRowAsHeader').value ? result.meta.fields : undefined);
+                this.data = result.data;
+                this.parseOptions.get('columnSeparator').setValue(result.meta.delimiter);
+            },
+        };
+
+        if (useStep){
+            config['step'] = (results, parser) => {
+
+                const myValue = this.avActivities.filter(entry => { return entry.name === results.data[this.mapping.controls.activity.value] });
+
+                if (myValue.length === 0){                
+                    const element = new FileNode();
+                    element.name = results.data[this.mapping.controls.activity.value];
+                    element.isParent = false;
+                    this.avActivities.push(element);
+                }
+                if (results.errors.length > 0){ 
+                    console.log("*********** Error while processing the file", results.errors);
+                }
+            };
+            config['preview'] = 0;
+            config['complete'] = undefined;
+        }
+        return config;
+
     }
 
     private calculateColumnNames = (numColumns: number, columnNames: string[]): string[] => {
@@ -299,14 +312,19 @@ export class PdNewBusinessProcessComponent implements OnInit {
 
     public moveNextTab = (): void => {
         if (!this.parseOptions.get('remote').value && this.parseOptions.get('preview').value) {
-            this.parseFile(this.sourceSelection.get('file').value);
+            this.parseFile(this.sourceSelection.get('file').value, false);
         }
         this.stepper.next();
     }
 
     public refreshPreview = (): void => {
         if (this.parseOptions.get('preview').value) {
-            this.parseFile(this.sourceSelection.get('file').value);
+            this.parseFile(this.sourceSelection.get('file').value, false);
         }
     }
+
+    public getActivities = (): void => {
+        this.parseFile(this.sourceSelection.get('file').value, true);
+    }
+    
 }
