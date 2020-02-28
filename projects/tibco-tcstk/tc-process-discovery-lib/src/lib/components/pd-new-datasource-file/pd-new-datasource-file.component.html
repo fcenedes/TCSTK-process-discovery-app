@@ -1,0 +1,9 @@
+<div fxLayout="column" [formGroup]="form" style="max-height: 100%">
+  <mat-form-field>
+    <input matInput placeholder="Selected File" formControlName="filename">
+  </mat-form-field>
+  <div fxLayoutGap="20px" style="overflow:hidden">
+      <tcpd-pd-list-documents fxFlex="30" [extension]="inputType" [sandboxId]="'31'" folderType="orgFolders" folderId="{{FOLDERID}}" (selectedDocument)="handleSelectedDocument($event)"></tcpd-pd-list-documents>
+      <tcpd-pd-data-preview fxFlex [data]="data" [columns]="columns"></tcpd-pd-data-preview>
+  </div>
+</div>

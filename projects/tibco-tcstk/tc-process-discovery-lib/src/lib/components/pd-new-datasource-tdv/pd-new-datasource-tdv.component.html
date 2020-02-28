@@ -1,0 +1,31 @@
+<div fxLayout="column">
+  <div fxFlex="30" fxLayoutGap="10px" fxLayout="row" [formGroup]="form">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput type="password" placeholder="Password" formControlName="password">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>Sites</mat-label>
+      <mat-select formControlName="site">
+        <mat-option *ngFor="let site of sites" [value]="site">{{site.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>Database</mat-label>
+      <mat-select formControlName="database">
+        <mat-option *ngFor="let database of databases" [value]="database">{{database.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>Tables</mat-label>
+      <mat-select formControlName="table">
+        <mat-option *ngFor="let table of tables" [value]="table">{{table.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <tcpd-pd-data-preview fxFlex [data]="data" [columns]="columns"></tcpd-pd-data-preview>
+  </div>
+</div>
