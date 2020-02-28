@@ -13,7 +13,8 @@ import {
     LiveAppsConfigResolver, RoleGuard,
     RolesResolver,
     LiveAppsLandingPageComponent,
-    RoleActiveResolver
+    RoleActiveResolver,
+    FormConfigResolver
 } from '@tibco-tcstk/tc-liveapps-lib';
 import { CaseComponent } from '../../routes/case/case.component';
 import { ConfigurationComponent } from '../../routes/configuration/configuration.component';
@@ -21,17 +22,17 @@ import { CONFIGURATION_ROUTE_CONFIG, CONFIGURATION_ROUTE_PROVIDERS } from './con
 import { PROCESS_DISCOVERY_ROUTE_CONFIG, PROCESS_DISCOVERY_ROUTE_PROVIDERS } from './process-discovery-app-route-config/process-discovery-route-config';
 import { FormResolver } from '@tibco-tcstk/tc-forms-lib';
 import { PdCockpitComponent } from '@tibco-tcstk/tc-process-discovery-lib';
+import { SpotfireConfigResolver } from '@tibco-tcstk/tc-spotfire-lib';
+import { SplashComponent } from 'src/app/routes/splash/splash.component';
 
 export const HOME_ROUTE = 'home';
 
 export const STARTER_APP_ROUTES = [
     {
         path: 'home',
-        component: LiveAppsLandingPageComponent,
+        component: SplashComponent,
         resolve: {
-            landingPagesConfigHolder: GeneralLandingPageConfigResolver,
             generalConfigHolder: GeneralConfigResolver,
-            rolesHolder: RolesResolver,
             activeRoleHolder: RoleActiveResolver
         }
     },
@@ -58,7 +59,8 @@ export const STARTER_APP_ROUTES = [
             groups: GroupsResolver,
             roles: RolesResolver,
             access: AccessResolver,
-            customFormDefs: FormResolver
+            customFormDefs: FormResolver,
+            formConfig: FormConfigResolver
         }
     },
     {
@@ -81,7 +83,9 @@ export const STARTER_APP_ROUTES = [
             generalConfigHolder: GeneralConfigResolver,
             laConfigHolder: LaConfigResolver,
             rolesHolder: RolesResolver,
-            customFormDefs: FormResolver
+            customFormDefs: FormResolver,
+            spotfireConfigHolder: SpotfireConfigResolver,
+            formConfig: FormConfigResolver
         },
         children: PROCESS_DISCOVERY_ROUTE_CONFIG
     }
@@ -99,7 +103,9 @@ export const STARTER_APP_PROVIDERS = [
         AccessResolver,
         FormResolver,
         RoleActiveResolver,
-        GeneralLandingPageConfigResolver
+        GeneralLandingPageConfigResolver,
+        SpotfireConfigResolver,
+        FormConfigResolver
     ],
     CONFIGURATION_ROUTE_PROVIDERS,
     PROCESS_DISCOVERY_ROUTE_PROVIDERS
