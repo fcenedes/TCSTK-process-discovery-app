@@ -6,19 +6,13 @@
             <p>Choose the TIBCO Cloud Process Discovery Configuration to be used within this application:</p>
         </div>
         <div style="margin: 20px" fxLayout="column">
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <span fxFlex="50">Configure the TIBCO Live Apps application with the datasources:</span>
-                <tcla-live-apps-applications style="width: 300px; max-width: 300px; margin-left: 10px;" [sandboxId]="sandboxId" [selectFirstApp]="false"
-                (selection)="selectApplication($event)" [selectedApp]="selectedApp"></tcla-live-apps-applications>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <span fxFlex="50">Configure the TIBCO Live Apps creator for datasources:</span>
-                <tcpd-pd-creator-selector [sandboxId]="sandboxId" [appId]="processDiscoveryConfig.datasourceAppId" [selectedCreatorId]="processDiscoveryConfig.creatorAppId" [typeId]="'1'" (creatorSelection)="selectCreator($event)"></tcpd-pd-creator-selector>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <span fxFlex="50">Configure the TIBCO Live Apps action to validate datasources:</span>
-                <tcla-live-apps-case-actions-list [sandboxId]="sandboxId" [appId]="processDiscoveryConfig.datasourceAppId" [seletedActionId]="processDiscoveryConfig.validateActionAppId" [typeId]="'1'" (actionClicked)="selectAction($event)"></tcla-live-apps-case-actions-list>
-            </div>
+          <tcla-live-apps-applications fxFlex [sandboxId]="sandboxId" [formFieldRendering]="true" [selectFirstApp]="false" (selection)="selectApplication($event)" [selectedApp]="selectedApp" [selectedAppId]="processDiscoveryConfig.datasourceAppId" [label]="'LiveApps Application Datasources'"></tcla-live-apps-applications>
+          <tcla-live-apps-creator-selector fxFlex [sandboxId]="sandboxId" [formFieldRendering]="true" [appId]="processDiscoveryConfig.datasourceAppId"
+            [label]="'Creator to add new datasources'" [seletedCreatorId]="processDiscoveryConfig.creatorAppId" [typeId]="'1'"
+            (creatorSelection)="selectCreator($event)"></tcla-live-apps-creator-selector>
+          <tcla-live-apps-case-actions-list fxFlex [sandboxId]="sandboxId" [formFieldRendering]="true" [appId]="processDiscoveryConfig.datasourceAppId"
+            [label]="'Live Apps action to validate datasources'" [seletedActionId]="processDiscoveryConfig.validateActionAppId" [typeId]="'1'"
+            (actionClicked)="selectAction($event)"></tcla-live-apps-case-actions-list>
         </div>
         <div fxFlex class="tcs-filler-panel"></div>
         <div fxLayout="column" fxLayoutAlign="end end" style="min-height: 50px">
