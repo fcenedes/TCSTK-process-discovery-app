@@ -1,0 +1,25 @@
+<div fxFill fxLayout="column">
+  <div fxLayout="column" [formGroup]="form">
+    <div fxLayoutGap="10px">
+      <div fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Analysis Name" formControlName="analysisName">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Analysis Description" formControlName="analysisDescription">
+        </mat-form-field>
+        <mat-form-field fxFlex="47">
+          <mat-label>Use a separate DXP</mat-label>
+          <mat-select formControlName="useSuffix">
+            <mat-option value="No">No</mat-option>
+            <mat-option value="Yes">Yes</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxFlex class="tcs-filler-panel"></div>
+  <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="5px" style="min-height: 50px; padding: 5px">
+    <button mat-button mat-raised-button color="primary" [disabled]="disableButtonTab()" matStepperNext>Next</button>
+  </div>
+</div>

@@ -6,32 +6,15 @@
                 <mat-option *ngFor="let inputTypeOption of inputTypeOptions" [value]="inputTypeOption.value">{{inputTypeOption.text}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <div fxLayoutGap="10px">
-            <div fxLayout="column">
-                <mat-form-field>
-                    <input matInput placeholder="Analysis Name" formControlName="analysisName">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput placeholder="Analysis Description" formControlName="analysisDescription">
-                </mat-form-field>
-            </div>
-            <div  *ngIf="showFileSelection()" fxLayout="row">
-                <mat-form-field>
-                    <input matInput placeholder="Filename" formControlName="filename">
-                </mat-form-field>
-                <div *ngIf="showButtons()">
-                    <button *ngIf="showSelectFileButton()" mat-raised-button color="primary" (click)="file.click()">Select file</button>
-                    <button *ngIf="showChangeFileButton()" mat-raised-button color="primary" (click)="file.click()">Change file</button>
-                    <input class="tcs-hidden-input" type="file" accept="{{allowedExtension}}" #file (change)="onFileSelect(file.files)">
-                </div>
-            </div>
-        </div>
     </div>
-    <div fxFlex>
-        <mat-checkbox [formControl]="preview">Preview file</mat-checkbox>
+    <div fxLayout="column" style="overflow: hidden;">
+        <!-- <mat-checkbox [formControl]="preview">Preview file</mat-checkbox> -->
+        <pd-new-datasource-tdv *ngIf="showDataVirtualization()" [form]="form.controls.tdv" [data]="data" [columns]="columns"></pd-new-datasource-tdv>
+        <pd-new-datasource-file style="max-height: 100%" *ngIf="showFileSelection()" [inputType]="form.get('inputType').value" [form]="form.controls.file" [data]="data" [columns]="columns"></pd-new-datasource-file>
     </div>
     <div fxFlex class="tcs-filler-panel"></div>
     <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="5px" style="min-height: 50px; padding: 5px">
-        <button mat-button mat-raised-button color="primary" (click)="moveNextTab()" [disabled]="disableButtonTab()">Next</button> 
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-button mat-raised-button color="primary" (click)="moveNextTab()" [disabled]="disableButtonTab()">Next</button>
     </div>
 </div>

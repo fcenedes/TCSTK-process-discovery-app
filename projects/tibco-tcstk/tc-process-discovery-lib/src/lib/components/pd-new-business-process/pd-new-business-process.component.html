@@ -8,10 +8,19 @@
                 <mat-horizontal-stepper fxFlex fxLayout="column" labelPosition="bottom" [linear]="isLinear" #stepper>
 
                     <!-- Select the datasource type JSON, CSV -->
+                    <mat-step #general_step>
+                      <ng-template matStepLabel>General Information</ng-template>
+                      <ng-container *ngIf="stepper.selected == general_step">
+                        <tcpd-pd-new-business-process-general-information [form]="generalSelection"></tcpd-pd-new-business-process-general-information>
+                      </ng-container>
+                    </mat-step>
+
+                    tcpd-pd-new-business-process-general-information
+                    <!-- Select the datasource type JSON, CSV -->
                     <mat-step #file_step>
                         <ng-template matStepLabel>Datasource selection</ng-template>
                         <ng-container *ngIf="stepper.selected == file_step">
-                            <pd-new-business-process-source-selection [form]="sourceSelection" [preview]="parseOptions.get('preview')" (refresh)="moveNextTab()"></pd-new-business-process-source-selection>
+                            <pd-new-business-process-source-selection [form]="sourceSelection" [preview]="parseOptions.get('preview')" [data]="data" [columns]="columns" (refresh)="moveNextTab()"></pd-new-business-process-source-selection>
                         </ng-container>
                     </mat-step>
 
@@ -19,7 +28,7 @@
                     <mat-step #parsing_step>
                         <ng-template matStepLabel>{{sourceSelection.get('inputType').value | uppercase}} Parse options</ng-template>
                         <ng-container *ngIf="stepper.selected == parsing_step">
-                            <pd-new-business-process-parsing [form]="parseOptions" [data]="data" [columns]="columns" (refresh)="refreshPreview()"></pd-new-business-process-parsing>
+                            <pd-new-business-process-parsing [form]="parseOptions" [data]="data" [columns]="columns" [inputType]="sourceSelection.get('inputType').value" (refresh)="refreshPreview()"></pd-new-business-process-parsing>
                         </ng-container>
                     </mat-step>
 
@@ -32,30 +41,30 @@
                     </mat-step>
 
                     <!-- Grouping -->
-                    <mat-step #grouping_step>
+                    <!-- <mat-step #grouping_step>
                         <ng-template matStepLabel>Grouping</ng-template>
                         <ng-container *ngIf="stepper.selected == grouping_step">
                             <pd-new-business-process-grouping  [form]="grouping" [avActivities]="avActivities"></pd-new-business-process-grouping>
                         </ng-container>
-                    </mat-step>
+                    </mat-step> -->
 
                     <!-- Other options -->
-                    <mat-step #other_step>
+                    <!-- <mat-step #other_step>
                         <ng-template matStepLabel>Other options</ng-template>
                         <ng-container *ngIf="stepper.selected == other_step">
                             <pd-new-business-process-other-options [form]="other"></pd-new-business-process-other-options>
                         </ng-container>
-                    </mat-step>
+                    </mat-step> -->
 
                     <!-- Confirmation -->
                     <mat-step #confirmation_step>
                         <ng-template matStepLabel>Confirmation</ng-template>
                         <ng-container *ngIf="stepper.selected == confirmation_step">
-                            <pd-new-business-process-confirmation [form]="sourceSelection" [form2]="mapping" [form3]="grouping" [caseCreated]="caseCreated" [caseURL]="caseURL" (confirmButtonClicked)="createNewBusinessProcess()"></pd-new-business-process-confirmation>
+                            <pd-new-business-process-confirmation [form]="generalSelection" [form2]="mapping" [caseCreated]="caseCreated" [caseURL]="caseURL" (confirmButtonClicked)="createNewBusinessProcess()"></pd-new-business-process-confirmation>
                         </ng-container>
                     </mat-step>
                 </mat-horizontal-stepper>
-            </div> 
+            </div>
         </div>
     </div>
 </div>

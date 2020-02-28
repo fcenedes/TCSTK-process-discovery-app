@@ -11,7 +11,7 @@ export class PdNewBusinessProcessConfirmationComponent implements OnInit {
 
     @Input() form: FormGroup;
     @Input() form2: FormGroup;
-    @Input() form3: FormGroup
+    // @Input() form3: FormGroup
     @Input() caseCreated: boolean;
     @Input() caseURL: string;
     @Output() confirmButtonClicked = new EventEmitter();
@@ -24,7 +24,7 @@ export class PdNewBusinessProcessConfirmationComponent implements OnInit {
     }
 
     public confirmClicked = (): void => {
-        
+
         this.confirmButtonClicked.emit();
     }
 

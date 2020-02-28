@@ -27,7 +27,7 @@
                         </mat-form-field>
                         <mat-form-field>
                             <input matInput placeholder="End" formControlName="end" [readonly]="true">
-                        </mat-form-field>                    
+                        </mat-form-field>
                     </div>
                     <div fxFlex="50" fxLayout="column">
                         <mat-form-field>
@@ -35,16 +35,16 @@
                         </mat-form-field>
                         <mat-form-field>
                             <input matInput placeholder="Others" formControlName="other" [readonly]="true">
-                        </mat-form-field>                    
+                        </mat-form-field>
                     </div>
                 </div>
-                <div [formGroup]="form3" >
+                <!-- <div [formGroup]="form3" >
                     <div class="tcs-data-preview-text">Grouping</div>
                     <mat-form-field>
                         <input matInput placeholder="Enable Groups" formControlName="enable" [readonly]="true">
                     </mat-form-field>
 
-                </div>
+                </div> -->
             </div>
         </div>
         <div *ngIf="caseCreated">
@@ -60,5 +60,5 @@
         <button mat-raised-button (click)="goToBusinessProcesses()">Go to business process</button>
         <button mat-raised-button color="primary" (click)="goToCase()">Go to case</button>
     </div>
-     
+
 </div>
