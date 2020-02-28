@@ -1,21 +1,15 @@
-<div fxLayout="column" class="process-mining-top-level" fxFlex>
-    <div *ngIf="!!currentDatasource" fxFlex fxLayout="column" style="padding-bottom: 20px">
-        <div>
-            <mat-tab-group (selectedTabChange)="tabChange($event)">
-                <mat-tab *ngFor="let page of allowedPages" label="{{page}}"></mat-tab>
-            </mat-tab-group>
-        </div>
-        <div fxFlex fxLayout="column">
-            <tcsf-spotfire-wrapper fxFlex [url]="spotfireServer" 
-                                        [path]="analysisPath" 
-                                        [page]="activePage" 
-                                        [parameters]="parameters"
-                                        [customization]="configuration"
-                                        [markingOn]="markingOn"
-                                        (markingEvent)="marking($event)"
-                                        >
-            </tcsf-spotfire-wrapper>
-                                        <!--  -->
-        </div>
+<div fxLayout="column" class="process-mining-top-level" fxFill>
+  <div *ngIf="ready" fxFlex fxLayout="column">
+    <div>
+      <mat-tab-group (selectedTabChange)="tabChange($event)">
+        <mat-tab *ngFor="let page of allowedPages" label="{{page}}"></mat-tab>
+      </mat-tab-group>
     </div>
+    <div fxFlex fxLayout="column" style="padding: 10px;">
+      <tcsf-spotfire-wrapper fxFlex [url]="spotfireServer" [path]="analysisPath" [page]="activePage"
+        [parameters]="parameters" [customization]="configuration" [markingOn]="markingOn"
+        (markingEvent)="marking($event)">
+      </tcsf-spotfire-wrapper>
+    </div>
+  </div>
 </div>

@@ -26,11 +26,10 @@
 }
 
 .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
-    border-left: 1px solid rgb(255, 255, 255); 
+    border-left: 1px solid rgb(255, 255, 255);
 }
 
 :host ::ng-deep .process-mining-top-level {
-    margin-bottom: 10px;
     border-radius: 3px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.33);
     background-color: #ffffff;
