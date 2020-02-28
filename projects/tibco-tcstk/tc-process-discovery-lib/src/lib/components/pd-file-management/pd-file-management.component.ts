@@ -19,7 +19,7 @@ export class PdFileManagementComponent implements OnInit {
 
     public sandboxId: number;
 
-    public uiAppId: string; 
+    public uiAppId: string;
     public userId: string;
 
     constructor(
@@ -33,25 +33,13 @@ export class PdFileManagementComponent implements OnInit {
     ngOnInit() {
         this.messageService.sendMessage('title-bar', 'file-management');
         this.sandboxId = this.route.snapshot.data.claims.sandboxId;
-        // this.listFiles();
-        this.customActions = ['Create business process'];
 
         this.uiAppId = this.route.snapshot.data.generalConfigHolder.uiAppId;
         this.userId = this.route.snapshot.data.claims.userId;
-
     }
 
     createNewDatasource() {
         this.router.navigate(['/starterApp/pd/new-datasource'], {});
     }
 
-    manageCustomAction($event: DocumentAction){
-        this.router.navigate(['/starterApp/pd/new-datasource',
-            {
-                documentName: $event.document.name,
-                documentExtension: $event.document.extension,
-                documentURL: window.location.protocol + '//' + window.location.host + this.documentService.getUrlForDocument('orgFolders', this.FOLDERID, $event.document.name, null, this.sandboxId)
-            }
-        ], {});        
-    }
 }

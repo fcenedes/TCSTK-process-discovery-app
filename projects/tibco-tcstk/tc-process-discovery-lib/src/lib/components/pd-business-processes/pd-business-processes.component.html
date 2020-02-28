@@ -1,0 +1,23 @@
+<div fxLayout="column" fxFill>
+  <div style="padding: 20px;overflow:auto" fxLayout="column" fxFlex>
+    <div fxLayout="row" fxLayoutAlign="start start" style="height: 20px">
+      <p>Here you can configure existing datasources and register new ones</p>
+    </div>
+    <div fxLayout="row wrap">
+      <div *ngFor="let case of cases" style="margin:5px">
+        <tcpd-pd-datasource-case-summary [uiAppId]="uiAppId" [typeBar]="true" [borderCard]="false"
+          [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case" (clickInvestigate)="clickInvestigateAction($event)">
+        </tcpd-pd-datasource-case-summary>
+        <div class="tcs-case-summary-line"></div>
+      </div>
+      <div *ngIf="cases.length == 0" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px"
+        style="margin-top: 20px;">
+        <mat-icon [svgIcon]="'ic-no-docs-icon'" style="height: 48px; width: 48px;"></mat-icon>
+        <div style="height: 100%" fxLayoutAlign="start center">
+          <span class="tcs-no-item-text">No documents found</span>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="tcs-filler-panel"></div>
+  </div>
+</div>

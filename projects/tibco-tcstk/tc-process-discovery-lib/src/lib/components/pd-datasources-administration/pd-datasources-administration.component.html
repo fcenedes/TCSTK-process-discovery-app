@@ -5,16 +5,15 @@
         </div>
         <div fxLayout="row wrap" >
             <div *ngFor="let case of cases" style="margin:5px" >
-                <tcpd-pd-datasource-case-summary [uiAppId]="datasourceId" [typeBar]="true" [borderCard]="false"
+                <tcla-live-apps-case-summary [uiAppId]="datasourceId" [typeBar]="true" [borderCard]="false"
                     [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case"
-                    (clickCase)="clickCaseAction($event)"></tcpd-pd-datasource-case-summary>
+                    (clickCase)="clickCaseAction($event)"></tcla-live-apps-case-summary>
                 <div class="tcs-case-summary-line"></div>
             </div>
         </div>
         <div fxFlex class="tcs-filler-panel"></div>
-        <!-- <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
-            <button mat-raised-button color="secundary" (click)="addNewDatasource()">Compare datasources</button>
-            <button mat-raised-button color="primary" (click)="addNewDatasource()">Add new datasource</button>
-        </div> -->
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">
+            <button mat-raised-button color="primary" (click)="addNewAnalysis()">Create new analysis</button>
+        </div>
     </div>
 </div>

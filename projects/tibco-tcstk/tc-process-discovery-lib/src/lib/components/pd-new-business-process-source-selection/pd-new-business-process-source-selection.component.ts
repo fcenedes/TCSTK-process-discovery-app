@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatStepper } from '@angular/material';
 
 @Component({
     selector: 'pd-new-business-process-source-selection',
@@ -11,62 +10,46 @@ import { MatStepper } from '@angular/material';
 export class PdNewBusinessProcessSourceSelectionComponent implements OnInit {
 
     @Input() form: FormGroup;
-    @Input() preview: FormControl;  
+    @Input() preview: FormControl;
+  @Input() data;
+  @Input() columns: string[];
+
+
     @Output() refresh = new EventEmitter<string>();
-    // @ViewChild('stepper', {static:true}) stepper: MatStepper;
-  
 
     public inputTypeOptions = [
         { text: 'CSV', value: 'csv' },
-        { text: 'JSON', value: 'json' }
+        // { text: 'JSON', value: 'json' },
+        { text: 'Data virtualization', value: 'tdv' }
     ]
     public allowedExtension: string;
 
     constructor() { }
 
     ngOnInit() {
-        
-    }
 
-    onFileSelect(filelist: File[]){
-        this.form.get('file').setValue(filelist[0]);
-        this.form.get('filename').setValue(filelist[0].name);
     }
 
     public disableButtonTab = (): boolean => {
-
-        // inputType, analysis name, analysis description and file name has defined values
         if (this.form.get('inputType') && this.form.get('inputType').value &&
-            this.form.get('analysisName') && this.form.get('analysisName').value &&
-            this.form.get('analysisDescription') && this.form.get('analysisDescription').value &&
-            this.form.get('filename') && this.form.get('filename').value) {
+           ((this.form.get('file').get('filename') && this.form.get('file').get('filename').value) || (this.form.get('tdv').get('table') && this.form.get('tdv').get('table').value))) {
             return false;
         };
-
         return true;
-    }
-
-    public showButtons = (): boolean => {
-        return typeof(this.form.get('file').value) == 'object'
-    }
-
-    public showSelectFileButton = (): boolean => {
-        return this.form.get('filename') && this.form.get('filename').value == '';
-    }
-
-    public showChangeFileButton = (): boolean => {
-        return !this.showSelectFileButton();
     }
 
     public showFileSelection = (): boolean => {
 
-        if (this.form.get('inputType') && this.form.get('inputType').value){
+        if (this.form.get('inputType') && (this.form.get('inputType').value === "json" || this.form.get('inputType').value === "csv")) {
             this.allowedExtension = '.' + this.form.get('inputType').value
-            return true; 
+            return true;
         } else {
             return false;
         }
+    }
 
+    public showDataVirtualization = (): boolean => {
+        return this.form.get('inputType') && this.form.get('inputType').value === "tdv"
     }
 
     public moveNextTab = (): void => {

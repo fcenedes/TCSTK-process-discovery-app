@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { LiveAppsCaseCockpitComponent } from '@tibco-tcstk/tc-liveapps-lib';
 
 @Component({
@@ -6,9 +6,9 @@ import { LiveAppsCaseCockpitComponent } from '@tibco-tcstk/tc-liveapps-lib';
   templateUrl: './pd-case-cockpit.component.html',
   styleUrls: ['./pd-case-cockpit.component.css']
 })
-export class PdCaseCockpitComponent extends LiveAppsCaseCockpitComponent  implements OnInit {
+export class PdCaseCockpitComponent extends LiveAppsCaseCockpitComponent  {
 
-    ngOnInit() {
+    ngOnChanges(changes: SimpleChanges) {
         // disable fav button
         // this.incFavButton = false;
         this.incConfigButton = false;
@@ -18,8 +18,6 @@ export class PdCaseCockpitComponent extends LiveAppsCaseCockpitComponent  implem
         // setup button array
         this.toolbarButtons = [];
         // call superclass init
-        super.ngOnInit();
+        super.ngOnChanges(changes);
     }
-
-
 }

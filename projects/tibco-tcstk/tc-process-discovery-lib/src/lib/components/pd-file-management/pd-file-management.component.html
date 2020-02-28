@@ -1,18 +1,13 @@
 <div fxLayout="column" fxFill>
     <div style="padding: 20px" fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="start start" style="height: 20px;overflow:none">
-            <p>Here you can configure existing datasources and register new ones</p>
+            <p>Here you can upload you event log files</p>
         </div>
         <div fxFlex fxLayoutGap="20px" style="overflow:hidden">
-            <div fxFlex  style="overflow:auto">
+            <div fxFlex style="overflow:auto">
                 <tcla-live-apps-documents [sandboxId]="sandboxId" folderType="orgFolders" folderId="{{FOLDERID}}"
-                    folderDescription="Files available" [customActions]="customActions"
-                    (customActionClicked)="manageCustomAction($event)">
+                    folderDescription="Files available">
                 </tcla-live-apps-documents>
-            </div>
-            <div fxFlex class="collaborationWidget" >
-                <tcla-live-apps-notes [userId]="userId" [relatedItemId]="uiAppId" [relatedItemType]="'CASE_APP'">
-                </tcla-live-apps-notes>
             </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px" style="min-height: 50px">

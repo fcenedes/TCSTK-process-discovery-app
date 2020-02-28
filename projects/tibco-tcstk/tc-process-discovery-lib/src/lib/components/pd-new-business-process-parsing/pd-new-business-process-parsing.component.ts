@@ -11,6 +11,7 @@ export class PdNewBusinessProcessParsingComponent implements OnInit {
     @Input() form: FormGroup;
     @Input() data;
     @Input() columns: string[];
+    @Input() inputType: string;
     @Output() refresh = new EventEmitter();
 
     public panelOpenState: boolean = false;

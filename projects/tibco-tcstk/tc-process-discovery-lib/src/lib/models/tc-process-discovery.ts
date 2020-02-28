@@ -35,3 +35,12 @@ export class ChangeDatasourceSelectionContext {
     ) { }
 }
 
+export class InvestigateCase implements Deserializable{
+    caseRef: string; 
+    deserialize(input: any) {
+        Object.assign(this, input);
+        return this;
+    }
+}
+
+
