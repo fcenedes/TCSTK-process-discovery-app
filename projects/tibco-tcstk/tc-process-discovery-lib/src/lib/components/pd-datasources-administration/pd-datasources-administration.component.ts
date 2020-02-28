@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LiveAppsService } from '@tibco-tcstk/tc-liveapps-lib';
-import { map } from 'rxjs/operators';
+import { LiveAppsService, CaseRoute } from '@tibco-tcstk/tc-liveapps-lib';
+import { map, flatMap } from 'rxjs/operators';
+import { InvestigateCase, Datasource } from '../../models/tc-process-discovery';
+import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
 
 @Component({
     selector: 'tcpd-pd-datasources-administration',
@@ -12,13 +14,14 @@ import { map } from 'rxjs/operators';
 export class PdDatasourcesAdministrationComponent implements OnInit {
 
     public cases = [];
-    public datasourceId: string;   
+    public datasourceId: string;
     public sandboxId: number;
-    public displayType: string; 
-    
+    public displayType: string;
+
     constructor(
-        private route: ActivatedRoute, 
-        private router: Router, 
+        private processDiscovery: PdProcessDiscoveryService,
+        private route: ActivatedRoute,
+        private router: Router,
         private liveapps: LiveAppsService,
         private messageService: MessageQueueService) { }
 
@@ -40,17 +43,20 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
                     });
                 })
             )
-            .subscribe(null, error => { console.log("***** error " + error.error.errorMsg); }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });          
+            .subscribe(null, error => { console.log("***** error " + error.error.errorMsg); }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });
 
         this.displayType = 'card';
     }
 
-    clickCaseAction = ($event: any) => {
+    clickCaseAction = ($event: CaseRoute) => {
         this.router.navigate(['/starterApp/pd/datasource/case/' + $event.appId + '/' + $event.typeId + '/' + $event.caseRef]);
     }
 
-    addNewDatasource = (): void => {
-        this.router.navigate(['/starterApp/pd/new-datasource'], {});
+    public addNewAnalysis = (): void => {
+      this.router.navigate(['/starterApp/configuration/new-analysis']);
+    }
 
+    public refresh = () => {
+        console.log("Refresh");
     }
 }
