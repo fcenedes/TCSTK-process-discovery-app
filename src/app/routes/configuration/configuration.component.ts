@@ -21,7 +21,7 @@ export class ConfigurationComponent implements OnInit {
     if (routeAction.action === 'backClicked') {
       // back clicked - navigate to home
         console.log("*****", this.rolesService.getCurrentRole());
-      this.router.navigate(['/starterApp/home/']);
+      this.router.navigate(['/starterApp/pd/business-processes']);
     }
   }
 
