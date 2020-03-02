@@ -17,6 +17,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
     public datasourceId: string;
     public sandboxId: number;
     public displayType: string;
+    public uiAppId: string;
 
     constructor(
         private processDiscovery: PdProcessDiscoveryService,
@@ -31,7 +32,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
         const claims = this.route.snapshot.data.claims;
         this.sandboxId = Number(claims.primaryProductionSandbox.id).valueOf();
         this.datasourceId = this.route.snapshot.data.processDiscovery.datasourceAppId.valueOf();
-
+        this.uiAppId = this.route.snapshot.data.processDiscovery.uiAppId;
 
         this.cases = [];
         this.liveapps.getCases(this.sandboxId, this.datasourceId, '1', 0, 100)
@@ -45,7 +46,7 @@ export class PdDatasourcesAdministrationComponent implements OnInit {
             )
             .subscribe(null, error => { console.log("***** error " + error.error.errorMsg); }) //this.errorMessage = 'Error retrieving applications: ' + error.error.errorMsg; });
 
-        this.displayType = 'card';
+        this.displayType = 'miniCard';
     }
 
     clickCaseAction = ($event: CaseRoute) => {

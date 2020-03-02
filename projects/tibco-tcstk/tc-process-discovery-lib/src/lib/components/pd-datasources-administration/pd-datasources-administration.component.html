@@ -5,7 +5,7 @@
         </div>
         <div fxLayout="row wrap" >
             <div *ngFor="let case of cases" style="margin:5px" >
-                <tcla-live-apps-case-summary [uiAppId]="datasourceId" [typeBar]="true" [borderCard]="false"
+                <tcla-live-apps-case-summary [uiAppId]="uiAppId" [typeBar]="true" [borderCard]="false"
                     [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case"
                     (clickCase)="clickCaseAction($event)"></tcla-live-apps-case-summary>
                 <div class="tcs-case-summary-line"></div>
