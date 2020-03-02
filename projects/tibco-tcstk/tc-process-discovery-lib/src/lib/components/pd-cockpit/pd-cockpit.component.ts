@@ -102,30 +102,23 @@ export class PdCockpitComponent implements OnInit, OnDestroy {
 
   public handleViewButtonEvent = (event: string) => {
 
-    if (event === this.currentView) return;
+    // if (event === this.currentView) {
+    //   this.analytics = true;
+    //   return;
+    // }
 
     if (event === 'process-mining-view'){
       this.messageService.sendMessage('title-bar', 'process-mining-view');
     }
 
     if (event === 'case-view' || event === 'business-processes'){
+      this.analytics = false;
       this.router.navigate(['/starterApp/pd/' + event]);
     }
 
     if (event === 'config') {
       this.router.navigate(['/starterApp/configuration/']);
     }
-
-    // if (event != 'process-mining-view') {
-    //   if (event === 'config') {
-    //     this.router.navigate(['/starterApp/configuration/']);
-    //   } else {
-    //     this.router.navigate(['/starterApp/pd/' + event]);
-    //   }
-    // } else {
-    //   this.messageService.sendMessage('title-bar', 'process-mining-view');
-    // }
-
   }
 
   private generateTitle = (): void => {
