@@ -1,7 +1,7 @@
 {
-  "browserTitle": "Tibco Cloud App",
-  "applicationTitle": "Case Manager App (TIBCO LABS™)",
-  "welcomeMessage": "Welcome to the Case Manager App",
+  "browserTitle": "TIBCO Cloud™ Discover App",
+  "applicationTitle": "Discover App",
+  "welcomeMessage": "My Cases Dashboard",
   "roles": [
     {
       "id": "Administrator",
@@ -20,7 +20,7 @@
         "group": "Discover - Investigators",
         "display": "Investigators",
         "priority": 5
-    }    
+    }
   ],
   "displayName": true,
   "documentationUrl": "assets/help.html"
