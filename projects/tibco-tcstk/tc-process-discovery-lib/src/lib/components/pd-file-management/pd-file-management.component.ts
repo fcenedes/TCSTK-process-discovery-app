@@ -31,7 +31,6 @@ export class PdFileManagementComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.messageService.sendMessage('title-bar', 'file-management');
         this.sandboxId = this.route.snapshot.data.claims.sandboxId;
 
         this.uiAppId = this.route.snapshot.data.generalConfigHolder.uiAppId;

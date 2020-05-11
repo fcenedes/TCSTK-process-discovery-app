@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import { MessageQueueService } from '@tibco-tcstk/tc-core-lib';
 import { ActivatedRoute } from '@angular/router';
-import { parse, unparse } from 'papaparse';
-import { LiveAppsService, TcDocumentService } from '@tibco-tcstk/tc-liveapps-lib';
+import { parse } from 'papaparse';
+import { LiveAppsService } from '@tibco-tcstk/tc-liveapps-lib';
 import { map } from 'rxjs/operators';
 import { MatSnackBar, MatStepper } from '@angular/material';
-import { HttpEventType, HttpClient } from '@angular/common/http';
 import { FileNode } from '../pd-new-business-process-grouping/pd-new-business-process-grouping.component';
 import { PdPDataVirtualizationConfigService } from '../../services/pd-data-virtualization-config.service';
 import { DataVirtualizationColumn } from '../../models/tc-data-virtualization-config';
@@ -39,7 +37,6 @@ export class PdNewBusinessProcessComponent implements OnInit {
   public caseURL: string = '';
 
   constructor(
-    private messageService: MessageQueueService,
     private liveapps: LiveAppsService,
     private dvService: PdPDataVirtualizationConfigService,
     private route: ActivatedRoute,
@@ -47,8 +44,6 @@ export class PdNewBusinessProcessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.messageService.sendMessage('title-bar', 'new-datasource');
-
     this.generalSelection = new FormGroup({
       analysisName: new FormControl(),
       analysisDescription: new FormControl(),
@@ -226,7 +221,7 @@ export class PdNewBusinessProcessComponent implements OnInit {
 
   private initCaseData = (): any => {
     const caseData = {
-      DiscoverAnalysisConfigCDB: {
+      DiscoverAnalysis: {
         Name: this.generalSelection.get('analysisName').value,
         Description: this.generalSelection.get('analysisDescription').value,
         InputType: this.sourceSelection.get('inputType').value,
@@ -248,7 +243,7 @@ export class PdNewBusinessProcessComponent implements OnInit {
     };
 
     if (this.sourceSelection.get('inputType').value === 'json' || this.sourceSelection.get('inputType').value === 'csv'){
-      caseData.DiscoverAnalysisConfigCDB.Datasource['File'] = {
+      caseData.DiscoverAnalysis.Datasource['File'] = {
         FileName: this.sourceSelection.get('file').get('filename').value,
         FilePath: this.sourceSelection.get('file').get('location').value,
         DateTimeFormat: this.parseOptions.get('dateTimeFormat').value,
@@ -261,14 +256,14 @@ export class PdNewBusinessProcessComponent implements OnInit {
     }
 
     if (this.sourceSelection.get('inputType').value === 'tdv') {
-      caseData.DiscoverAnalysisConfigCDB.Datasource['TDV'] = {
-        Endpoint: this.sourceSelection.get('tdv').get('site').value.host + ':' + this.sourceSelection.get('tdv').get('site').value.port,
+      caseData.DiscoverAnalysis.Datasource['TDV'] = {
+        Endpoint: this.sourceSelection.get('tdv').get('site').value.host + ':' + '9401', // this.sourceSelection.get('tdv').get('site').value.port,
         Site: this.sourceSelection.get('tdv').get('site').value.name,
         Domain: this.sourceSelection.get('tdv').get('domain').value,
         Database: this.sourceSelection.get('tdv').get('database').value.name,
         Table: this.sourceSelection.get('tdv').get('table').value.name,
-        Username: this.sourceSelection.get('tdv').get('username').value,
-        Password: this.sourceSelection.get('tdv').get('password').value,
+        // Username: this.sourceSelection.get('tdv').get('username').value,
+        // Password: this.sourceSelection.get('tdv').get('password').value,
         Query: '',
         PrimaryKey: '',
         Partitions: 0,
@@ -309,7 +304,6 @@ export class PdNewBusinessProcessComponent implements OnInit {
         this.data = newRows;
       })
     })
-
   }
 
   public refreshPreview = (): void => {

@@ -1,23 +1,8 @@
 <div fxLayout="column" class="process-discovery-top-level" fxFlex>
   <div>
-    <tc-tibco-cloud-menu-bar [toolbarButtons]="toolbarButtons" [headerText]="title"
-      (toolbarButtonEvent)="handleToolbarButtonEvent($event)" [burgerMenuButtons]="burgerMenuButtons"
-      (burgerMenuButtonEvent)="handleViewButtonEvent($event)">
-      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxFlex="33" fxLayoutAlign="center none" fxShow fxHide.lt-md>
-          <!-- <tcla-live-apps-role-switcher *ngIf="displayRoles.length > 1" [roles]="displayRoles"
-            [selectedRole]="currentRole" (changeRoleEvent)="roleChange($event)">
-          </tcla-live-apps-role-switcher> -->
-        </div>
-        <button *ngIf="title=='Business Processes'" mat-button (click)="handleCreateNewAnalysis()">
-          <mat-icon [svgIcon]="'tcs-case-start-icon'"></mat-icon>
-          <span class="tcs-case-create-button-text"> Create New Analysis</span>
-        </button>
-        <tcla-live-apps-application-create-button *ngIf="showAnalytics()" [sandboxId]="sandboxId" [appIds]="appIds"
-          (selection)="handleCreatorAppSelection($event)" fxFlex="33" fxLayoutAlign="end none">
-        </tcla-live-apps-application-create-button>
-      </div>
-    </tc-tibco-cloud-menu-bar>
+    <div>
+      <uxpl-primary-nav #primaryNav (selected)="handleClick($event)"></uxpl-primary-nav>
+    </div>
   </div>
   <div class="tcs-home-content" fxLayout="column" fxFlex="grow" fxLayoutAlign="start stretch"
     style="padding-left: 20px; padding-right: 20px; margin-top: 10px; padding-bottom: 10px;">

@@ -15,4 +15,11 @@ html, body {
   background-color: #ffffff;
 }
 
+.page-title {
+  color: #212121;
+  font-family: "Source Sans Pro";
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 38px;
+}
 

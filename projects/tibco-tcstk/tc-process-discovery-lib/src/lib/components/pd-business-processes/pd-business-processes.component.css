@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("~uxpl/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf"),
+  url("~uxpl/fonts/Source_Sans_Pro/SourceSansPro-Regular.woff2")
+  format("truetype");
+}
+
+.menu-mode-icon {
+  height: 100%;
+  width: 20px;
+  border-radius: 0.83px;
+  margin-left: 24px;
+}
