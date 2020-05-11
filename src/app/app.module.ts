@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -65,7 +65,8 @@ const tcCoreConfig: TcCoreConfig = {
         // for using oAuth
         // { provide: HTTP_INTERCEPTORS, useClass: OAuthInterceptor, multi: true }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
     constructor(public sessionRefreshService: SessionRefreshService, public tcConfigService: TcCoreConfigService) {

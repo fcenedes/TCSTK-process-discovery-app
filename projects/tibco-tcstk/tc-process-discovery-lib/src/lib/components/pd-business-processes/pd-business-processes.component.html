@@ -1,14 +1,27 @@
 <div fxLayout="column" fxFill>
   <div style="padding: 20px;overflow:auto" fxLayout="column" fxFlex>
-    <div fxLayout="row" fxLayoutAlign="start start" style="height: 20px">
-      <p>Here you can configure existing datasources and register new ones</p>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div class="page-title">Process Analysis</div>
+        <mat-icon (click)="switchMode()"
+          class="tcs-icon tcs-icon-active tcs-document-edit-buttons tcs-document-upload-icon menu-mode-icon"
+          matTooltip="New Group" matTooltipPosition="left" matTooltipShowDelay="1000" [svgIcon]="viewIcon">
+        </mat-icon>
+      </div>
+      <div>
+        <uxpl-button id="#newAnalysis">New Analysis</uxpl-button>
+      </div>
     </div>
-    <div fxLayout="row wrap">
-      <div *ngFor="let case of cases" style="margin:5px">
-        <tcpd-pd-datasource-case-summary [uiAppId]="uiAppId" [typeBar]="true" [borderCard]="false"
-          [displayType]="displayType" [sandboxId]="sandboxId" [caseRef]="case" (clickInvestigate)="clickInvestigateAction($event)">
-        </tcpd-pd-datasource-case-summary>
-        <div class="tcs-case-summary-line"></div>
+    <div>
+      <div *ngIf="isViewMode('list-view')" fxLayout="row wrap">
+        <div *ngFor="let case of cases" style="margin:5px">
+          <uxpl-card-grid>
+            <uxpl-info-card [config]="case" style="width: 435px" (action)="cardClick($event)"></uxpl-info-card>
+          </uxpl-card-grid>
+        </div>
+      </div>
+      <div *ngIf="isViewMode('card-view')">
+        Under active development. Waiting for Hugo.
       </div>
       <div *ngIf="cases.length == 0" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px"
         style="margin-top: 20px;">
