@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, Input, ElementRef } from '@angular/core';
 import { SpotfireCustomization } from '@tibco/spotfire-wrapper/lib/spotfire-customization';
 import { SpotfireWrapperComponent, SpotfireConfig } from '@tibco-tcstk/tc-spotfire-lib';
-import { PdProcessDiscoveryService } from '../../services/pd-process-discovery.service';
-import { ToolbarButton, MessageQueueService } from '@tibco-tcstk/tc-core-lib';
-import { MatDialog } from '@angular/material';
-import { Roles, TcRolesService, Groups } from '@tibco-tcstk/tc-liveapps-lib';
-import { Datasource } from '../../models/tc-process-discovery';
+
+import { UxplLeftNav } from '@tibco-tcstk/cloudstartercomponents/dist/types/components/uxpl-left-nav/uxpl-left-nav';
+
 
 @Component({
   selector: 'tcpd-pd-process-mining',
@@ -16,6 +13,8 @@ import { Datasource } from '../../models/tc-process-discovery';
 export class PdProcessMiningComponent implements OnChanges {
 
   @ViewChild(SpotfireWrapperComponent, { static: false }) spotfireWrapperComponent: SpotfireWrapperComponent;
+  @ViewChild('leftNav', { static: false }) leftNav: ElementRef<UxplLeftNav>;
+  public tabs: any;
 
   // Spotfire general configuration
   @Input() spotfireConfig : SpotfireConfig;
@@ -32,9 +31,7 @@ export class PdProcessMiningComponent implements OnChanges {
 
   public ready: boolean = false;
 
-  constructor(
-  ) {
-  }
+  constructor() {}
 
   private initialize = ():void => {
     this.spotfireServer = this.spotfireConfig.spotfireServer;
@@ -59,9 +56,19 @@ export class PdProcessMiningComponent implements OnChanges {
     };
     this.analysisPath = this.spotfireConfig.analysisPath;
     this.markingOn[this.spotfireConfig.tableName] = this.spotfireConfig.columnNames;
-    // this.activePage = 'Config';
-    // this.allowedPages = ['Config'];
+
+    this.leftNav.nativeElement.tabs = [];
+    this.spotfireConfig.allowedPages.forEach(
+      (pageName: string) => {
+        const menuEntry = { id: pageName, label: pageName, child: [] };
+        this.leftNav.nativeElement.tabs.push(menuEntry);
+    })
   }
+
+  handleClick = (event: any): void => {
+    console.log('***** Left Menu selected: ', event);
+    this.spotfireWrapperComponent.openPage(this.allowedPages[event.id]);
+  };
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.ready && this.spotfireConfig && this.parameters){
