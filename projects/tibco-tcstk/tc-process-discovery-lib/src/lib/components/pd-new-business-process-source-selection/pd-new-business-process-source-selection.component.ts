@@ -19,7 +19,6 @@ export class PdNewBusinessProcessSourceSelectionComponent implements OnInit {
 
     public inputTypeOptions = [
         { text: 'CSV', value: 'csv' },
-        // { text: 'JSON', value: 'json' },
         { text: 'Data virtualization', value: 'tdv' }
     ]
     public allowedExtension: string;
