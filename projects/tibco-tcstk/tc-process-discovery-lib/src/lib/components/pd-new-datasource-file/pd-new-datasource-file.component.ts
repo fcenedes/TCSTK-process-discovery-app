@@ -14,7 +14,6 @@ export class PdNewDatasourceFileComponent implements OnInit {
   @Input() data;
   @Input() columns: string[];
 
-
   constructor() { }
 
   ngOnInit() {
@@ -22,7 +21,10 @@ export class PdNewDatasourceFileComponent implements OnInit {
 
   public handleSelectedDocument = ($event: any): void => {
     this.form.get('filename').setValue($event.name);
-    this.form.get('location').setValue(window.location.origin + '/webresource/orgFolders/' + this.FOLDERID + '/' + $event.name)
+
+    // if in devmode change the location to TIBCO Cloud in EU
+    const host = window.location.hostname === 'localhost' ? 'https://eu.liveapps.cloud.tibco.com' : window.location.origin;
+    this.form.get('location').setValue(host + '/webresource/orgFolders/' + this.FOLDERID + '/' + $event.name)
   }
 
 }
