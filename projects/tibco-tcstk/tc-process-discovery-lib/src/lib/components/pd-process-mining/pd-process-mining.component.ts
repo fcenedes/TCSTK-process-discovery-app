@@ -3,6 +3,7 @@ import { SpotfireCustomization } from '@tibco/spotfire-wrapper/lib/spotfire-cust
 import { SpotfireWrapperComponent, SpotfireConfig } from '@tibco-tcstk/tc-spotfire-lib';
 
 import { UxplLeftNav } from '@tibco-tcstk/cloudstartercomponents/dist/types/components/uxpl-left-nav/uxpl-left-nav';
+import { NavTab } from '@tibco-tcstk/cloudstartercomponents/dist/types/models/navTab';
 
 
 @Component({
@@ -66,8 +67,9 @@ export class PdProcessMiningComponent implements OnChanges {
   }
 
   handleClick = (event: any): void => {
-    console.log('***** Left Menu selected: ', event);
-    this.spotfireWrapperComponent.openPage(this.allowedPages[event.id]);
+    setTimeout(() => {
+      this.spotfireWrapperComponent.openPage(event.detail.id);
+    }, 0);
   };
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -76,12 +78,11 @@ export class PdProcessMiningComponent implements OnChanges {
       this.ready = true;
     }
     if (this.ready && !changes.parameters.firstChange){
-      this.spotfireWrapperComponent.showPage(this.activePage);
+      setTimeout(() => {
+        this.spotfireWrapperComponent.showPage(this.activePage);
+        this.leftNav.nativeElement.setTab({id: this.activePage});
+      }, 0);
     }
-  }
-
-  public tabChange = ($event: any): void => {
-    this.spotfireWrapperComponent.openPage(this.allowedPages[$event.index]);
   }
 
   public marking(data) {
