@@ -242,7 +242,7 @@ export class PdNewBusinessProcessComponent implements OnInit {
       }
     };
 
-    if (this.sourceSelection.get('inputType').value === 'json' || this.sourceSelection.get('inputType').value === 'csv'){
+    if (this.sourceSelection.get('inputType').value === 'csv'){
       caseData.DiscoverAnalysis.Datasource['File'] = {
         FileName: this.sourceSelection.get('file').get('filename').value,
         FilePath: this.sourceSelection.get('file').get('location').value,
